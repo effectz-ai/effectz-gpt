@@ -1,0 +1,163 @@
+{
+  service Identity: {
+    name: Deposit number request,
+    service Code: 1,
+    service Structure: CoreService,
+    service Type: Transactional,
+    category Of Service Recipient: [
+      Business,
+      Individual
+    ],
+    legislation Governing The Service: [
+      Wetting deposit system
+    ],
+    conditions For Providing The Service: [
+      This service is available for the publishing houses from the business sector, whether they are companies or individual institutions,
+      If the workbook was printed or published outside the Hashemite Kingdom of Jordan, and it was for a Jordanian author it must be distributed inside the Kingdom to be given a deposit number.,
+      The applicant must bring a copy of the book in the form of a manuscript on a flash or CD while submitting the application,
+      The book must be printed and published in the Hashemite Kingdom of Jordan, whether it was for a Jordanian or non-Jordanian author.
+    ]
+  },
+  service Access: {
+    channels Providing The Service: National Library Department building,
+    where To Provide The Service: Centralized,
+    branches Provided For The Service: [],
+    contact And Contact Information: [{
+      name: National Library Department building,
+      phone: 065662845,
+      email: nl@nl.gov.jo,
+      working Days: [
+        Sunday,
+        Thursday
+      ],
+      working Hours: 8:00 am-3:00 pm
+    }],
+  },
+  stages Of Service Provision: {
+    spatial: ,
+    forms Used: [
+ 	   Request a deposit number
+     ],
+    main Procedures For Providing The Service: [
+        Submit an application for a deposit number,
+        Filling in the form of confirming the validation of the data in the application,
+        Receive an official book containing the deposit number
+     ],
+    standard Time Taken To Provide The Service: 30.0 Minute,
+    
+    electronic: ,
+    main Procedures For Providing The Service: [
+        Submit an application for a deposit number,
+        Filling in the form of confirming the validation of the data in the application,
+        Receive an official book containing the deposit number
+      ],
+  },
+  documents Required To Obtain The Service: [
+    {
+      document: Personal identification photos of the inheritances,
+      governmental Department: Civil Status and Passports Department,
+      document Format: 
+    },
+    {
+      document: Passport for a non-Jordanian - Paper - Copy,
+      governmental Department: Residence and Border Department,
+      document Format: Jordanian Paper Copy
+    },
+    {
+      document: Work permit from the Media Authority - Paper - Copy,
+      governmental Department: Media Authority,
+      document Format: Paper Copy
+    },
+    {
+      document: The death certificate for the author - Paper - Copy,
+      governmental Department: Civil Status and Passports Department,
+      document Format: Paper Copy
+    },
+    {
+      document: A copy of the work - Paper - Copy,
+      governmental Department: applicant,
+      document Format: Paper Copy
+    },
+    {
+      document: Personal identification of the author - Paper - Copy,
+      governmental Department: Civil Status and Passports Department,
+      document Format: Paper Copy
+    },
+    {
+      document: The official request signed and sealed from the publishing house - Paper - Copy,
+      governmental Department: applicant,
+      document Format: Copy
+    },
+    {
+      document: A picture of the family book of the minor author - Paper - Copy,
+      governmental Department: Civil Status and Passports Department,
+      document Format: Paper Copy
+    },
+    {
+      document: Written delegation - Paper - Copy,
+      governmental Department: Ministry of Justice,
+      document Format: Paper Copy
+    },
+    {
+      document: Certificate of Commissioners to sign on behalf of the publishing house - the company,
+      governmental Department: Ministry of Industry and Trade,
+      document Format: the company
+    },
+    {
+      document: Personal identification of the parent - Paper - Copy,
+      governmental Department: Civil Status and Passports Department,
+      document Format: Paper Copy
+    },
+    {
+      document: Translation approval from the author to the translator - Paper - Copy,
+      governmental Department: The author,
+      document Format: Paper Copy
+    },
+    {
+      document: Identity proof - Paper - Copy,
+      governmental Department: Civil Status and Passports Department and external,
+      document Format: Paper Copy
+    },
+    {
+      document: Publishing house license - Paper - Copy,
+      governmental Department: Media Authority,
+      document Format: Paper Copy
+    },
+    {
+      document: Publishing house license - Paper - Copy,
+      governmental Department: Media Authority,
+      document Format: Paper Copy
+    },
+    {
+      document: Determination of inheritance - Paper - Copy,
+      governmental Department: Sharia courts,
+      document Format: Paper Copy
+    },
+    {
+      document: Written delegation from the inheritances - Paper - Copy,
+      governmental Department: Ministry of Justice,
+      document Format: Paper Copy
+    },
+    {
+      document: Contract with a printing press or publishing house - paper - original,
+      governmental Department: applicant,
+      document Format: paper original
+    },
+    {
+      document: Publishing House Registration Certificate - Company - Paper - Copy,
+      governmental Department: Ministry of Industry and Trade,
+      document Format: Company Paper Copy
+    }
+  ],
+  fees: [Not specified],
+  service Output: [
+    {
+      service Out put Form: official book, official letter - Paper - Document,
+      validity Of The Document: ساري المفعول (not expired)
+    },
+    {
+      service Out put Form: Index card - Paper - Document,
+      validity Of The Document: سنة (year)
+    }
+  ]
+}

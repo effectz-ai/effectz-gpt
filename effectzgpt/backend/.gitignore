@@ -2,3 +2,9 @@ __pycache__
 storage
 .DS_Store
 output
+
+#cromaDB
+/chromadb
+
+# local env files
+.env.local

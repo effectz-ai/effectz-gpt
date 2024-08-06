@@ -7,6 +7,7 @@ First, setup the environment with poetry:
 > **_Note:_** This step is not needed if you are using the dev-container.
 
 ```
+poetry env use "C:\Users\nilaa\AppData\Local\Programs\Python\Python311\python.exe"  
 poetry install
 poetry shell
 ```

@@ -1,0 +1,73 @@
+{
+  "service Identity": {
+    "name": "Training request",
+    "service Code": 8,
+    "service Structure": "CoreService",
+    "service Type": "Transactional",
+    "category Of Service Recipient": [
+      "Business"
+    ],
+    "legislation Governing The Service": [
+      "The National Library system"
+    ],
+    "conditions For Providing The Service": [
+      "This service is provided to military personnel, students, recent graduates, government and private institutions"
+    ]
+  },
+  "service Access": {
+    "channels Providing The Service": "National Library Department building",
+    "where To Provide The Service": "Centralized",
+    "branches Provided For The Service": [],
+    "contact And Contact Information": [
+      {
+        "name": "National Library Department building",
+        "phone": "065662845",
+        "email": "nl@nl.gov.jo",
+        "working Days": [
+          "Sunday",
+          "Thursday"
+        ],
+        "working Hours": "8:00 am-3:00 pm"
+      }
+    ]
+  },
+  "stages Of Service Provision": {
+    "spatial": {
+      "forms Used": [
+        "training request"
+      ],
+      "main Procedures For Providing The Service": [
+        "Submit a training application",
+        "Receive an official book that includes the approval decision of the application"
+      ],
+      "standard Time Taken To Provide The Service": "2.0 Minute"
+    },
+    "electronic": "",
+      "main Procedures For Providing The Service": [
+        "Submit a training application",
+        "Receive an official book that includes the approval decision of the application"
+      ],
+  },
+  "documents Required To Obtain The Service": [
+    {
+      "document": "Proof of identity",
+      "governmental Department": "The Civil Status and Passports Department or the authority responsible for issuing passports in the applicant's home country",
+      "document Format": "paper copy"
+    }
+  ],
+  "fees": [],
+  "service Output": [
+    {
+      "service Output Form": "official book, official letter - Paper - Document",
+      "validity Of The Document": "ساري المفعول"
+    },
+    {
+      "service Output Form": "Finish training book - Paper - Document",
+      "validity Of The Document": "ساري المفعول"
+    },
+    {
+      "service Output Form": "Training certificates - Paper - Document",
+      "validity Of The Document": "ساري المفعول"
+    }
+  ]
+}

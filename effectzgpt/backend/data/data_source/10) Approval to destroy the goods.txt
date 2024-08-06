@@ -1,0 +1,98 @@
+{
+  "service Identity": {
+    "name": "Approval to destroy the goods",
+    "service Code": 10,
+    "service Structure": "SubService",
+    "service Type": "Transactional",
+    "category Of Service Recipient": [
+      "Business",
+      "Individual"
+    ],
+    "conditions For Providing The Service": []
+  },
+  "service Access": {
+    "channels Providing The Service": [
+      "Public Service Office Income and Sales Tax Department",
+      "Income and Sales Tax Department website"
+    ],
+    "where To Provide The Service": "Decentralized",
+    "branches Provided For The Service": [],
+    "contact And Contact Information": [
+      {
+        "name": "Public Service Office Income and Sales Tax Department",
+        "phone": "96264604444",
+        "email": "istd@istd.gov.jo",
+        "working Days": [
+          "Sunday - Thursday"
+        ],
+        "working Hours": "8:00-3:00"
+      },
+      {
+        "name": "Income and Sales Tax Department",
+        "phone": "96264604444",
+        "email": "istd@istd.gov.jo",
+        "working Days": [
+          "Sunday - Thursday"
+        ],
+        "working Hours": "8:00-3:00"
+      },
+      {
+        "name": "The website of the Income and Sales Tax Department"
+      } ,
+{
+        "name": "Income and Sales Tax Department website"
+      }
+
+    ]
+  },
+  "stages Of Service Provision": {
+    "spatial": {
+      "forms Used": [
+        "Duly filled application"
+      ],
+      "main Procedures For Providing The Service": [
+        "Submit a requisition or an official letter and attach the required documents",
+        "Receive the approval letter for the formation of the coalition committee",
+        "Carry out the destruction process in the presence of the beneficiary",
+        "Receive the signed inventory minute"
+      ],
+      "standard Time Taken To Provide The Service": "60.0 Minute"
+    },
+    "electronic": "",
+    "main Procedures For Providing The Service": [
+      "Submit a requisition or an official letter and attach the required documents",
+      "Receive the approval letter for the formation of the coalition committee",
+      "Carry out the destruction process in the presence of the beneficiary",
+      "Receive the signed inventory minute"
+    ],  
+  },
+  "documents Required To Obtain The Service": [
+    {
+      "document": "Requisition or official letter",
+      "governmental Department": "The beneficiary",
+      "document Format": ""
+    },
+    {
+      "document": "A list of the goods to be destroyed",
+      "governmental Department": "The beneficiary",
+      "document Format": ""
+    },
+    {
+      "document": "Deed of deputizing, representation and authorization",
+      "governmental Department": "Income and Sales Tax Department",
+      "document Format": ""
+    },
+    {
+      "document": "Identity proof of the taxpayer or delegate",
+      "governmental Department": "Civil Status and Passports Department",
+      "document Format": ""
+    }
+  ],
+  "fees": [],
+  "service Output": [
+    {
+      "service Output Form": "An approval letter to destroy the goods",
+      "validity Of The Document": "لا يوجد"
+    }
+  ]
+}

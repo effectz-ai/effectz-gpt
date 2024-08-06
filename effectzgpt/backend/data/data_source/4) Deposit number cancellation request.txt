@@ -1,0 +1,123 @@
+{
+  "service Identity": {
+    "name": "Deposit number cancellation request",
+    "service Code": 4,
+    "service Structure": "SubService",
+    "service Type": "Transactional",
+    "category Of Service Recipient": [
+      "Business",
+      "Individual"
+    ],
+    "legislation Governing The Service": [
+      "Wetting deposit system"
+    ],
+    "conditions For Providing The Service": [
+      "Not implementing the work is required to accept the request to cancel the deposit number"
+    ]
+  },
+  "service Access": {
+    "channels Providing The Service": "National Library Department building",
+    "where To Provide The Service": "Centralized",
+    "branches Provided For The Service": [],
+    "contact And Contact Information": [
+      {
+        "name": "National Library Department building",
+        "phone": "065662845",
+        "email": "nl@nl.gov.jo",
+        "working Days": [
+          "Sunday",
+          "Thursday"
+        ],
+        "working Hours": "8:00 am-3:00 pm"
+      }
+    ]
+  },
+  "stages Of Service Provision": {
+    "spatial": {
+      "forms Used": [
+        "Request for canceling the deposit number"
+      ],
+      "main Procedures For Providing The Service": [
+        "Submit a request to cancel the deposit number",
+        "Submit the form to the deposit center",
+        "Receive an official book that includes canceling the deposit number"
+      ],
+      "standard Time Taken To Provide The Service": "30.0 Minute"
+    },
+    "electronic": "",
+      "main Procedures For Providing The Service": [
+        "Submit a request to cancel the deposit number",
+        "Submit the form to the deposit center",
+        "Receive an official book that includes canceling the deposit number"
+      ],  
+  },
+  "documents Required To Obtain The Service": [
+    {
+      "document": "Identity proof",
+      "governmental Department": "Civil Status and Passports Department and external",
+      "document Format": "Paper copy"
+    },
+    {
+      "document": "Personal identification of the parent",
+      "governmental Department": "Civil Status and Passports Department",
+      "document Format": "Paper Copy"
+    },
+    {
+      "document": "Certificate of Commissioners to sign on behalf of the publishing house",
+      "governmental Department": "Ministry of Industry and Trade",
+      "document Format": "the company"
+    },
+    {
+      "document": "Written delegation from the inheritances",
+      "governmental Department": "Ministry of Justice",
+      "document Format": "Paper Copy"
+    },
+    {
+      "document": "Identity proof",
+      "governmental Department": "Civil Status and Passports Department and external",
+      "document Format": "Paper copy"
+    },
+    {
+      "document": "The death certificate for the author",
+      "governmental Department": "Civil Status and Passports Department",
+      "document Format": "Paper Copy"
+    },
+    {
+      "document": "Passport for a non-Jordanian",
+      "governmental Department": "Residence and Border Department",
+      "document Format": "Jordanian Paper Copy"
+    },
+    {
+      "document": "Written delegation",
+      "governmental Department": "Ministry of Justice",
+      "document Format": "Paper Copy"
+    },
+    {
+      "document": "The official book containing the deposit number",
+      "governmental Department": "The National Library Department",
+      "document Format": "Paper Copy"
+    },
+    {
+      "document": "Publishing House Registration Certificate",
+      "governmental Department": "Ministry of Industry and Trade",
+      "document Format": "Company Paper Copy"
+    },
+    {
+      "document": "A picture of the family book of the minor author",
+      "governmental Department": "Civil Status and Passports Department",
+      "document Format": "Paper Copy"
+    },
+    {
+      "document": "Determination of inheritance",
+      "governmental Department": "Sharia courts",
+      "document Format": "Paper Copy"
+    }
+  ],
+  "fees": "Not specified",
+  "service Output": [
+    {
+      "service Output Form": "official book, official letter - Paper - Document",
+      "validity Of The Document": "ساري المفعول"
+    }
+  ]
+},

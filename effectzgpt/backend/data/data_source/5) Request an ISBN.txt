@@ -1,0 +1,115 @@
+{
+  "service Identity": {
+    "name": "Request an ISBN",
+    "service Code": 5,
+    "service Structure": "CoreService",
+    "service Type": "Transactional",
+    "category Of Service Recipient": [
+      "Business",
+      "Individual"
+    ],
+    "legislation Governing The Service": [
+      "Wetting deposit system"
+    ],
+    "conditions For Providing The Service": [
+      "The work must not have a previous international standard number under the same deposit number",
+      "The service applicant must have a subscription number dedicated to his book publications (ISBN subscriber)",
+      "To obtain the service, the work must have obtained a national deposit number before submitting the application"
+    ]
+  },
+  "service Access": {
+    "channels Providing The Service": "National Library Department building",
+    "where To Provide The Service": "Centralized",
+    "branches Provided For The Service": [],
+    "contact And Contact Information": [
+      {
+        "name": "National Library Department building",
+        "phone": "065662845",
+        "email": "nl@nl.gov.jo",
+        "working Days": [
+          "Sunday",
+          "Thursday"
+        ],
+        "working Hours": "8:00 am-3:00 pm"
+      }
+    ]
+  },
+  "stages Of Service Provision": {
+    "spatial": {
+      "forms Used": [
+        "Request an international standard number ISBN"
+      ],
+      "main Procedures For Providing The Service": [
+        "Submit an application for an international standard ISBN",
+        "Filling in the form of confirming the validation of the data in the application",
+        "Receive an official book containing an international standard ISBN"
+      ],
+      "standard Time Taken To Provide The Service": "30.0 Minute"
+    },
+    "electronic":"",
+    "main Procedures For Providing The Service": [
+        "Submit an application for an international standard ISBN",
+        "Filling in the form of confirming the validation of the data in the application",
+        "Receive an official book containing an international standard ISBN"
+     ],
+  },
+  "documents Required To Obtain The Service": [
+    {
+      "document": "Personal proof for a non-Jordanian",
+      "governmental Department": "Residence and Border Department- High Commissioner for Refugees",
+      "document Format": "Jordanian Paper Copy"
+    },
+    {
+      "document": "Publishing house license",
+      "governmental Department": "Media Authority",
+      "document Format": "Paper Copy"
+    },
+    {
+      "document": "Identity proof",
+      "governmental Department": "Civil Status and Passports Department and external",
+      "document Format": "Paper copy"
+    },
+    {
+      "document": "Written delegation",
+      "governmental Department": "Ministry of Justice",
+      "document Format": "Paper Copy"
+    },
+    {
+      "document": "Certificate of commissioners to sign on behalf of the publishing house",
+      "governmental Department": "Ministry of Industry and Trade",
+      "document Format": "Paper Copy"
+    },
+    {
+      "document": "The contract signed between the publisher and the author, according to the rules",
+      "governmental Department": "applicant",
+      "document Format": "Paper Copy"
+    },
+    {
+      "document": "An official book includes the national deposit number",
+      "governmental Department": "The National Library Department",
+      "document Format": "Paper Copy"
+    },
+    {
+      "document": "Publishing House Registration Certificate",
+      "governmental Department": "Ministry of Industry and Trade",
+      "document Format": "Company Paper Copy"
+    }
+  ],
+  "fees": "Not specified",
+  "service Output": [
+    {
+      "service Output Form": "official book, official letter - Paper - Document",
+      "validity Of The Document": "ساري المفعول"
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+
