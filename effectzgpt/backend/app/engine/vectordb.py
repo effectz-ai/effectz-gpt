@@ -16,6 +16,7 @@ def get_vector_store():
             raise ValueError(
                 "Please provide either CHROMA_PATH or CHROMA_HOST and CHROMA_PORT"
             )
+        print("effectz", os.getenv("CHROMA_HOST"),os.getenv("CHROMA_PORT"),collection_name)
         store = ChromaVectorStore.from_params(
             host=os.getenv("CHROMA_HOST"),
             port=int(os.getenv("CHROMA_PORT")),
