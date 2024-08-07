@@ -1,0 +1,33 @@
+**/.git
+**/.cache
+*Dockerfile*
+**/.env
+
+# Python
+**/__pycache__
+*.pyc
+*.pyo
+*.pyd
+*,cover
+*.log
+.git*
+
+
+# Node
+**/.results
+**/node_modules
+./static
+
+# Ignore development create_llama code
+./storage/
+./static/
+./data/
+
+# Deployment files
+./Dockerfile
+
+# Do not ignore template config files
+!config/*
+
+# next
+./.next
