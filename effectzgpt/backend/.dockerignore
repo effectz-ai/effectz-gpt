@@ -24,3 +24,6 @@
 
 # Do not ignore template config files
 !config/*
+
+#poetry
+./poetry.lock
