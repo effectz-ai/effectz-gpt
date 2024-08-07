@@ -58,7 +58,7 @@ app.include_router(file_upload_router, prefix="/api/chat/upload")
 
 if __name__ == "__main__":
     app_host = os.getenv("APP_HOST", "0.0.0.0")
-    app_port = int(os.getenv("APP_PORT", "8000"))
+    app_port = int(os.getenv("APP_PORT", "5000"))
     reload = True if environment == "dev" else False
 
     uvicorn.run(app="main:app", host=app_host, port=app_port, reload=reload)
