@@ -10,7 +10,7 @@ RUN npm install -f
 COPY . .
 RUN npm run build
 
-# ====================================
-FROM build AS release
-
-CMD ["npm", "run", "start"]
+## Export the Next.js application as static files
+ENV PORT=3000
+EXPOSE 3000
+CMD ["npm", "run", "dev"]

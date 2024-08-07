@@ -15,12 +15,11 @@ RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=/opt/poetry python
 RUN apt update && apt install -y chromium chromium-driver
 
 # Install dependencies
-COPY ./pyproject.toml ./poetry.lock* /app/
+COPY ./pyproject.toml /app/
 RUN poetry install --no-root --no-cache --only main
 
-# ====================================
-FROM build as release
-
 COPY . .
+
+RUN mkdir -p chromadb
 
 CMD ["python", "main.py"]
