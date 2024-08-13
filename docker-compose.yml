@@ -20,29 +20,30 @@ services:
       - ./effectzgpt/backend/data:/app/data
       - ./effectzgpt/backend/chromadb:/app/chromadb
     environment:
-      - APP_PORT=5000
-      - TOP_K=10
-      - STREAM_TIMEOUT=60000
-      - VECTOR_STORE_PROVIDER=chroma
-  #      - CHROMA_PATH=./chromadb
-      - CHROMA_COLLECTION=default
-      - MODEL_PROVIDER=openai
-      - MODEL=gpt-4o
-      - EMBEDDING_MODEL=text-embedding-3-large
-      - EMBEDDING_DIM=1024
-      - LLAMA_CLOUD_API_KEY=
-      - OPENAI_API_KEY=
+      - APP_PORT=${APP_PORT}
+      - TOP_K=${TOP_K}
+      - STREAM_TIMEOUT=${STREAM_TIMEOUT}
+      - VECTOR_STORE_PROVIDER=${VECTOR_STORE_PROVIDER}
+      - CHROMA_PATH=${CHROMA_PATH}
+      - CHROMA_COLLECTION=${CHROMA_COLLECTION}
+      - MODEL_PROVIDER=${MODEL_PROVIDER}
+      - MODEL=${MODEL}
+      - EMBEDDING_MODEL=${EMBEDDING_MODEL}
+      - EMBEDDING_DIM=${EMBEDDING_DIM}
+      - LLAMA_CLOUD_API_KEY=${LLAMA_CLOUD_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
       - SYSTEM_PROMPT=You are Jordan government assistant , you only know about the services provided by the Jordan government .
-      - COHERE_API_KEY=
-      - CHROMA_HOST=host.docker.internal
-      - CHROMA_PORT=8000
+      - COHERE_API_KEY=${COHERE_API_KEY}
+      - CHROMA_HOST=${CHROMA_HOST}
+      - CHROMA_PORT=${CHROMA_PORT}
   #    networks:
   #      - ragapp-network
   #  links:
   #    - chromadb
     command: >
       /bin/sh -c
-      "poetry run generate &&
+      "
+      poetry run generate &&
       python main.py"
 
   effectzgpt_ui:
@@ -51,7 +52,7 @@ services:
     ports:
       - 5000:3000
     environment:
-      - NEXT_PUBLIC_CHAT_API=http://localhost:5001/api/chat
+      - NEXT_PUBLIC_CHAT_API=${NEXT_PUBLIC_CHAT_API}
     volumes:
       - ./effectzgpt/frontend/config:/app/config
       - ./effectzgpt/frontend/cache:/app/cache
@@ -72,23 +73,23 @@ services:
       - ./effectzgpt/frontend/cache:/app/frontend/cache
       - ./effectzgpt/backend/chromadb:/app/backend/chromadb
     environment:
-      - NEXT_PUBLIC_CHAT_API=http://localhost:5000/api/chat
-      - APP_PORT=5000
-      - TOP_K=10
-      - STREAM_TIMEOUT=60000
-      - VECTOR_STORE_PROVIDER=chroma
-      - CHROMA_PATH=./backend/chromadb
-      - CHROMA_COLLECTION=default
-      - MODEL_PROVIDER=openai
-      - MODEL=gpt-4o-mini
-      - EMBEDDING_MODEL=text-embedding-3-large
-      - EMBEDDING_DIM=1024
-      - LLAMA_CLOUD_API_KEY=
-      - OPENAI_API_KEY=
+      - NEXT_PUBLIC_CHAT_API=${NEXT_PUBLIC_CHAT_API}
+      - APP_PORT=${APP_PORT}
+      - TOP_K=${TOP_K}
+      - STREAM_TIMEOUT=${STREAM_TIMEOUT}
+      - VECTOR_STORE_PROVIDER=${VECTOR_STORE_PROVIDER}
+      - CHROMA_PATH=${CHROMA_PATH}
+      - CHROMA_COLLECTION=${CHROMA_COLLECTION}
+      - MODEL_PROVIDER=${MODEL_PROVIDER}
+      - MODEL=${MODEL}
+      - EMBEDDING_MODEL=${EMBEDDING_MODEL}
+      - EMBEDDING_DIM=${EMBEDDING_DIM}
+      - LLAMA_CLOUD_API_KEY=${LLAMA_CLOUD_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
       - SYSTEM_PROMPT=You are Jordan government assistant , you only know about the services provided by the Jordan government .
-      - COHERE_API_KEY=
-      - CHROMA_HOST=host.docker.internal
-      - CHROMA_PORT=8000
+      - COHERE_API_KEY=${COHERE_API_KEY}
+      - CHROMA_HOST=${CHROMA_HOST}
+      - CHROMA_PORT=${CHROMA_PORT}
     command: >
       /bin/sh -c
       "
