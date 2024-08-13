@@ -25,7 +25,7 @@ export const RagConfigForm:FC<RagConfigFormProps> = ({onInputChange,...rest}) =>
                     <Textarea
                         value={value}
                         onChange={handleInputChange}
-                        placeholder="Enter Your Promt"
+                        placeholder="Enter Your Prompt"
                         bg='#FFFFFF'
                      />
                     <Text color='brand.300'>Use system prompt to define the responsibilities and behaviors of the assistant.</Text>
@@ -34,6 +34,7 @@ export const RagConfigForm:FC<RagConfigFormProps> = ({onInputChange,...rest}) =>
                         color='#FFFFFF' 
                         w='full'
                         rounded='full'
+                        onClick={handleInputChange}
                         >Update</Button>
                 </VStack>
 

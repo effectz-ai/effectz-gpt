@@ -1,9 +1,9 @@
-import { ModelProvider, NavBar, RagConfig } from "@/components";
+import { AdditionalApiKeys, ModelProvider, NavBar, RagConfig } from "@/components";
 
 export default function Home() {
   return (
     <div>
-      <RagConfig />
+      <AdditionalApiKeys />
     </div>
   );
 }
