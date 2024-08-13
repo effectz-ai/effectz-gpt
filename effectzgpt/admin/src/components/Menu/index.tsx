@@ -9,19 +9,23 @@ export type CustomMenuListProps = BetterOmit<BoxProps,'children'> & {
     itemList: string[];
     tagline: string;
     heading?: string;
+    onSelected?: (item: string) => void;
 }
 
 export const CustomMenuList:FC<CustomMenuListProps> = ({...props}) => {
     const [selectedItem, setSelectedItem] = useState(props.itemList[0])
     const handleMenuItemClick = (item: string) => {
         setSelectedItem(item)
+        if(props.onSelected){
+            props.onSelected(item)
+        }
     }
     return (
         <Box  {...props}>
             <VStack alignItems='flex-start'>
                 <Menu matchWidth={true}>
                     <Heading size='md'>{props.heading}</Heading>
-                    <MenuButton as={Button} rightIcon={<ArrowDownIcon />} w='full'>
+                    <MenuButton as={Button} rightIcon={<ArrowDownIcon />} w='full' textAlign='left'>
                         {selectedItem}
                     </MenuButton>
                     <MenuList>

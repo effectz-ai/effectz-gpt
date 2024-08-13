@@ -2,19 +2,28 @@
 
 import { BetterOmit } from "@/utils/BetterOmmit"
 import { Box, BoxProps, Heading, Input, InputGroup, InputRightElement, Text, useClipboard, VStack } from "@chakra-ui/react"
-import { FC, useState } from "react";
+import React, { FC, useState } from "react";
 import { EyeIcon, EyeOffIcon } from "../icons";
 import { CopyIcon } from "../icons/CopyIcon";
 
 export type PasswordFieldProps = BetterOmit<BoxProps, 'children'> & {
     tagline?: string
     heading?: string
+    onApiKeyChange?: (value: string) => void
 };
 
 export const PasswordField:FC<PasswordFieldProps> = ({...rest}) => {
     const [show, setShow] = useState(false);
     const {onCopy, value, setValue, hasCopied} = useClipboard('');
     const handleClick = () => setShow(!show)
+
+    const handleInputChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = e.target.value;
+        setValue(newValue);
+        if(rest.onApiKeyChange){
+            rest.onApiKeyChange(newValue);
+        }
+    }
     return(
         <Box {...rest}>
             <VStack alignItems='flex-start'>
@@ -24,7 +33,7 @@ export const PasswordField:FC<PasswordFieldProps> = ({...rest}) => {
                         type={show ? 'text' : 'password'}
                         value={value}
                         placeholder='API Key'
-                        onChange={(e) => setValue(e.target.value)}
+                        onChange={handleInputChange}
                     />
                     <InputRightElement>
                         {
