@@ -1,27 +1,30 @@
 services:
+
   chromadb:
+    container_name: chroma
     image: chromadb/chroma
     ports:
       - 8000:8000
     volumes:
       - ./chroma_data:/chroma/chroma
-    networks:
-      - ragapp-network
+  #    networks:
+  #      - ragapp-network
 
   effectzgpt_server:
+    container_name: server
     image: effectzai/effectzgpt_b
     ports:
-      - 5000:5000
+      - 5001:5000
     volumes:
       - ./effectzgpt/backend/config:/app/config
       - ./effectzgpt/backend/data:/app/data
-#      - ./effectzgpt/backend/chromadb:/app/chromadb
+      - ./effectzgpt/backend/chromadb:/app/chromadb
     environment:
       - APP_PORT=5000
       - TOP_K=10
       - STREAM_TIMEOUT=60000
       - VECTOR_STORE_PROVIDER=chroma
-#      - CHROMA_PATH=./chromadb
+  #      - CHROMA_PATH=./chromadb
       - CHROMA_COLLECTION=default
       - MODEL_PROVIDER=openai
       - MODEL=gpt-4o
@@ -30,31 +33,70 @@ services:
       - LLAMA_CLOUD_API_KEY=
       - OPENAI_API_KEY=
       - SYSTEM_PROMPT=You are Jordan government assistant , you only know about the services provided by the Jordan government .
-      - COHERE_API_KEY=Yp0wADuPD6aMfOcfuSzNs7pru2Kqy3jloizXMECp
+      - COHERE_API_KEY=
       - CHROMA_HOST=host.docker.internal
       - CHROMA_PORT=8000
-    networks:
-      - ragapp-network
-    depends_on:
-      - chromadb
+  #    networks:
+  #      - ragapp-network
+  #  links:
+  #    - chromadb
     command: >
       /bin/sh -c
       "poetry run generate &&
       python main.py"
 
   effectzgpt_ui:
+    container_name: ui
     image: effectzai/effectzgpt_f
     ports:
-      - 8001:3000
+      - 5000:3000
     environment:
-      - NEXT_PUBLIC_CHAT_API=http://localhost:5000/api/chat
+      - NEXT_PUBLIC_CHAT_API=http://localhost:5001/api/chat
     volumes:
       - ./effectzgpt/frontend/config:/app/config
       - ./effectzgpt/frontend/cache:/app/cache
-    networks:
-      - ragapp-network
-    depends_on:
+    links:
       - effectzgpt_server
+  #  networks:
+  #    - ragapp-network
 
-networks:
-  ragapp-network:
+  effectzgpt:
+    container_name: effectzgpt_a
+    image: effectzai/effectzgpt
+    ports:
+      - 5000:3000
+    volumes:
+      - ./effectzgpt/backend/config:/app/backend/config
+      - ./effectzgpt/backend/data:/app/backend/data
+      - ./effectzgpt/frontend/config:/app/frontend/config
+      - ./effectzgpt/frontend/cache:/app/frontend/cache
+      - ./effectzgpt/backend/chromadb:/app/backend/chromadb
+    environment:
+      - NEXT_PUBLIC_CHAT_API=http://localhost:5000/api/chat
+      - APP_PORT=5000
+      - TOP_K=10
+      - STREAM_TIMEOUT=60000
+      - VECTOR_STORE_PROVIDER=chroma
+      - CHROMA_PATH=./backend/chromadb
+      - CHROMA_COLLECTION=default
+      - MODEL_PROVIDER=openai
+      - MODEL=gpt-4o-mini
+      - EMBEDDING_MODEL=text-embedding-3-large
+      - EMBEDDING_DIM=1024
+      - LLAMA_CLOUD_API_KEY=
+      - OPENAI_API_KEY=
+      - SYSTEM_PROMPT=You are Jordan government assistant , you only know about the services provided by the Jordan government .
+      - COHERE_API_KEY=
+      - CHROMA_HOST=host.docker.internal
+      - CHROMA_PORT=8000
+    command: >
+      /bin/sh -c
+      "
+      cd /app/backend &&
+      poetry run generate &&
+      nohup python main.py > output_b.log 2>&1 &
+      cd /app/frontend &&
+      exec npm run start"
+
+#networks:
+#  ragapp-network:
