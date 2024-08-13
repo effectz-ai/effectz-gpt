@@ -47,7 +47,7 @@ services:
     ports:
       - 8001:3000
     environment:
-      - NEXT_PUBLIC_CHAT_API=http://localhost:5000/api/chat
+      - NEXT_PUBLIC_CHAT_API=http://localhost:3000/api/chat
     volumes:
       - ./effectzgpt/frontend/config:/app/config
       - ./effectzgpt/frontend/cache:/app/cache
