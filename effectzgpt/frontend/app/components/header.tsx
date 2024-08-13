@@ -12,15 +12,15 @@ export default function Header() {
           href="https://www.effectz.ai/"
           className="flex items-center justify-center font-nunito text-lg font-bold gap-2"
         >
-          <span>Built by Effectz.AI</span>
-          <Image
-            className="rounded-xl"
-            src="/effectz.png"
-            alt="Effectz Logo"
-            width={40}
-            height={40}
-            priority
-          />
+          {/*<span>Built by Effectz.AI</span>*/}
+          {/*<Image*/}
+          {/*  className="rounded-xl"*/}
+          {/*  src="/effectz.png"*/}
+          {/*  alt="Effectz Logo"*/}
+          {/*  width={40}*/}
+          {/*  height={40}*/}
+          {/*  priority*/}
+          {/*/>*/}
         </a>
       </div>
     </div>

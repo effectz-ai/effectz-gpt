@@ -60,9 +60,14 @@ class VercelStreamResponse(StreamingResponse):
             conversation = chat_data.messages + [
                 Message(role="assistant", content=final_response)
             ]
-            questions = await NextQuestionSuggestion.suggest_next_questions(
-                conversation
-            )
+            questions = [
+                "How to obtain Deposit Number Request service?",
+                "How to obtain Amendment Request - Renewal of the Deposit Number request service?",
+                "How to obtain Deposit Number Cancellation Request service?",
+                "How to Request an ISBN?",
+                "How to request to Subscribe to an ISBN Agency?",
+                "How to make Gift Request?"]
+
             if len(questions) > 0:
                 yield VercelStreamResponse.convert_data(
                     {
