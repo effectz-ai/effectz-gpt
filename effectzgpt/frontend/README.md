@@ -70,6 +70,8 @@ docker run \
 
 ## Learn More
 
+NOTE:  for NEXT_PUBLIC_CHAT_API use public ip of the backend server and make sure the port is open
+
 To learn more about LlamaIndex, take a look at the following resources:
 
 - [LlamaIndex Documentation](https://docs.llamaindex.ai) - learn about LlamaIndex (Python features).
