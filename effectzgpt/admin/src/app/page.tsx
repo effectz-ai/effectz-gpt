@@ -1,10 +1,9 @@
-import { NavBar } from "@/components";
-import { Text } from "@chakra-ui/react";
+import { ModelProvider, NavBar } from "@/components";
 
 export default function Home() {
   return (
     <div>
-      <NavBar />
+      <ModelProvider />
     </div>
   );
 }

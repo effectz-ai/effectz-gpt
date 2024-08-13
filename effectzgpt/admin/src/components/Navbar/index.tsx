@@ -13,9 +13,9 @@ export const NavBar:FC<NavbarProps> = ({...props} : NavbarProps) => {
                     </Box>
                     <Spacer/>
                     <Box>
-                        <HStack>
+                        <HStack gap={4}>
                             <HomeIcon width={35} height={35} color='#FFFFFF'/>
-                            <NotificationIcon width={35} height={35} color='#FFFFFF'/>
+                            <NotificationIcon width={30} height={30} color='#FFFFFF'/>
                         </HStack>
                     </Box>
                 </Flex>

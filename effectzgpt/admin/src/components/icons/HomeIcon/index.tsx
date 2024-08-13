@@ -1,6 +1,5 @@
 import { BetterOmit } from "@/utils/BetterOmmit";
 import { Icon, IconProps } from "@chakra-ui/react";
-import { color } from "framer-motion";
 import { FC } from "react";
 
 export type HomeIconProps = BetterOmit<IconProps, 'children' | 'color'> & {
