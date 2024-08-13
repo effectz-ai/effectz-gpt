@@ -1,9 +1,9 @@
-import { ModelProvider, NavBar } from "@/components";
+import { ModelProvider, NavBar, RagConfig } from "@/components";
 
 export default function Home() {
   return (
     <div>
-      <ModelProvider />
+      <RagConfig />
     </div>
   );
 }

@@ -36,7 +36,7 @@ export const ModelProvider:FC<ModelProviderProps> = ({...rest}) => {
         };
 
         try {
-            const response = await axios.post('/api/your-endpoint', payload); // Update the endpoint
+            const response = await axios.post('/api/effectzai-endpoint', payload); // Update the endpoint
             console.log('API response:', response.data);
         } catch (error) {
             console.error('Failed to send data to the API:', error);
