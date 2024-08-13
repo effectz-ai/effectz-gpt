@@ -12,6 +12,7 @@ export function useClientConfig(): ChatConfig {
   const [config, setConfig] = useState<ChatConfig>();
 
   const backendOrigin = useMemo(() => {
+    console.log("Effectz", chatAPI);
     return chatAPI ? new URL(chatAPI).origin : "";
   }, [chatAPI]);
 
