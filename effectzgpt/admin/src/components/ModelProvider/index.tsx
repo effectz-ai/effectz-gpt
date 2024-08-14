@@ -48,7 +48,7 @@ export const ModelProvider:FC<ModelProviderProps> = ({...rest}) => {
         }
     }
     return(
-        <Box {...rest} bg='brand.100' rounded={10} p={6} boxShadow={"0 0 6px 0"}>
+        <Box {...rest} bg='brand.100' rounded={10} p={6}>
             <VStack alignItems='flex-start' w='full'>
                 <CustomMenuList 
                     w='full' my={2} 

@@ -34,6 +34,7 @@ export const PasswordField:FC<PasswordFieldProps> = ({...rest}) => {
                         value={value}
                         placeholder='API Key'
                         onChange={handleInputChange}
+                        bg='#FFFFFF'
                     />
                     <InputRightElement>
                         {

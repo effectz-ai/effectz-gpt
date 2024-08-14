@@ -6,7 +6,7 @@ export type AdditionalApiKeyProps = BetterOmit<BoxProps, 'children'>
 
 export const AdditionalApiKeys:FC<AdditionalApiKeyProps> = ({...rest}) => {
     return(
-        <Box {...rest} bg='brand.100' p={6} rounded={10} boxShadow={"0 0 6px 0"}>
+        <Box {...rest} bg='brand.100' p={6} rounded={10} >
             <Heading size='md' mb={4}>Additional API Keys</Heading>
             <hr />
             <VStack alignItems='flex-start'>
