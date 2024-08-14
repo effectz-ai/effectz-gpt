@@ -1,4 +1,4 @@
-import { AdditionalApiKeys, KnowlegeUpload, ModelProvider, NavBar, RagConfig } from "@/components";
+import { AdditionalApiKeys, ChatUi, KnowlegeUpload, ModelProvider, NavBar, RagConfig } from "@/components";
 import { GridItem, SimpleGrid } from "@chakra-ui/react";
 
 export default function Home() {
@@ -9,6 +9,9 @@ export default function Home() {
         <RagConfig m={10} />
         <KnowlegeUpload m={10} />
         <AdditionalApiKeys m={10} />
+      </GridItem>
+      <GridItem>
+        <ChatUi />
       </GridItem>
     </SimpleGrid>
   );

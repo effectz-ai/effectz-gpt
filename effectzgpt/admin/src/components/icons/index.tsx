@@ -3,3 +3,8 @@ export * from './NotificationIcon';
 export * from './ArrowDowIcon';
 export * from './EyeIcon';
 export * from './EyeOffIcon';
+export * from './RepeatIcon';
+export * from './UserIcon';
+export * from './EffectzLogo';
+export * from './AttachmentIcon';
+export * from './SendIcon';
