@@ -15,7 +15,8 @@ export const ChatItem:FC<ChatItemProps> = ({message,isUser,...rest}) => {
                     <HStack>
                         <IconButton
                             aria-label=""
-                            icon={<UserIcon />}
+                            icon={<UserIcon />}      
+                            boxShadow={'0 0 4px 0'}
                         />
                         <Text>{message}</Text>
                     </HStack>
@@ -26,6 +27,7 @@ export const ChatItem:FC<ChatItemProps> = ({message,isUser,...rest}) => {
                         <IconButton
                             aria-label=""
                             icon={<EffectzIcon />}
+                            boxShadow={'0 0 4px 0'}
                         />
                         <Text>{message}</Text>
                     </HStack>

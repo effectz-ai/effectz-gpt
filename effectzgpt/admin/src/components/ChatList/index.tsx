@@ -18,7 +18,7 @@ export const ChatList:FC<ChatListProps> = ({messages,...rest}) => {
             <VStack alignItems='flex-start' maxH='80vh' overflowY='scroll'>
                 {
                     messages.map((message) => (
-                        <ChatItem key={message.id} message={message.message} isUser={message.isUser} />
+                        <ChatItem p={2} key={message.id} message={message.message} isUser={message.isUser} />
                     ))
                 }
             </VStack>

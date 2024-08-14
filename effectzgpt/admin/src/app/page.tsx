@@ -11,7 +11,7 @@ export default function Home() {
         <AdditionalApiKeys m={10} />
       </GridItem>
       <GridItem>
-        <ChatUi />
+        <ChatUi m={10} p={6}/>
       </GridItem>
     </SimpleGrid>
   );

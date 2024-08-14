@@ -1,12 +1,14 @@
 'use client'
 
-import { Box } from "@chakra-ui/react"
+import { Box, BoxProps } from "@chakra-ui/react"
 import { ChatHeader } from "../ChatHeader"
 import { ChatList } from "../ChatList"
 import { ChatInput } from "../ChatInput"
-import { useState } from "react"
+import { FC, useState } from "react"
+import { BetterOmit } from "@/utils/BetterOmmit"
 
-export const ChatUi = () => {
+export type ChatUIProps = BetterOmit<BoxProps, 'children'>;
+export const ChatUi:FC<ChatUIProps> = ({...rest}) => {
     const [messages, setMessages] = useState([
         { id: 1, message: "What is GenAI? Give a small paragraph", isUser: true },
         { id: 2, message: "Generative AI (genAI) refers to a category of artificial intelligence...", isUser: false },
@@ -40,9 +42,9 @@ export const ChatUi = () => {
         setMessages([...messages, newMessage]);
       };
     return (
-            <Box p={6}>
+            <Box {...rest} bg='brand.100' rounded={10}>
                 <ChatHeader />
-                <ChatList messages={messages}/>
+                <ChatList py={4} messages={messages}/>
                 <ChatInput />
             </Box>
     )

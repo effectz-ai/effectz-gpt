@@ -15,7 +15,6 @@ export const ChatInput:FC<ChatInputProps> = ({...rest}) => {
                 />
                 <Input
                     placeholder="Type a message"
-
                 />
                 <IconButton
                     aria-label="Send Message"

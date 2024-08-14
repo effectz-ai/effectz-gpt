@@ -2,7 +2,7 @@ import { Box, Heading } from "@chakra-ui/react"
 
 export const ChatHeader = () => {
     return(
-        <Box py={6}>
+        <Box>
             <Heading size='md'>
                 EffectzGPT
             </Heading>
