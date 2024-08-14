@@ -37,4 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 # Admin UI
 
-![UI](https://github.com/effectz-ai/effectz-gpt/blob/feature/admin/effectzgpt/admin/ADMIN_UI_V1.png)
+![UI](https://github.com/effectz-ai/effectz-gpt/blob/feature/admin/effectzgpt/admin/admin_UI_v1.png)
