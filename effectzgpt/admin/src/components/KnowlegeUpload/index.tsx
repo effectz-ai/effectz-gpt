@@ -21,12 +21,12 @@ export const KnowlegeUpload:FC<KnowlegeUploadProps> = ({...rest}) => {
     }
   };
     return (
-        <Box {...rest} bg='brand.100' boxShadow='0 0 6px 0' rounded={10} p={4}>
+        <Box {...rest} bg='brand.100' rounded={10} p={4}>
             <Accordion allowToggle rounded={10}>
                 <AccordionItem>
                     <AccordionButton>
                         <Box as='span' flex='1' textAlign='left'>
-                            <Heading size='md'>RAG Config</Heading>
+                            <Heading size='md'>Knowledge</Heading>
                         </Box>
                         <AccordionIcon />
                     </AccordionButton>

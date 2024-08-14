@@ -5,3 +5,5 @@ export * from './RagConfig';
 export * from './RagConfigForm';
 export * from './AdditionalApiKeys'
 export * from './FileUpload';
+export * from './KnowlegeUpload'
+export * from './ChatUi';

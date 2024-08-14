@@ -25,7 +25,7 @@ export const CustomMenuList:FC<CustomMenuListProps> = ({...props}) => {
             <VStack alignItems='flex-start'>
                 <Menu matchWidth={true}>
                     <Heading size='md'>{props.heading}</Heading>
-                    <MenuButton as={Button} rightIcon={<ArrowDownIcon />} w='full' textAlign='left'>
+                    <MenuButton bg='#FFFFFF' as={Button} rightIcon={<ArrowDownIcon />} w='full' textAlign='left'>
                         {selectedItem}
                     </MenuButton>
                     <MenuList>

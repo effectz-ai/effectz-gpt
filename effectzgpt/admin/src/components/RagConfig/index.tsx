@@ -14,7 +14,7 @@ export const RagConfig = (props: RagConfigProps) => {
         setInputUpdate(value);
     }
     return (
-        <Box {...props} bg='brand.100' rounded={10} p={6} boxShadow={"0 0 6px 0"}>
+        <Box {...props} bg='brand.100' rounded={10} p={6}>
             <Accordion allowToggle>
                 <AccordionItem>
                     <AccordionButton>
