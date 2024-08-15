@@ -25,6 +25,9 @@ version = "^0.23.2"
 [tool.poetry.dependencies.llama-index-vector-stores-chroma]
 version = "^0.1.8"
 
+[tool.poetry.dependencies.llama-index-vector-stores-qdrant]
+version = "^0.2.15"
+
 [tool.poetry.dependencies.docx2txt]
 version = "^0.8"
 
