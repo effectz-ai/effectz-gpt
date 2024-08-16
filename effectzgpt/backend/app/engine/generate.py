@@ -8,6 +8,7 @@ import os
 from app.engine.loaders import get_documents
 from app.engine.vectordb import get_vector_store
 from app.settings import init_settings
+from app.engine.node_preprocessors import get_sentence_window_node_parser
 from llama_index.core.ingestion import IngestionPipeline
 from llama_index.core.node_parser import SentenceSplitter
 from llama_index.core.settings import Settings
@@ -31,14 +32,20 @@ def get_doc_store():
 
 
 def run_pipeline(docstore, vector_store, documents):
-    pipeline = IngestionPipeline(
-        transformations=[
-            SentenceSplitter(
+    transformations = []
+    transformations.append(SentenceSplitter(
                 chunk_size=Settings.chunk_size,
                 chunk_overlap=Settings.chunk_overlap,
-            ),
-            Settings.embed_model,
-        ],
+            ))
+    transformations.append(Settings.embed_model)
+
+    if os.getenv("USE_SENTENCE_WINDOW_RETRIEVAL", "True").lower() == "true":
+        transformations.append(get_sentence_window_node_parser())
+    
+    transformations.append(get_sentence_window_node_parser())
+    
+    pipeline = IngestionPipeline(
+        transformations=transformations,
         docstore=docstore,
         docstore_strategy="upserts_and_delete",
         vector_store=vector_store,
