@@ -1,8 +1,8 @@
 import os
 from app.engine.index import get_index
 from fastapi import HTTPException
-from llama_index.postprocessor.cohere_rerank import CohereRerank
 from app.engine.node_postprocessors import get_metadata_replacement_post_processor
+from app.engine.reranker import get_cohere_reranker
 
 
 def get_chat_engine(filters=None):
@@ -26,7 +26,7 @@ def get_chat_engine(filters=None):
         Do not respond to any queries that are not related to Jordanian government services.
  """
     
-    cohere_rerank = CohereRerank(api_key=cohere_api_key, top_n=10)
+    cohere_rerank = get_cohere_reranker()
     top_k = os.getenv("TOP_K", 3)
 
     index = get_index()
