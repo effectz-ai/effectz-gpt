@@ -2,6 +2,7 @@ import os
 from app.engine.index import get_index
 from fastapi import HTTPException
 from llama_index.postprocessor.cohere_rerank import CohereRerank
+from app.engine.node_postprocessors import get_metadata_replacement_post_processor
 
 
 def get_chat_engine(filters=None):
@@ -36,11 +37,16 @@ def get_chat_engine(filters=None):
                 "StorageContext is empty - call 'poetry run generate' to generate the storage first"
             ),
         )
+        
+    node_postprocessors = []
+    node_postprocessors.append(cohere_rerank)
+    if os.getenv("USE_SENTENCE_WINDOW_RETRIEVAL", "True").lower() == "true":
+        node_postprocessors.append(get_metadata_replacement_post_processor())
 
     return index.as_chat_engine(
         similarity_top_k=int(top_k),
         system_prompt=system_prompt,
-        node_postprocessors=[cohere_rerank],
+        node_postprocessors=node_postprocessors,
         chat_mode="condense_plus_context",
         filters=filters,
     )
