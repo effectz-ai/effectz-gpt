@@ -42,8 +42,6 @@ def run_pipeline(docstore, vector_store, documents):
     if os.getenv("USE_SENTENCE_WINDOW_RETRIEVAL", "True").lower() == "true":
         transformations.append(get_sentence_window_node_parser())
     
-    transformations.append(get_sentence_window_node_parser())
-    
     pipeline = IngestionPipeline(
         transformations=transformations,
         docstore=docstore,
