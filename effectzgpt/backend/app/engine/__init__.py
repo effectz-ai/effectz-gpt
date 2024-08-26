@@ -24,7 +24,7 @@ def get_chat_engine(filters=None):
         Do not respond to any queries that are not related to Jordanian government services.
  """
     
-    top_k = os.getenv("TOP_K", 3)
+    top_k = os.getenv("TOP_K", 10)
 
     index = get_index()
     if index is None:

@@ -1,10 +1,10 @@
 import os
-from app.engine.constants import DEFAULT_TOP_K
+from app.engine.constants import DEFAULT_COHERE_TOP_K
 from llama_index.postprocessor.cohere_rerank import CohereRerank
 
 def get_cohere_reranker():
     api_key = os.getenv("COHERE_API_KEY")
-    top_k = int(os.getenv("TOP_K", DEFAULT_TOP_K))
+    top_k = int(os.getenv("COHERE_TOP_K", DEFAULT_COHERE_TOP_K))
 
     if api_key is None:
         raise ValueError(
