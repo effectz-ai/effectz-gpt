@@ -12,6 +12,7 @@ from app.api.routers.chat import chat_router
 from app.api.routers.upload import file_upload_router
 from app.api.routers.data_ingestion import data_ingestion_router
 from app.api.routers.url_scraper import url_scraping_router
+from app.api.routers.web_scraper import web_scraping_router
 from app.settings import init_settings
 from app.observability import init_observability
 from fastapi.staticfiles import StaticFiles
@@ -59,6 +60,7 @@ app.include_router(chat_router, prefix="/api/chat")
 app.include_router(file_upload_router, prefix="/api/chat/upload")
 app.include_router(data_ingestion_router, prefix="/api")
 app.include_router(url_scraping_router, prefix="/api")
+app.include_router(web_scraping_router, prefix="/api")
 
 if __name__ == "__main__":
     app_host = os.getenv("APP_HOST", "0.0.0.0")
