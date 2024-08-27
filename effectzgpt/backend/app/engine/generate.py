@@ -63,12 +63,12 @@ def persist_storage(docstore, vector_store):
     storage_context.persist(STORAGE_DIR)
 
 
-def generate_datasource():
+def generate_datasource(loader_file):
     init_settings()
     logger.info("Generate index for the provided data")
 
     # Get the stores and documents or create new ones
-    documents = get_documents()
+    documents = get_documents(loader_file)
     # Set private=false to mark the document as public (required for filtering)
     for doc in documents:
         doc.metadata["private"] = "false"

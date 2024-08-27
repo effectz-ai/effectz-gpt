@@ -1,49 +1,34 @@
 import logging
 import yaml
-from pydantic import BaseModel
 from fastapi import APIRouter, HTTPException
 from typing import List
 from app.engine.generate import generate_datasource
+from app.engine.loaders.web import CrawlUrl, WebLoaderConfig
 
 web_scraping_router = r = APIRouter()
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
-class ScrapeRequest(BaseModel):
-    urls: List[str]
-    depth: int = 0
-
 @r.post("/scrape_web")
-async def scrape_web(request: ScrapeRequest):
+async def scrape_web(requests: List[CrawlUrl]):
     try:
-        logger.info(f"Received URLs: {request.urls}")
-        logger.info(f"Depth: {request.depth}")
+        web_loader_config = WebLoaderConfig()
+        for request in requests:
+            logger.info(f"Base URL: {request.base_url}")
+            logger.info(f"Prefix: {request.prefix}")
+            logger.info(f"Max depth: {request.max_depth}")
 
-        web_loader_config = {
-            "web": {
-                "urls": [{"base_url": url, "prefix": url, "max_depth": request.depth} for url in request.urls],
-            }
-        }
+            crawl_url = CrawlUrl(base_url=request.base_url, prefix=request.prefix, max_depth=request.max_depth)
+            web_loader_config.urls.append(crawl_url)
+        
+        with open("config/temp_loader.yaml", "w") as file:
+            yaml.dump({"web": web_loader_config.dict()}, file)
 
-        with open("config/loaders.yaml", "r") as file:
-            config = yaml.safe_load(file)
+        generate_datasource("temp_loader")
 
-        config.update(web_loader_config)
-
-        with open("config/loaders.yaml", "w") as file:
-            yaml.safe_dump(config, file)
-
-        generate_datasource()
-
-        with open("config/loaders.yaml", "r") as file:
-            config = yaml.safe_load(file)
-
-        if "web" in config:
-            del config["web"]
-
-        with open("config/loaders.yaml", "w") as file:
-            yaml.safe_dump(config, file)
+        with open("config/temp_loader.yaml", "w") as file:
+            file.write("")
 
         return {'message': 'Ingestion completed'}
     except Exception as e:

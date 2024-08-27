@@ -8,15 +8,15 @@ from app.engine.loaders.web import WebLoaderConfig, get_web_documents
 logger = logging.getLogger(__name__)
 
 
-def load_configs():
-    with open("config/loaders.yaml") as f:
+def load_configs(loader_file):
+    with open(f"config/{loader_file}.yaml") as f:
         configs = yaml.safe_load(f)
     return configs
 
 
-def get_documents():
+def get_documents(loader_file):
     documents = []
-    config = load_configs()
+    config = load_configs(loader_file)
     for loader_type, loader_config in config.items():
         logger.info(
             f"Loading documents from loader: {loader_type}, config: {loader_config}"

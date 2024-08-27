@@ -29,7 +29,7 @@ async def ingest_documents(files: List[UploadFile] = File(...)):
             with open(file_path, 'wb') as buffer:
                 buffer.write(file.file.read())
 
-        generate_datasource()
+        generate_datasource("loaders")
     
         return {'message': 'Ingestion completed'}
 
