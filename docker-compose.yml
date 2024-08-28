@@ -99,5 +99,25 @@ services:
       cd /app/frontend &&
       exec npm run start"
 
+  effectz_whatsapp:
+    image: effectzai/effectzgpt_whatsapp 
+    ports:
+      - "${WHATSAPP_PORT}:${WHATSAPP_PORT}"
+    environment:
+      - WHATSAPP_WEBHOOK_VERIFY_TOKEN=${WHATSAPP_WEBHOOK_VERIFY_TOKEN}
+      - EFFECTZGPT_ENDPOINT=${EFFECTZGPT_ENDPOINT}
+      - WHATSAPP_ACCESS_TOKEN=${WHATSAPP_ACCESS_TOKEN}
+      - WHATSAPP_BUSINESS_ACCOUNT_ID=${WHATSAPP_BUSINESS_ACCOUNT_ID}
+      - WHATSAPP_PHONE_NUMBER_ID=${WHATSAPP_PHONE_NUMBER_ID}
+  
+  effectz_messenger:
+    image: effectzai/effectzgpt_messenger 
+    ports:
+      - "${MESSENGER_PORT}:${MESSENGER_PORT}"
+    environment:
+      - MESSENGER_WEBHOOK_VERIFY_TOKEN=${MESSENGER_WEBHOOK_VERIFY_TOKEN}
+      - MESSENGER_ACCESS_TOKEN=${MESSENGER_ACCESS_TOKEN}
+      - EFFECTZGPT_ENDPOINT=${EFFECTZGPT_ENDPOINT}
+
 #networks:
 #  ragapp-network:
