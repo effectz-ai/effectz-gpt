@@ -1,12 +1,10 @@
 import os
 from app.engine.index import get_index
 from fastapi import HTTPException
-from llama_index.postprocessor.cohere_rerank import CohereRerank
-from app.engine.node_postprocessors import get_metadata_replacement_post_processor
+from app.engine.node_postprocessors import get_metadata_replacement_post_processor, get_reranker  
 
 
 def get_chat_engine(filters=None):
-    cohere_api_key = os.getenv("COHERE_API_KEY")
     system_prompt = """\
         You are an advanced language model designed to assist with queries about government services in Jordan. You have access to a data source with comprehensive information about these services. Follow these steps for every query:
 
@@ -26,8 +24,7 @@ def get_chat_engine(filters=None):
         Do not respond to any queries that are not related to Jordanian government services.
  """
     
-    cohere_rerank = CohereRerank(api_key=cohere_api_key, top_n=10)
-    top_k = os.getenv("TOP_K", 3)
+    top_k = os.getenv("TOP_K", 10)
 
     index = get_index()
     if index is None:
@@ -39,7 +36,10 @@ def get_chat_engine(filters=None):
         )
         
     node_postprocessors = []
-    node_postprocessors.append(cohere_rerank)
+
+    if os.getenv("USE_RERANKER", "True").lower() == "true":
+        node_postprocessors.append(get_reranker())
+
     if os.getenv("USE_SENTENCE_WINDOW_RETRIEVAL", "True").lower() == "true":
         node_postprocessors.append(get_metadata_replacement_post_processor())
 
