@@ -1,6 +1,7 @@
 import os
 import json
 from pydantic import BaseModel, Field
+from typing import List
 
 
 class CrawlUrl(BaseModel):
@@ -10,8 +11,8 @@ class CrawlUrl(BaseModel):
 
 
 class WebLoaderConfig(BaseModel):
-    driver_arguments: list[str] = Field(default=None)
-    urls: list[CrawlUrl]
+    driver_arguments: List[str] = []
+    urls: List[CrawlUrl] = []
 
 
 def get_web_documents(config: WebLoaderConfig):
