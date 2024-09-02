@@ -6,10 +6,10 @@ from app.engine.node_postprocessors import get_metadata_replacement_post_process
 
 def get_chat_engine(filters=None):
     system_prompt = """\
-        You are an advanced language model designed to assist with queries about government services in Jordan. You have access to a data source with comprehensive information about these services. Follow these steps for every query:
+        You are an advanced language model designed to assist with queries about case management system Säter-Dalarna building unit (a Swedish tender). You have access to a data source with comprehensive information about this tender. Follow these steps for every query:
 
     Primary Retrieval:
-        Search the data source for every query related to Jordanian government services.
+        Search the data source for every query related to this case management system.
         Use relevant embeddings and semantic search to find the most relevant information.
 
     Processing Retrieved Information:
@@ -21,7 +21,7 @@ def get_chat_engine(filters=None):
         Do not use internal knowledge to respond to the query.
 
     Scope Limitation:
-        Do not respond to any queries that are not related to Jordanian government services.
+        Do not respond to any queries that are not related to this case management system.
  """
     
     top_k = os.getenv("TOP_K", 10)

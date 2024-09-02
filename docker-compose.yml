@@ -10,9 +10,9 @@ services:
   #    networks:
   #      - ragapp-network
 
-  effectzgpt_server:
-    container_name: server
-    image: effectzai/effectzgpt_b
+  effectzgpt_server_tender:
+    container_name: server_tender
+    image: effectzai/effectzgpt_b_tender
     ports:
       - 5001:5000
     volumes:
@@ -26,16 +26,23 @@ services:
       - VECTOR_STORE_PROVIDER=${VECTOR_STORE_PROVIDER}
       - CHROMA_PATH=${CHROMA_PATH}
       - CHROMA_COLLECTION=${CHROMA_COLLECTION}
+      - QDRANT_COLLECTION=${QDRANT_COLLECTION}
       - MODEL_PROVIDER=${MODEL_PROVIDER}
       - MODEL=${MODEL}
       - EMBEDDING_MODEL=${EMBEDDING_MODEL}
       - EMBEDDING_DIM=${EMBEDDING_DIM}
       - LLAMA_CLOUD_API_KEY=${LLAMA_CLOUD_API_KEY}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - SYSTEM_PROMPT=You are Jordan government assistant , you only know about the services provided by the Jordan government .
+      - QDRANT_URL=${QDRANT_URL}
+      - QDRANT_API_KEY=${QDRANT_API_KEY}
+      - SYSTEM_PROMPT=You are an assistant to assist with queries about case management system Säter-Dalarna building unit (a Swedish tender) .
       - COHERE_API_KEY=${COHERE_API_KEY}
-      - CHROMA_HOST=${CHROMA_HOST}
-      - CHROMA_PORT=${CHROMA_PORT}
+      - USE_RERANKER=${USE_RERANKER}
+      - COHERE_TOP_K=${COHERE_TOP_K}
+      - WINDOW_SIZE=${WINDOW_SIZE}
+      - USE_SENTENCE_WINDOW_RETRIEVAL=${USE_SENTENCE_WINDOW_RETRIEVAL}
+      # - CHROMA_HOST=${CHROMA_HOST}
+      # - CHROMA_PORT=${CHROMA_PORT}
   #    networks:
   #      - ragapp-network
   #  links:
@@ -46,9 +53,9 @@ services:
       poetry run generate &&
       python main.py"
 
-  effectzgpt_ui:
-    container_name: ui
-    image: effectzai/effectzgpt_f
+  effectzgpt_ui_tender:
+    container_name: ui_tender
+    image: effectzai/effectzgpt_f_tender
     ports:
       - 5000:3000
     environment:
@@ -57,7 +64,7 @@ services:
       - ./effectzgpt/frontend/config:/app/config
       - ./effectzgpt/frontend/cache:/app/cache
     links:
-      - effectzgpt_server
+      - effectzgpt_server_tender
   #  networks:
   #    - ragapp-network
 
@@ -88,8 +95,8 @@ services:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - SYSTEM_PROMPT=You are Jordan government assistant , you only know about the services provided by the Jordan government .
       - COHERE_API_KEY=${COHERE_API_KEY}
-      - CHROMA_HOST=${CHROMA_HOST}
-      - CHROMA_PORT=${CHROMA_PORT}
+      # - CHROMA_HOST=${CHROMA_HOST}
+      # - CHROMA_PORT=${CHROMA_PORT}
     command: >
       /bin/sh -c
       "
