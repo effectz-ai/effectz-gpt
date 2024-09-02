@@ -63,7 +63,7 @@ def persist_storage(docstore, vector_store):
     storage_context.persist(STORAGE_DIR)
 
 
-def generate_datasource(loader_file):
+def generate_datasource(loader_file="loaders"):
     init_settings()
     logger.info("Generate index for the provided data")
 
