@@ -8,7 +8,7 @@ export interface ChatConfig {
 }
 
 export function useClientConfig(): ChatConfig {
-  const chatAPI = process.env.NEXT_PUBLIC_CHAT_API;
+  const chatAPI = "http://localhost:5001/api/chat";
   const [config, setConfig] = useState<ChatConfig>();
 
   const backendOrigin = useMemo(() => {

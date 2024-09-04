@@ -26,15 +26,12 @@ services:
       - VECTOR_STORE_PROVIDER=${VECTOR_STORE_PROVIDER}
       - CHROMA_PATH=${CHROMA_PATH}
       - CHROMA_COLLECTION=${CHROMA_COLLECTION}
-      - QDRANT_COLLECTION=${QDRANT_COLLECTION}
       - MODEL_PROVIDER=${MODEL_PROVIDER}
       - MODEL=${MODEL}
       - EMBEDDING_MODEL=${EMBEDDING_MODEL}
       - EMBEDDING_DIM=${EMBEDDING_DIM}
       - LLAMA_CLOUD_API_KEY=${LLAMA_CLOUD_API_KEY}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - QDRANT_URL=${QDRANT_URL}
-      - QDRANT_API_KEY=${QDRANT_API_KEY}
       - SYSTEM_PROMPT=You are an assistant to assist with queries about case management system Säter-Dalarna building unit (a Swedish tender) .
       - COHERE_API_KEY=${COHERE_API_KEY}
       - USE_RERANKER=${USE_RERANKER}
@@ -57,7 +54,7 @@ services:
     container_name: ui_tender
     image: effectzai/effectzgpt_f_tender
     ports:
-      - 5000:3000
+      - 5002:3000
     environment:
       - NEXT_PUBLIC_CHAT_API=${NEXT_PUBLIC_CHAT_API}
     volumes:
