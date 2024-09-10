@@ -14,9 +14,7 @@ export enum MessageAnnotationType {
   SUGGESTED_QUESTIONS = "suggested_questions",
 }
 
-export type ImageData = {
-  url: string;
-};
+export type ImageData = string []
 
 export type DocumentFileType = "csv" | "pdf" | "txt" | "docx";
 
