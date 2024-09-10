@@ -1,5 +1,6 @@
 import Header from "@/app/components/header";
 import ChatSection from "./components/chat-section";
+import ChatGenImage from "@/app/components/ui/chat/chat-message/chat-genimage";
 
 export default function Home() {
   return (

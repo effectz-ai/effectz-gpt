@@ -61,10 +61,10 @@ export default function ChatInput(
   };
 
   const handleUploadFile = async (file: File) => {
-    if (imageUrl || files.length > 0) {
-      alert("You can only upload one file at a time.");
-      return;
-    }
+    // if (imageUrl || files.length > 0) {
+    //   alert("You can only upload one file at a time.");
+    //   return;
+    // }
     try {
       await uploadFile(file, props.requestParams);
       props.onFileUpload?.(file);

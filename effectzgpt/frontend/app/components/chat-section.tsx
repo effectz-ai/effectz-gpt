@@ -3,6 +3,7 @@
 import { useChat } from "ai/react";
 import { ChatInput, ChatMessages } from "./ui/chat";
 import { useClientConfig } from "./ui/chat/hooks/use-config";
+import ChatGenImage from "@/app/components/ui/chat/chat-message/chat-genimage";
 
 export default function ChatSection() {
   const { backend } = useClientConfig();
