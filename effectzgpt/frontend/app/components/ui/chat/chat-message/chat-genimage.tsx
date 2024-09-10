@@ -8,14 +8,16 @@ type chatGenImageProps = {
 
 export default function ChatGenImage({url= "https://placehold.co/600x400/png"}:chatGenImageProps) {
     return (
-        <div className="w-[300px] overflow-hidden rounded-md">
+        <div className="max-w-[200px] overflow-hidden rounded-md">
             <AspectRatio.Root ratio={1} asChild={true}>
                 <Image
                     className="object-cover w-full h-full"
                     src={url}
                     alt="gen image"
-                    width={100}
-                    height={100}
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    style={{ width: "100%", height: "auto" }}
                 />
             </AspectRatio.Root>
 
