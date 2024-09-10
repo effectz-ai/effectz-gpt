@@ -16,8 +16,8 @@ logger = logging.getLogger()
 async def generate_images(prompt: str = Form(...)):
     logger.info(f"Prompt: {prompt}")
     try:
-        generated_img_url = generate_image(prompt)
-        return {'generated_img_url': generated_img_url}
+        url_array = generate_image(prompt)
+        return {'response': url_array}
 
     except Exception as e:
         logger.error(f"An error occurred image generation: {str(e)}")

@@ -43,8 +43,8 @@ def generate_image(prompt):
     }
 
     response = requests.post(image_generation_api_url, headers=headers, json=data)
-    img_id = response.json()['created']
-    img_url = response.json()['data'][0]['url']
-
+    # img_id = response.json()['created']
+    # img_url = response.json()['data'][0]['url']
     # save_image_from_url(img_id, img_url)
-    return img_url
+    url_array = response.json()['data']
+    return url_array
