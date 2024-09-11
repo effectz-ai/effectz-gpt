@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3fe839a5-13cf-4d91-b846-149d441e93e5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/effectzgpt/backend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/effectzgpt/backend/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/effectzgpt/frontend/app/components/ui/chat/chat-message/chat-image.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/effectzgpt/frontend/app/components/ui/chat/chat-message/chat-image.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="3fe839a5-13cf-4d91-b846-149d441e93e5" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,7 +79,7 @@
       <workItem from="1725883480255" duration="3087000" />
       <workItem from="1725941507855" duration="5299000" />
       <workItem from="1725951113284" duration="5000" />
-      <workItem from="1725952838810" duration="16890000" />
+      <workItem from="1725952838810" duration="17243000" />
     </task>
     <servers />
   </component>
