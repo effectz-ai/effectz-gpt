@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3fe839a5-13cf-4d91-b846-149d441e93e5" name="Changes" comment="" />
+    <list default="true" id="3fe839a5-13cf-4d91-b846-149d441e93e5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/effectzgpt/backend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/effectzgpt/backend/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/effectzgpt/frontend/app/components/ui/chat/chat-message/chat-image.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/effectzgpt/frontend/app/components/ui/chat/chat-message/chat-image.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/imagecell" />
+        <entry key="$PROJECT_DIR$" value="feature/genimage" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,7 +53,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/imagecell&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/genimage-preview&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -79,7 +83,7 @@
       <workItem from="1725883480255" duration="3087000" />
       <workItem from="1725941507855" duration="5299000" />
       <workItem from="1725951113284" duration="5000" />
-      <workItem from="1725952838810" duration="14118000" />
+      <workItem from="1725952838810" duration="16890000" />
     </task>
     <servers />
   </component>

@@ -5,7 +5,7 @@ export function ChatImage({ data }: { data: ImageData }) {
   return (
       <div>
           {data.map((imageUrl ,i) => (
-              <div key={i} className="rounded-md max-w-[200px] shadow-md m-1">
+              <div key={i} className="rounded-md max-w-[512px] shadow-md m-1">
                   <Image
                       src={imageUrl}
                       width={0}
