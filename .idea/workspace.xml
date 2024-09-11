@@ -20,7 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/imagecell" />
+        <entry key="$PROJECT_DIR$" value="feature/genimage" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,7 +49,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/imagecell&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/genimage-preview&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -79,7 +79,7 @@
       <workItem from="1725883480255" duration="3087000" />
       <workItem from="1725941507855" duration="5299000" />
       <workItem from="1725951113284" duration="5000" />
-      <workItem from="1725952838810" duration="14118000" />
+      <workItem from="1725952838810" duration="17243000" />
     </task>
     <servers />
   </component>
