@@ -1,3 +1,4 @@
+
 import { JSONValue } from "ai";
 import { Button } from "../button";
 import { DocumentPreview } from "../document-preview";
@@ -6,6 +7,8 @@ import { Input } from "../input";
 import UploadImagePreview from "../upload-image-preview";
 import { ChatHandler } from "./chat.interface";
 import { useFile } from "./hooks/use-file";
+import SpeechUploader from "@/app/components/ui/speech-uploader";
+import {useEffect, useState} from "react";
 
 const ALLOWED_EXTENSIONS = ["png", "jpg", "jpeg", "csv", "pdf", "txt", "docx"];
 
@@ -25,6 +28,7 @@ export default function ChatInput(
     requestParams?: any;
   },
 ) {
+  const [transcript, setTranscript] = useState("");
   const {
     imageUrl,
     setImageUrl,
@@ -34,6 +38,14 @@ export default function ChatInput(
     reset,
     getAnnotations,
   } = useFile();
+
+  useEffect(() => {
+    if (transcript) {
+      // @ts-ignore
+      props.setInput!((prevInput:string) => prevInput + ' ' + transcript);
+      setTranscript('');
+    }
+  }, [transcript, props.setInput]);
 
   // default submit function does not handle including annotations in the message
   // so we need to use append function to submit new message with annotations
@@ -61,10 +73,10 @@ export default function ChatInput(
   };
 
   const handleUploadFile = async (file: File) => {
-    // if (imageUrl || files.length > 0) {
-    //   alert("You can only upload one file at a time.");
-    //   return;
-    // }
+    if (imageUrl || files.length > 0) {
+      alert("You can only upload one file at a time.");
+      return;
+    }
     try {
       await uploadFile(file, props.requestParams);
       props.onFileUpload?.(file);
@@ -94,20 +106,24 @@ export default function ChatInput(
       )}
       <div className="flex w-full items-start justify-between gap-4 ">
         <Input
-          autoFocus
-          name="message"
-          placeholder="Type a message"
-          className="flex-1"
-          value={props.input}
-          onChange={props.handleInputChange}
+            autoFocus
+            name="message"
+            placeholder="Type a message"
+            className="flex-1"
+            value={props.input}
+            onChange={props.handleInputChange}
         />
         <FileUploader
-          onFileUpload={handleUploadFile}
-          onFileError={props.onFileError}
-          config={{
-            allowedExtensions: ALLOWED_EXTENSIONS,
-            disabled: props.isLoading,
-          }}
+            onFileUpload={handleUploadFile}
+            onFileError={props.onFileError}
+            config={{
+              allowedExtensions: ALLOWED_EXTENSIONS,
+              disabled: props.isLoading,
+            }}
+        />
+        <SpeechUploader
+            onTranscript={(text) => setTranscript(text)}
+            onError={(errMsg) => console.error(errMsg)}
         />
         <Button type="submit" disabled={props.isLoading || !props.input.trim()}>
           Send message

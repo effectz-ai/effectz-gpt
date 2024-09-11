@@ -72,6 +72,8 @@ docker run \
 
 NOTE:  for NEXT_PUBLIC_CHAT_API use public ip of the backend server and make sure the port is open
 
+NOTE: If you are using Speech recognition please use use supported browser (Google Chrome, Safari)
+
 To learn more about LlamaIndex, take a look at the following resources:
 
 - [LlamaIndex Documentation](https://docs.llamaindex.ai) - learn about LlamaIndex (Python features).
