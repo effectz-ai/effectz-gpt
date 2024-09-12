@@ -34,12 +34,12 @@ def save_image_from_url(id, url):
 def generate_image(prompt):
     data = {
         "prompt": prompt,
-        "model": os.getenv("IMG_GENERATION_MODEL", "dall-e-2"),
+        "model": os.getenv("IMG_GENERATION_MODEL", "dall-e-3"),
         "n": int(os.getenv("NO_OF_IMG", 1)),
         "quality": os.getenv("IMG_GENERATION_QUALITY", "hd"),
         "response_format": "url",
-        "size": os.getenv("SIZE_OF_IMG", "256x256"),
-        "style": os.getenv("STYLE_OF_IMG", "natural")
+        "size": os.getenv("SIZE_OF_IMG", "1792x1024"),
+        "style": os.getenv("STYLE_OF_IMG", "vivid")
     }
 
     response = requests.post(image_generation_api_url, headers=headers, json=data)
