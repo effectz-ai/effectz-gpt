@@ -67,6 +67,16 @@ docker run \
   -p 3000:3000 \
   <your_app_image_name>
 ```
+## Admin panel
+Admin panel is accessible for users who has admin privileges on `/admin` Route.
+
+## Authentication
+
+Populate the .env file with your firebase project credentials an run the application.
+If you need to override authentication for Development purposes check the route and commentout the `<ProtectedRoute>`
+component.
+
+If you need to protect any route wrap the component with `<ProtectedRoute>`
 
 ## Learn More
 
