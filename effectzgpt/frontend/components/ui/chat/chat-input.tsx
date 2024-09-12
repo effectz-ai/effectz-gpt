@@ -7,7 +7,7 @@ import { Input } from "../input";
 import UploadImagePreview from "../upload-image-preview";
 import { ChatHandler } from "./chat.interface";
 import { useFile } from "./hooks/use-file";
-import SpeechUploader from "@/app/components/ui/speech-uploader";
+import SpeechUploader from "@/components/ui/speech-uploader";
 import {useEffect, useState} from "react";
 
 const ALLOWED_EXTENSIONS = ["png", "jpg", "jpeg", "csv", "pdf", "txt", "docx"];

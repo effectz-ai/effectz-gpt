@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChatHandler, SuggestedQuestionsData } from "..";
+import { ChatHandler, SuggestedQuestionsData } from "../index";
 
 export function SuggestedQuestions({
   questions,
