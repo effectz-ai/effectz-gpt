@@ -69,6 +69,9 @@ docker run \
 ```
 ## Admin panel
 Admin panel is accessible for users who has admin privileges on `/admin` Route.
+![Dashboard](https://github.com/effectz-ai/effectz-gpt/blob/feat/auth/effectzgpt/frontend/dashboard.png)
+
+![Admin Panel](https://github.com/effectz-ai/effectz-gpt/blob/feat/auth/effectzgpt/frontend/Admin.png)
 
 ## Authentication
 

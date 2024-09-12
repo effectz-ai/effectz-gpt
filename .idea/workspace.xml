@@ -5,27 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3fe839a5-13cf-4d91-b846-149d441e93e5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/effectzgpt/frontend/.firebaserc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/effectzgpt/frontend/app/dashboard/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/effectzgpt/frontend/app/login/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/effectzgpt/frontend/components/auth/Auth.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/effectzgpt/frontend/components/auth/ProtectedRoute.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/effectzgpt/frontend/config/firebase.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/effectzgpt/frontend/context/AuthContext/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/effectzgpt/frontend/database.rules.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/effectzgpt/frontend/firebase.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/effectzgpt/frontend/firestore.indexes.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/effectzgpt/frontend/firestore.rules" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/effectzgpt/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/effectzgpt/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/effectzgpt/frontend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/effectzgpt/frontend/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/effectzgpt/frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/effectzgpt/frontend/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/effectzgpt/frontend/app/admin/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/effectzgpt/frontend/app/admin/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/effectzgpt/frontend/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/effectzgpt/frontend/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/effectzgpt/frontend/context/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/effectzgpt/frontend/context/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/effectzgpt/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/effectzgpt/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/effectzgpt/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/effectzgpt/frontend/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,20 +52,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feat/auth",
-    "last_opened_file_path": "/Users/frost/projects/repos/github/effectzai/effectz-gpt/effectzgpt/frontend/app/admin",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/Users/frost/projects/repos/github/effectzai/effectz-gpt/effectzgpt/frontend/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/auth&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/frost/projects/repos/github/effectzai/effectz-gpt/effectzgpt/frontend/app/admin&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/frost/projects/repos/github/effectzai/effectz-gpt/effectzgpt/frontend/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/effectzgpt/frontend/app/admin" />
@@ -117,7 +97,7 @@
       <workItem from="1725941507855" duration="5299000" />
       <workItem from="1725951113284" duration="5000" />
       <workItem from="1725952838810" duration="31816000" />
-      <workItem from="1726114024314" duration="17671000" />
+      <workItem from="1726114024314" duration="18043000" />
     </task>
     <servers />
   </component>
