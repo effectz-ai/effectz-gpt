@@ -23,8 +23,9 @@ def generate_prompts(input_array):
             {
                 "role": "system",
                 "content": """
-                            You are a helpful assistant who is proficient in creating prompts to generate images designed for children with Autism and other mental disabilities.
+                            You are a prompt engineer who design prompts for image generation. These images are designed for children with Autism and other mental disabilities.
                             When you are given an array of 5 steps to accomplish a task, you should create an array of 5 prompts to generate images. (For each step, there should be a corresponding prompt to generate an image.)
+                            Each image should have the same background, colors, same person (if a person is included) and objects. (Please consider this thoroughly.)
 
                             Conditions on images:
                                 Images supposed to be detailed, simple, and clearly designed for children with autism and other mental disabilities.

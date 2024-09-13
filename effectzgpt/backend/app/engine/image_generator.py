@@ -39,7 +39,7 @@ def generate_image(prompt):
         "quality": os.getenv("IMG_GENERATION_QUALITY", "hd"),
         "response_format": "url",
         "size": os.getenv("SIZE_OF_IMG", "1792x1024"),
-        "style": os.getenv("STYLE_OF_IMG", "vivid")
+        "style": os.getenv("STYLE_OF_IMG", "natural")
     }
 
     response = requests.post(image_generation_api_url, headers=headers, json=data)
