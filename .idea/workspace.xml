@@ -10,7 +10,6 @@
     <list default="true" id="3fe839a5-13cf-4d91-b846-149d441e93e5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/effectzgpt/frontend/app/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/effectzgpt/frontend/app/dashboard/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/effectzgpt/frontend/components/auth/ProtectedRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/effectzgpt/frontend/components/auth/ProtectedRoute.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +101,7 @@
       <workItem from="1725941507855" duration="5299000" />
       <workItem from="1725951113284" duration="5000" />
       <workItem from="1725952838810" duration="31816000" />
-      <workItem from="1726114024314" duration="25994000" />
+      <workItem from="1726114024314" duration="27663000" />
     </task>
     <servers />
   </component>

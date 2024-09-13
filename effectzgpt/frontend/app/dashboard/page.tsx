@@ -8,18 +8,20 @@ import UserProfile from "@/components/auth/UserProfile";
 import Image from "next/image";
 
 export default function DashboardPage() {
-    const { user, role, signOut } = useAuth();
+    const { user, role, signOut, loading } = useAuth();
     const router = useRouter();
 
     const handleLogout = async () => {
         await signOut();
         router.push('/login');
     };
-
-    if (!user) {
-        return <div>Not Authenticated please visit <Link href={'/login'}>Login Page</Link></div>; // or a loading indicator
+    if(loading) {
+        return <div>Loading...</div>;
     }
-    console.log(user)
+    if (!user) {
+        return <div>Not Authenticated <Link href={'/login'}>Login</Link></div>;
+    }
+
     return (
         <ProtectedRoute>
             <div className="max-w-3xl mx-auto mt-10 p-6 rounded-lg shadow-md bg-gradient-to-r from-green-50 to-white">
