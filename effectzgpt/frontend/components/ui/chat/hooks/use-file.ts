@@ -8,7 +8,7 @@ import {
   DocumentFileType,
   MessageAnnotation,
   MessageAnnotationType,
-} from "..";
+} from "../index";
 import { useClientConfig } from "./use-config";
 
 const docMineTypeMap: Record<string, DocumentFileType> = {
