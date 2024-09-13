@@ -4,7 +4,6 @@ import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import Link from "next/link";
-import UserProfile from "@/components/auth/UserProfile";
 import Image from "next/image";
 
 export default function DashboardPage() {
@@ -40,9 +39,6 @@ export default function DashboardPage() {
                         </p>
                         <p className="text-lg text-gray-700">Your role is: {role}</p>
                     </div>
-                </div>
-                <div className="mb-4">
-                    <UserProfile user={user}/>
                 </div>
                 <button
                     onClick={() => router.push('/')}
