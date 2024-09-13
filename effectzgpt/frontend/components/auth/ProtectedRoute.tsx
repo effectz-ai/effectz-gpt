@@ -3,6 +3,7 @@
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import {ReactNode, useEffect} from 'react';
+import Link from "next/link";
 
 interface ProtectedRouteProps {
     children: ReactNode;
@@ -25,7 +26,7 @@ export default function ProtectedRoute({ children, adminOnly = false }: Protecte
     }
 
     if (!user || (adminOnly && role !== 'admin')) {
-        return router.push('/login');
+        return <div>Not Authenticated please visit <Link href={'/login'}/></div>;
     }
 
     return <>{children}</>;
