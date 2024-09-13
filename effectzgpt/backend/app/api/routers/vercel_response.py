@@ -55,12 +55,19 @@ class VercelStreamResponse(StreamingResponse):
         # Yield the text response
         async def _chat_response_generator():
             final_response = ""
+            
             async for token in response.async_response_gen():
                 final_response += token
-                yield VercelStreamResponse.convert_text(token)
-
-            # Extract steps
+                #yield VercelStreamResponse.convert_text(token)
+            
             steps = re.findall(r'\d+\.\s\*\*(.*?)\*\*:\n\s*-\s*(.*?)\n(?:\s*-\s*(.*?))?\n(?:\s*-\s*(.*?))?\n(?:\s*-\s*(.*?))?\n?', final_response, re.DOTALL)
+            headings = [item[0] for item in steps]
+            formatted_string = '\n'.join([f"{i+1}. **{heading}**" for i, heading in enumerate(headings)])
+            
+            yield VercelStreamResponse.convert_text(formatted_string)
+
+            # Format the extracted steps for further processing
+            formatted_steps = []
             
             # Format the extracted steps for further processing
             formatted_steps = []
