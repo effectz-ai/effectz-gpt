@@ -45,6 +45,7 @@ export default function SpeechUploader({ onTranscript, onError, disabled = false
                 recognition.stop();
             }
         };
+        // @ts-ignore
     }, [onError]);
 
     const startListening = useCallback(() => {
