@@ -7,7 +7,7 @@ authors = [ "Marcus Schiesser <mail@marcusschiesser.de>" ]
 readme = "README.md"
 
 [tool.poetry.scripts]
-generate = "app.engine.generate:generate_datasource"
+generate = "app.engine.generate:generate_datasource_init"
 
 [tool.poetry.dependencies]
 python = "^3.11,<3.12"

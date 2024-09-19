@@ -11,6 +11,7 @@ from fastapi.responses import RedirectResponse
 from app.api.routers.chat import chat_router
 from app.api.routers.upload import file_upload_router
 from app.api.routers.data_ingestion import data_ingestion_router
+from app.api.routers.image_generation import image_generation_router
 from app.api.routers.url_scraper import url_scraping_router
 from app.api.routers.web_scraper import web_scraping_router
 from app.api.routers.question_ingestion import question_ingestion_router
@@ -60,6 +61,7 @@ mount_static_files("output", "/api/files/output")
 app.include_router(chat_router, prefix="/api/chat")
 app.include_router(file_upload_router, prefix="/api/chat/upload")
 app.include_router(data_ingestion_router, prefix="/api")
+app.include_router(image_generation_router, prefix="/api")
 app.include_router(url_scraping_router, prefix="/api")
 app.include_router(web_scraping_router, prefix="/api")
 app.include_router(question_ingestion_router, prefix="/api")
