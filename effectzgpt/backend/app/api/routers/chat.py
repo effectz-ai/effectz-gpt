@@ -18,6 +18,7 @@ from app.api.routers.models import (
 from app.api.routers.vercel_response import VercelStreamResponse
 from app.api.services.llama_cloud import LLamaCloudFileService
 from app.engine import get_chat_engine
+from app.engine.query_preprocessor import add_icl
 
 chat_router = r = APIRouter()
 
@@ -49,6 +50,11 @@ async def chat(
     try:
         last_message_content = data.get_last_message_content()
         messages = data.get_history_messages()
+
+        # Adding In-Context Learning
+        if os.getenv("USE_ICL", "True").lower() == "true":
+            no_of_similar_questions = int(os.getenv("NO_OF_SIMILAR_QUESIONS", 3))
+            last_message_content = add_icl(last_message_content, no_of_similar_questions)
 
         doc_ids = data.get_chat_document_ids()
         filters = generate_filters(doc_ids)
