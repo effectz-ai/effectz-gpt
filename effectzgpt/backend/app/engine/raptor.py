@@ -40,3 +40,15 @@ def raptor_ingestion(path):
 
     logger.info("Generation completed!")
 
+def get_raptor_retriever(top_k = 10):
+    logger.info("Get RAPTOR retriever")
+    retriever = RaptorRetriever(
+        [],
+        embed_model=Settings.embed_model, 
+        llm=Settings.llm,
+        vector_store=vector_store,  
+        similarity_top_k=top_k,
+        mode="tree_traversal",
+    )
+    return retriever
+
