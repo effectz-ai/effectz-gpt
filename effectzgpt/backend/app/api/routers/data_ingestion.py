@@ -9,6 +9,7 @@ from typing import List
 from fastapi import APIRouter, HTTPException, UploadFile, File
 
 from app.engine.generate import generate_datasource
+from app.engine.raptor import raptor_ingestion
 
 data_ingestion_router = r = APIRouter()
 
@@ -22,14 +23,17 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 @r.post("/ingest_documents")
-async def ingest_documents(files: List[UploadFile] = File(...)):
+def ingest_documents(files: List[UploadFile] = File(...)):
     try:
         for file in files:
             file_path = os.path.join(UPLOAD_FOLDER, file.filename)
             with open(file_path, 'wb') as buffer:
                 buffer.write(file.file.read())
 
-        generate_datasource("loaders")
+        if os.getenv("USE_RAPTOR", "True").lower() == "true":
+            raptor_ingestion(UPLOAD_FOLDER)
+        else:
+            generate_datasource("loaders")
     
         return {'message': 'Ingestion completed'}
 

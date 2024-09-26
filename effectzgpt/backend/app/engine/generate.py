@@ -7,6 +7,7 @@ import os
 
 from app.engine.loaders import get_documents
 from app.engine.vectordb import get_vector_store
+from app.engine.raptor import raptor_ingestion
 from app.settings import init_settings
 from app.engine.node_preprocessors import get_sentence_window_node_parser
 from llama_index.core.ingestion import IngestionPipeline
@@ -85,7 +86,10 @@ def generate_datasource(loader_file):
 
 
 def generate_datasource_init():
-    generate_datasource("loaders")
+    if os.getenv("USE_RAPTOR", "True").lower() == "true":
+        raptor_ingestion("data/data_source")
+    else:
+        generate_datasource("loaders")
 
 
 if __name__ == "__main__":
