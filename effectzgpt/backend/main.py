@@ -1,4 +1,8 @@
+from sys import prefix
+
 from dotenv import load_dotenv
+
+from effectzgpt.backend.app.api.routers.model_config import config_router
 
 load_dotenv()
 
@@ -63,6 +67,7 @@ app.include_router(data_ingestion_router, prefix="/api")
 app.include_router(image_generation_router, prefix="/api")
 app.include_router(url_scraping_router, prefix="/api")
 app.include_router(web_scraping_router, prefix="/api")
+app.include_router(config_router,prefix="/api/management/config")
 
 if __name__ == "__main__":
     app_host = os.getenv("APP_HOST", "0.0.0.0")
