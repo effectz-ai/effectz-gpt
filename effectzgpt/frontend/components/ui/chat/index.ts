@@ -67,6 +67,7 @@ export type ToolData = {
 };
 
 export type SuggestedQuestionsData = string[];
+export type AutismPreChatData = string[]
 
 export type AnnotationData =
   | ImageData
