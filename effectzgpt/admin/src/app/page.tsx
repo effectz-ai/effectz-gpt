@@ -60,7 +60,7 @@ export default function Home() {
       <main className="h-screen w-screen">
         <div className="flex flex-col max-h-full h-full">
           <div className="w-full shrink-0">
-            <StatusBar configured={configured ?? false} />
+            {/*<StatusBar configured={configured ?? false} />*/}
           </div>
           <div className="w-full flex-1 overflow-auto flex">
             <div
@@ -93,7 +93,7 @@ export default function Home() {
             )}
           </div>
           <div className="w-full shrink-0">
-            <Footer />
+            {/*<Footer />*/}
           </div>
         </div>
       </main>
