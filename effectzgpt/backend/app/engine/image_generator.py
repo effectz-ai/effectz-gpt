@@ -16,7 +16,7 @@ if api_key:
     }
 
 else:   
-    raise ValueError(
+     raise ValueError(
         "Please provide OPENAI_API_KEY"
     )
 

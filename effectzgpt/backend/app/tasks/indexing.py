@@ -1,7 +1,7 @@
 import os
 import shutil
 import logging
-from create_llama.backend.app.engine.generate import generate_datasource
+from app.engine.generate import generate_datasource
 
 
 logger = logging.getLogger("uvicorn")
@@ -9,7 +9,7 @@ logger = logging.getLogger("uvicorn")
 
 def index_all():
     # Just call the generate_datasource from create_llama for now
-    generate_datasource()
+    generate_datasource("loaders")
 
 
 def reset_index():

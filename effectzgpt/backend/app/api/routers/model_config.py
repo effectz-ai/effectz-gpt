@@ -2,12 +2,12 @@ from typing import Optional, Annotated, List
 from fastapi import APIRouter, Depends, Query
 from fastapi.exceptions import HTTPException
 from fastapi.responses import JSONResponse
-from src.models.model_config import ModelConfig
-from src.models.chat_config import ChatConfig
-from src.controllers.providers import AIProvider
-from src.tasks.indexing import reset_index
-from src.controllers.env_configs import EnvConfigManager
-from create_llama.backend.app.settings import init_settings
+from app.models.model_config import ModelConfig
+from app.models.chat_config import ChatConfig
+from app.controllers.providers import AIProvider
+from app.tasks.indexing import reset_index, logger
+from app.controllers.env_configs import EnvConfigManager
+from app.settings import init_settings
 
 config_router = r = APIRouter()
 
@@ -16,6 +16,7 @@ config_router = r = APIRouter()
 def is_configured(
         config: ModelConfig = Depends(ModelConfig.get_config),
 ) -> bool:
+    # logger.warning("is_configured",config.configured)
     return config.configured
 
 

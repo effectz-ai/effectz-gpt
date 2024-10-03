@@ -94,6 +94,31 @@ docker run \
   <your_backend_image_name>
 ```
 
+
+## configuration files
+
+### 1) ./config/loaders : contains information related to external knowledge sources
+```
+db:
+- queries: [] \
+  uri: null \
+- queries: [] \
+  uri: null\
+file:\
+  data_dir: "data"\
+  # use_llama_parse: Use LlamaParse if `true`. Needs a `LLAMA_CLOUD_API_KEY` from https://cloud.llamaindex.ai set as environment variable
+  use_llama_parse: false\
+web:\
+  driver_arguments: []\
+  urls: []\
+
+```
+
+### 2) ./config/tools.yaml : contains configuration related to external tools
+```
+llamahub: {}
+local: {}
+```
 ## Learn More
 
 To learn more about LlamaIndex, take a look at the following resources:
