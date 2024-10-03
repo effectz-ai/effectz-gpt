@@ -1,7 +1,7 @@
 import logging
-from src.models.base_env import BaseEnvConfig
-from create_llama.backend.app.settings import init_settings
-from src.controllers.system_prompt import SystemPromptManager
+from app.models.base_env import BaseEnvConfig
+from app.settings import init_settings
+from app.controllers.system_prompt import SystemPromptManager
 
 
 logger = logging.getLogger(__name__)

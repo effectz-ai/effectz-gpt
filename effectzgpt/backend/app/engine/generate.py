@@ -83,6 +83,8 @@ def generate_datasource(loader_file):
 
     logger.info("Finished generating the index")
 
+def generate_datasource():
+    generate_datasource("loaders")
 
 if __name__ == "__main__":
-    generate_datasource()
+    generate_datasource("loaders")

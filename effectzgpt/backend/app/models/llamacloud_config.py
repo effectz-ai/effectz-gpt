@@ -2,7 +2,7 @@ from typing import Self
 
 from pydantic import Field
 
-from src.models.base_env import BaseEnvConfig
+from app.models.base_env import BaseEnvConfig
 
 
 class LlamaCloudConfig(BaseEnvConfig):

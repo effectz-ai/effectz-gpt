@@ -1,10 +1,11 @@
 import logging
-from typing import Dict, Optional, Union, Literal
+
 from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import HTTPException
-from src.controllers.loader import LoaderManager, loader_manager
-from src.models.loader import LoaderConfig, SupportedLoaders
+
+from app.controllers.loader import LoaderManager, loader_manager
+from app.models.loader import LoaderConfig, SupportedLoaders
 
 
 loader_router = r = APIRouter()
