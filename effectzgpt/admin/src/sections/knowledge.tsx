@@ -69,7 +69,7 @@ export const Knowledge = () => {
       description="Manage your own data to chat with. You can consider using LlamaCloud for hosting your data."
       open
     >
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-4">
         <Switch
           checked={useLlamaCloud}
           onCheckedChange={onSwitchKnowledge}

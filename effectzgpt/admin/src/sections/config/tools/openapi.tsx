@@ -59,7 +59,7 @@ export const OpenAPIConfig = ({
                 }}
               />
             </FormControl>
-            <div>
+            <div className='px-2'>
               <FormLabel className="font-normal">{field.value.label}</FormLabel>
               <FormDescription>{field.value.description}</FormDescription>
             </div>

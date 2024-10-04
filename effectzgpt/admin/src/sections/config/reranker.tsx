@@ -74,7 +74,7 @@ export const RerankerConfig = () => {
                     }}
                   />
                 </FormControl>
-                <div>
+                <div className='px-2'>
                   <FormLabel className="font-normal">Use Reranker</FormLabel>
                   <FormMessage />
                   <FormDescription>

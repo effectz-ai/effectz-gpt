@@ -245,7 +245,7 @@ const FileLoaderConfig = () => {
                     }}
                   />
                 </FormControl>
-                <div>
+                <div className='px-2'>
                   <FormLabel className="font-normal">Use LlamaParse</FormLabel>
                   <FormMessage />
                   <FormDescription>
@@ -350,7 +350,7 @@ const UploadFile = ({
           e.target.value = ""; // Clear the input value
         }}
       />
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-4 mb-2">
         <Label htmlFor="upload-knowledge-files">
           <Button
             disabled={isSubmitting}

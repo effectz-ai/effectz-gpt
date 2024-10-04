@@ -52,7 +52,7 @@ export const ToolConfig = () => {
       description="Config tools and agent"
     >
       <Form {...form}>
-        <form className="space-y-4 mb-4">
+        <form className="space-y-4">
           <div className="flex flex-col space-y-4">
             <FormField
               control={form.control}
@@ -74,7 +74,7 @@ export const ToolConfig = () => {
                       }}
                     />
                   </FormControl>
-                  <div>
+                  <div className='px-2'>
                     <FormLabel className="font-normal">
                       {field.value.label}
                     </FormLabel>
@@ -104,7 +104,7 @@ export const ToolConfig = () => {
                       }}
                     />
                   </FormControl>
-                  <div>
+                  <div className='px-2'>
                     <FormLabel className="font-normal">
                       {field.value.label}
                     </FormLabel>
