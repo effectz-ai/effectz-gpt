@@ -77,11 +77,11 @@ python main.py
 | ---------------- | ----------- | ---------------------------------- |
 | LlamaIndex       | ✅          | Implement LlamaIndex RAG pipelines |
 
-| 🗄️ Vector DB Suport | Implemented | Description                                          |
-| ------------------- | ----------- | ---------------------------------------------------- |
-| Chroma              | ✅          | AI-native open-source vector database                |
-| Qdrant              | planned ⏱️  | Open-source vector database and vector search engine |
-| Weaviate            | planned ⏱️  | Open-source vectore database                         |
+| 🗄️ Vector DB Support | Implemented | Description                                          |
+| -------------------- | ----------- | ---------------------------------------------------- |
+| Chroma               | ✅          | AI-native open-source vector database                |
+| Qdrant               | ✅          | Open-source vector database and vector search engine |
+| Weaviate             | planned ⏱️  | Open-source vectore database                         |
 
 
 ## API Keys
