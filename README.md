@@ -1,13 +1,12 @@
-# EffectzGPT by Effectz.AI  ![Logo of Effectz.AI](https://github.com/effectz-ai/effectz-gpt/img/effectzai.png)
+# EffectzGPT by [Effectz.AI](https://www.effectz.ai/)  ![Logo of Effectz.AI](https://github.com/effectz-ai/effectz-gpt/img/effectzai.png)
 
 ## Welcome to EffectzGPT
-### EffectzGPT: Easily Build Data Apps with LLMs
-EffectzGPT helps you quickly create data applications powered by Large Language Models (LLMs). Based on LlamaIndex, it's specially designed for building scalable apps that require advanced reasoning over data. It has been used in both real-world business applications and cutting-edge research. EffectzGPT makes developing powerful AI-driven data applications simple—even if you're not an AI expert.
+### EffectzGPT => Easily Build Data Apps with LLMs
+EffectzGPT helps you quickly create data applications powered by Large Language Models (LLMs). Based on LlamaIndex, it's specially designed for building scalable apps that require advanced reasoning over data. It has been used in both real-world business applications and cutting-edge research. EffectzGPT makes developing powerful AI-driven data applications simple—even if you're not an AI expert. EffectzGPT has been developed using [LlamaIndex](https://github.com/run-llama/llama_index).
 \
 \
-![Demo of EffectzGPT](https://github.com/effectz-ai/effectz-gpt/img/effectzgpt-fe.png)
+[**Watch the demo of EffectzGPT**](https://www.youtube.com/watch?v=C6k6pJ4MbOs)
 
-- [🎯 Welcome to EffectzGPT](#welcome-to-effectzgpt)
 - [💾 EffectzGPT Walkthrough](#effectzgpt-walkthrough)
 - [✨ Feature Lists](#feature-lists)
 - [🔑 API Keys](#api-keys)
@@ -55,13 +54,16 @@ python main.py
 | Document Ingestion                                       | ✅          | Ingest documents into EffectzGPT               |
 | URL Scraping                                             | ✅          | Ingest data from urls into EffectzGPT          |
 
-| ✨ RAG Features         | Implemented | Description                                           | Reference                                                                                               |
-| ----------------------- | ----------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| Reranking               | ✅          | Rerank results based on context for improved results |                                                                                                           |
-| RAPTOR                  | ✅          | Raptor ingestion                                     | [RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval](https://arxiv.org/abs/2401.18059) |
-| Supervised ICL          | ✅          | Supervised In-Context Learning                       | [Many-Shot In-Context Learning](https://arxiv.org/abs/2404.11018)                                         |
-| Unsupervised ICL        | ✅          | Unsupervised In-Context Learning                     | [Many-Shot In-Context Learning](https://arxiv.org/abs/2404.11018)                                         |
-| Self-Route              | planned ⏱️  | Hybrid approach (RAG / LC LLM)                       | [Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach](https://arxiv.org/abs/2407.16833) |
+| ✨ RAG Features         | Implemented | Description                                                    | Reference                                                                                                 |
+| ----------------------- | ----------- | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Reranking               | ✅          | Rerank results based on context for improved results           |                                                                                                           |
+| RAPTOR                  | ✅          | Raptor ingestion                                               | [RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval](https://arxiv.org/abs/2401.18059) |
+| Supervised ICL          | ✅          | Supervised In-Context Learning                                 | [Many-Shot In-Context Learning](https://arxiv.org/abs/2404.11018)                                         |
+| Unsupervised ICL        | ✅          | Unsupervised In-Context Learning                               | [Many-Shot In-Context Learning](https://arxiv.org/abs/2404.11018)                                         |
+| Query Optimization      | planned ⏱️  | Optimization by PROmpting (OPRO)                               | [Large Language Models as Optimizers](https://arxiv.org/abs/2309.03409)                                    |
+| Support for Hybrid RAG              | planned ⏱️  | Integrating Knowledge Graphs and Vector RAG                    | [HybridRAG: Integrating Knowledge Graphs and Vector Retrieval Augmented Generation for Efficient Information Extraction](https://arxiv.org/abs/2408.04948) |
+| LlamaIndex Workflows Support   | planned ⏱️  | Event-driven abstraction used to chain together several events |                                                                                                   |
+| Self-Route              | planned ⏱️  | Hybrid approach (RAG / LC LLM)                                 | [Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach](https://arxiv.org/abs/2407.16833) |
 
 | 🗡️ Chunking Techniques | Implemented | Description                       |
 | ---------------------- | ----------- | --------------------------------- |
@@ -74,6 +76,12 @@ python main.py
 | 🤝 RAG Libraries | Implemented | Description                        |
 | ---------------- | ----------- | ---------------------------------- |
 | LlamaIndex       | ✅          | Implement LlamaIndex RAG pipelines |
+
+| 🗄️ Vector DB Suport | Implemented | Description                                          |
+| ------------------- | ----------- | ---------------------------------------------------- |
+| Chroma              | ✅          | AI-native open-source vector database                |
+| Qdrant              | planned ⏱️  | Open-source vector database and vector search engine |
+| Weaviate            | planned ⏱️  | Open-source vectore database                         |
 
 
 ## API Keys
