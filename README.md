@@ -55,12 +55,12 @@ python main.py
 | Document Ingestion                                       | ✅          | Ingest documents into EffectzGPT               |
 | URL Scraping                                             | ✅          | Ingest data from urls into EffectzGPT          |
 
-| ✨ RAG Features         | Implemented | Description                                           | Reference         |
-| ----------------------- | ----------- | ----------------------------------------------------- | ----------------- |
-| Reranking               | ✅          | Rerank results based on context for improved results |                   |
+| ✨ RAG Features         | Implemented | Description                                           | Reference                                                                                               |
+| ----------------------- | ----------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Reranking               | ✅          | Rerank results based on context for improved results |                                                                                                           |
 | RAPTOR                  | ✅          | Raptor ingestion                                     | [RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval](https://arxiv.org/abs/2401.18059) |
-| Supervised ICL          | ✅          | Supervised In-Context Learning                       |                   |
-| Unsupervised ICL        | ✅          | Unsupervised In-Context Learning                     |                   |
+| Supervised ICL          | ✅          | Supervised In-Context Learning                       | [Many-Shot In-Context Learning](https://arxiv.org/abs/2404.11018)                                         |
+| Unsupervised ICL        | ✅          | Unsupervised In-Context Learning                     | [Many-Shot In-Context Learning](https://arxiv.org/abs/2404.11018)                                         |
 | Self-Route              | planned ⏱️  | Hybrid approach (RAG / LC LLM)                       | [Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach](https://arxiv.org/abs/2407.16833) |
 
 | 🗡️ Chunking Techniques | Implemented | Description                       |
