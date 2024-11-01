@@ -1,4 +1,4 @@
-# EffectzGPT by [Effectz.AI](https://www.effectz.ai/)  ![Logo of Effectz.AI](https://github.com/effectz-ai/effectz-gpt/img/effectzai.png)
+# EffectzGPT by [Effectz.AI](https://www.effectz.ai/)  ![Logo of Effectz.AI](https://github.com/effectz-ai/effectz-gpt/blob/main/img/effectzai.png)
 
 ## Welcome to EffectzGPT
 ### EffectzGPT => Easily Build Data Apps with LLMs
@@ -99,9 +99,9 @@ Below is a comprehensive list of the API keys and variables you may require:
 
 ## Trusted By Our Clients
 
-![Logo of University of Florida](https://github.com/effectz-ai/effectz-gpt/img/uf.png) &nbsp;&nbsp;
-![Logo of Chitra](https://github.com/effectz-ai/effectz-gpt/img/chitra.png) &nbsp;&nbsp;
-![Logo of Cleolinks AB](https://github.com/effectz-ai/effectz-gpt/img/cleolinks.png)
+![Logo of University of Florida](https://github.com/effectz-ai/effectz-gpt/blob/main/img/uf.png) &nbsp;&nbsp;
+![Logo of Chitra](https://github.com/effectz-ai/effectz-gpt/blob/main/img/chitra.png) &nbsp;&nbsp;
+![Logo of Cleolinks AB](https://github.com/effectz-ai/effectz-gpt/blob/main/img/cleolinks.png)
 
 ## Used In Cutting Edge Research
 
