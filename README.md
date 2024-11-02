@@ -1,11 +1,11 @@
 # EffectzGPT by [Effectz.AI](https://www.effectz.ai/)  ![Logo of Effectz.AI](https://github.com/effectz-ai/effectz-gpt/blob/main/img/effectzai.png)
 
 ## Welcome to EffectzGPT
-### EffectzGPT => Easily Build Data Apps with LLMs
-EffectzGPT helps you quickly create data applications powered by Large Language Models (LLMs). Based on LlamaIndex, it's specially designed for building scalable apps that require advanced reasoning over data. It has been used in both real-world business applications and cutting-edge research. EffectzGPT makes developing powerful AI-driven data applications simple—even if you're not an AI expert. EffectzGPT has been developed using [LlamaIndex](https://github.com/run-llama/llama_index).
+### EffectzGPT => Easy Workflow Automations with LLMs
+EffectzGPT helps you quickly develop **Enterprise Workflow Automation Applications** powered by **Large Language Models (LLMs)**. It is specially designed for building scalable apps that require advanced reasoning over data. It has been used in both real-world business applications and cutting-edge research. EffectzGPT makes developing powerful AI-driven workflow automation applications simple, even if you're not an AI expert. EffectzGPT has been developed using [LlamaIndex](https://github.com/run-llama/llama_index).
 \
 \
-[**Watch the demo of EffectzGPT**](https://www.youtube.com/watch?v=C6k6pJ4MbOs)
+[**Watch the Youtube demo of EffectzGPT ChatBot**](https://www.youtube.com/watch?v=C6k6pJ4MbOs)
 
 - [💾 EffectzGPT Walkthrough](#effectzgpt-walkthrough)
 - [✨ Feature Lists](#feature-lists)
@@ -64,6 +64,9 @@ python main.py
 | Support for Hybrid RAG              | planned ⏱️  | Integrating Knowledge Graphs and Vector RAG                    | [HybridRAG: Integrating Knowledge Graphs and Vector Retrieval Augmented Generation for Efficient Information Extraction](https://arxiv.org/abs/2408.04948) |
 | LlamaIndex Workflows Support   | planned ⏱️  | Event-driven abstraction used to chain together several events |                                                                                                   |
 | Self-Route              | planned ⏱️  | Hybrid approach (RAG / LC LLM)                                 | [Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach](https://arxiv.org/abs/2407.16833) |
+| Secure ICL              | planned ⏱️  | Secure ICL implementation for security sensitive applications  | [Privacy-Preserving In-Context Learning with Differentially Private Few-Shot Generation](https://arxiv.org/abs/2309.11765) |
+| Dense-X-Retrieval       | planned ⏱️  | Retrieval based on propoistions extracted from each node       | [Dense X Retrieval: What Retrieval Granularity Should We Use?](https://arxiv.org/abs/2312.06648) |
+| Corrective RAG          | planned ⏱️  | Incorporating a self-correction mechanism that evaluates and refines retrieved knowledge       | [Corrective Retrieval Augmented Generation](https://arxiv.org/abs/2401.15884) |
 
 | 🗡️ Chunking Techniques | Implemented | Description                       |
 | ---------------------- | ----------- | --------------------------------- |
@@ -72,6 +75,12 @@ python main.py
 | 🆒 Cool Bonus         | Implemented | Description                                             |
 | --------------------- | ----------- | ------------------------------------------------------- |
 | Docker Support        | ✅          | EffectzGPT is deployable via Docker                     |
+| Inbuilt ChatBot       | ✅          | A Next.js based ChatBot is available                    |
+| Inbuilt Admin Panel   | ✅          | A Next.js based Admin Panel is available                |
+| Whatsapp Intergration | ✅          | Whatsapp business API is supported                      |
+| Messenger Intergration| ✅          | Facebook messenger API is supported                     |
+| Streaming API         | ✅          | For Applications like chatbots                          |
+| Non-Streaming API     | ✅          | For Non-streaming RAG applications                      |
 
 | 🤝 RAG Libraries | Implemented | Description                        |
 | ---------------- | ----------- | ---------------------------------- |
