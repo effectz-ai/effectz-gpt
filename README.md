@@ -79,6 +79,8 @@ python main.py
 | Inbuilt Admin Panel   | ✅          | A Next.js based Admin Panel is available                |
 | Whatsapp Intergration | ✅          | Whatsapp business API is supported                      |
 | Messenger Intergration| ✅          | Facebook messenger API is supported                     |
+| Streaming API         | ✅          | For Applications like chatbots                          |
+| Non-Streaming API     | ✅          | For Non-streaming RAG applications                      |
 
 | 🤝 RAG Libraries | Implemented | Description                        |
 | ---------------- | ----------- | ---------------------------------- |
