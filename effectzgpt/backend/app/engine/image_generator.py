@@ -36,7 +36,7 @@ def generate_image(prompt):
         "prompt": prompt,
         "model": os.getenv("IMG_GENERATION_MODEL", "dall-e-3"),
         "n": int(os.getenv("NO_OF_IMG", 1)),
-        "quality": os.getenv("IMG_GENERATION_QUALITY", "hd"),
+        "quality": os.getenv("IMG_GENERATION_QUALITY", "standard"),
         "response_format": "url",
         "size": os.getenv("SIZE_OF_IMG", "1792x1024"),
         "style": os.getenv("STYLE_OF_IMG", "natural")
