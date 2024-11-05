@@ -72,7 +72,8 @@ export function useFile() {
     if (imageUrl) {
       annotations.push({
         type: MessageAnnotationType.IMAGE,
-        data: { url: imageUrl },
+          // @ts-ignore
+          data: { url: imageUrl },
       });
     }
     if (files.length > 0) {
