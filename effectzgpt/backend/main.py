@@ -1,6 +1,8 @@
 from dotenv import load_dotenv
 
 load_dotenv()
+load_dotenv('.env.local',override=True)
+
 
 import logging
 import os
