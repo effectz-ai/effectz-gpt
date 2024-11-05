@@ -1,4 +1,5 @@
 import json
+import re
 
 from aiostream import stream
 from fastapi import Request
@@ -8,6 +9,8 @@ from llama_index.core.chat_engine.types import StreamingAgentChatResponse
 from app.api.routers.events import EventCallbackHandler
 from app.api.routers.models import ChatData, Message, SourceNodes
 from app.api.services.suggestion import NextQuestionSuggestion
+from app.engine.prompt_generator import generate_prompts
+from app.engine.image_generator import generate_image
 
 
 class VercelStreamResponse(StreamingResponse):
@@ -52,22 +55,52 @@ class VercelStreamResponse(StreamingResponse):
         # Yield the text response
         async def _chat_response_generator():
             final_response = ""
+            
             async for token in response.async_response_gen():
                 final_response += token
-                yield VercelStreamResponse.convert_text(token)
+                #yield VercelStreamResponse.convert_text(token)
+            
+            steps = re.findall(r'\d+\.\s\*\*(.*?)\*\*:\n\s*-\s*(.*?)\n(?:\s*-\s*(.*?))?\n(?:\s*-\s*(.*?))?\n(?:\s*-\s*(.*?))?\n?', final_response, re.DOTALL)
+            headings = [item[0] for item in steps]
+            formatted_string = '\n'.join([f"{i+1}. **{heading}**" for i, heading in enumerate(headings)])
+            
+            yield VercelStreamResponse.convert_text(formatted_string)
+
+            # Format the extracted steps for further processing
+            formatted_steps = []
+            
+            # Format the extracted steps for further processing
+            formatted_steps = []
+
+            for step in steps:
+                step_title = step[0].strip()
+                step_actions = [action.strip() for action in step[1:] if action.strip()]
+                step_text = f"{step_title}: " + " ".join(step_actions)
+                formatted_steps.append(step_text)
+
+            # Generate prompts for each step
+            prompt_array = generate_prompts(formatted_steps)
+
+            # Genrate image urls
+            image_array = []
+
+            for prompt in prompt_array:
+                item = generate_image(prompt)
+                image_array.append(item[0]['url'])
 
             # Generate questions that user might interested to
-            conversation = chat_data.messages + [
-                Message(role="assistant", content=final_response)
-            ]
-            questions = await NextQuestionSuggestion.suggest_next_questions(
-                conversation
-            )
-            if len(questions) > 0:
+            # conversation = chat_data.messages + [
+            #     Message(role="assistant", content=final_response)
+            # ]
+            # questions = await NextQuestionSuggestion.suggest_next_questions(
+            #     conversation
+            # )
+            
+            if len(image_array) > 0:
                 yield VercelStreamResponse.convert_data(
                     {
-                        "type": "suggested_questions",
-                        "data": questions,
+                        "type": "image",
+                        "data": image_array,
                     }
                 )
 
