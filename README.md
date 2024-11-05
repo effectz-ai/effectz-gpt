@@ -60,10 +60,10 @@ python main.py
 | RAPTOR                  | ✅          | Raptor ingestion                                               | [RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval](https://arxiv.org/abs/2401.18059) |
 | Supervised ICL          | ✅          | Supervised In-Context Learning                                 | [Many-Shot In-Context Learning](https://arxiv.org/abs/2404.11018)                                         |
 | Unsupervised ICL        | ✅          | Unsupervised In-Context Learning                               | [Many-Shot In-Context Learning](https://arxiv.org/abs/2404.11018)                                         |
-| Query Optimization      | planned ⏱️  | Optimization by PROmpting (OPRO)                               | [Large Language Models as Optimizers](https://arxiv.org/abs/2309.03409)                                    |
+| Query Optimization      | ✅          | Optimization by PROmpting (OPRO)                               | [Large Language Models as Optimizers](https://arxiv.org/abs/2309.03409)                                    |
 | Support for Hybrid RAG              | planned ⏱️  | Integrating Knowledge Graphs and Vector RAG                    | [HybridRAG: Integrating Knowledge Graphs and Vector Retrieval Augmented Generation for Efficient Information Extraction](https://arxiv.org/abs/2408.04948) |
 | LlamaIndex Workflows Support   | planned ⏱️  | Event-driven abstraction used to chain together several events |                                                                                                   |
-| Self-Route              | planned ⏱️  | Hybrid approach (RAG / LC LLM)                                 | [Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach](https://arxiv.org/abs/2407.16833) |
+| Self-Route              | ✅          | Hybrid approach (RAG / LC LLM)                                 | [Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach](https://arxiv.org/abs/2407.16833) |
 | Secure ICL              | planned ⏱️  | Secure ICL implementation for security sensitive applications  | [Privacy-Preserving In-Context Learning with Differentially Private Few-Shot Generation](https://arxiv.org/abs/2309.11765) |
 | Dense-X-Retrieval       | planned ⏱️  | Retrieval based on propoistions extracted from each node       | [Dense X Retrieval: What Retrieval Granularity Should We Use?](https://arxiv.org/abs/2312.06648) |
 | Corrective RAG          | planned ⏱️  | Incorporating a self-correction mechanism that evaluates and refines retrieved knowledge       | [Corrective Retrieval Augmented Generation](https://arxiv.org/abs/2401.15884) |
@@ -108,7 +108,7 @@ Below is a comprehensive list of the API keys and variables you may require:
 
 ## Trusted By Our Clients
 
-![Logo of University of Florida](https://github.com/effectz-ai/effectz-gpt/blob/main/img/uf.png) &nbsp;&nbsp;
+#![Logo of University of Florida](https://github.com/effectz-ai/effectz-gpt/blob/main/img/uf.png) &nbsp;&nbsp;
 ![Logo of Chitra](https://github.com/effectz-ai/effectz-gpt/blob/main/img/chitra.png) &nbsp;&nbsp;
 ![Logo of Cleolinks AB](https://github.com/effectz-ai/effectz-gpt/blob/main/img/cleolinks.png)
 
