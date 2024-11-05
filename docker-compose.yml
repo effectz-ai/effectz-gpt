@@ -10,9 +10,9 @@ services:
   #    networks:
   #      - ragapp-network
 
-  effectzgpt_server:
-    container_name: server
-    image: effectzai/effectzgpt_b
+  effectzgpt_autism_server:
+    container_name: autism_server
+    image: effectzai/effectzgpt_autism_b
     ports:
       - 5001:5000
     volumes:
@@ -32,10 +32,16 @@ services:
       - EMBEDDING_DIM=${EMBEDDING_DIM}
       - LLAMA_CLOUD_API_KEY=${LLAMA_CLOUD_API_KEY}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - SYSTEM_PROMPT=You are Jordan government assistant , you only know about the services provided by the Jordan government .
       - COHERE_API_KEY=${COHERE_API_KEY}
       - CHROMA_HOST=${CHROMA_HOST}
       - CHROMA_PORT=${CHROMA_PORT}
+      - IMG_STORAGE_DIR="generated_images"
+      - IMG_GENERATION_MODEL=dall-e-3
+      - NO_OF_IMG=1
+      - IMG_GENERATION_QUALITY=hd
+      - SIZE_OF_IMG=1024x1024
+      - STYLE_OF_IMG=natural
+      - PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
   #    networks:
   #      - ragapp-network
   #  links:
@@ -43,12 +49,11 @@ services:
     command: >
       /bin/sh -c
       "
-      poetry run generate &&
       python main.py"
 
-  effectzgpt_ui:
-    container_name: ui
-    image: effectzai/effectzgpt_f
+  effectzgpt_autism_ui:
+    container_name: autism_ui
+    image: effectzai/effectzgpt_autism_f
     ports:
       - 5000:3000
     environment:
@@ -57,7 +62,7 @@ services:
       - ./effectzgpt/frontend/config:/app/config
       - ./effectzgpt/frontend/cache:/app/cache
     links:
-      - effectzgpt_server
+      - effectzgpt_autism_server
   #  networks:
   #    - ragapp-network
 
