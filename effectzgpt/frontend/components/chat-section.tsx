@@ -4,7 +4,7 @@ import { useChat } from "ai/react";
 import { ChatInput, ChatMessages } from "./ui/chat";
 import { useClientConfig } from "./ui/chat/hooks/use-config";
 import ChatGenImage from "@/components/ui/chat/chat-message/chat-genimage";
-import {AutismPreChat} from "@/components/ui/chat/chat-message/Autism-pre-chat";
+// import {AutismPreChat} from "@/components/ui/chat/chat-message/Autism-pre-chat";
 
 export default function ChatSection() {
   const { backend } = useClientConfig();
@@ -50,7 +50,7 @@ export default function ChatSection() {
             setInput={setInput}
           />
         </div>
-        <AutismPreChat append={append}/>
+        {/* <AutismPreChat append={append}/> */}
       </div>
   );
 }
