@@ -25,7 +25,7 @@ export default function ChatSection() {
     },
     onError: (error: unknown) => {
       if (!(error instanceof Error)) throw error;
-      const message = JSON.parse(error.message);
+      const message = JSON.parse(error.message); //??
       alert(message.detail);
     },
   });

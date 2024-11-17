@@ -11,7 +11,7 @@ export type RagConfigFormProps = BetterOmit<BoxProps, 'children'> & {
 export const RagConfigForm:FC<RagConfigFormProps> = ({onInputChange,...rest}) => {
     const [value, setValue] = useState('');
     const handleInputChange = (e:any) => {
-        let inputValue = e.target.value
+        const inputValue = e.target.value
         setValue(inputValue)
         if(onInputChange){
             onInputChange(inputValue)
