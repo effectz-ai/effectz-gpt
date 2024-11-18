@@ -14,7 +14,7 @@ services:
     container_name: kings_server
     image: effectzai/effectzgpt_kings_server_b
     ports:
-      - 5001:5000
+      - 5000:5000
     volumes:
       - ./effectzgpt/backend/config:/app/config
       - ./effectzgpt/backend/data:/app/data
@@ -50,7 +50,7 @@ services:
     container_name: kings_ui
     image: effectzai/effectzgpt_kings_f
     ports:
-      - 5000:3000
+      - 5001:3000
     environment:
       - NEXT_PUBLIC_CHAT_API=${NEXT_PUBLIC_CHAT_API}
     volumes:
