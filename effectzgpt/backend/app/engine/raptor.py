@@ -5,7 +5,6 @@ load_dotenv()
 import logging
 import os
 
-from llama_index.packs.raptor import RaptorPack, RaptorRetriever
 from llama_index.core import SimpleDirectoryReader
 from llama_index.core.node_parser import SentenceSplitter
 from llama_index.core.settings import Settings
@@ -22,6 +21,7 @@ init_settings()
 vector_store = get_vector_store()
 
 def raptor_ingestion(path):
+    from llama_index.packs.raptor import RaptorPack, RaptorRetriever
     logger.info("Generate RaptorPack for the provided data")
     data_dir = os.path.abspath(path)
     documents = SimpleDirectoryReader(input_dir=data_dir).load_data()
