@@ -10,9 +10,9 @@ services:
   #    networks:
   #      - ragapp-network
 
-  effectzgpt_server:
-    container_name: server
-    image: effectzai/effectzgpt_b
+  effectzgpt_kings_server:
+    container_name: kings_server
+    image: effectzai/effectzgpt_kings_server_b
     ports:
       - 5001:5000
     volumes:
@@ -46,9 +46,9 @@ services:
       poetry run generate &&
       python main.py"
 
-  effectzgpt_ui:
-    container_name: ui
-    image: effectzai/effectzgpt_f
+  effectzgpt_kings_ui:
+    container_name: kings_ui
+    image: effectzai/effectzgpt_kings_f
     ports:
       - 5000:3000
     environment:
@@ -57,7 +57,7 @@ services:
       - ./effectzgpt/frontend/config:/app/config
       - ./effectzgpt/frontend/cache:/app/cache
     links:
-      - effectzgpt_server
+      - effectzgpt_kings_server
   #  networks:
   #    - ragapp-network
 
