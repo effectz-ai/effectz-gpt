@@ -1,3 +1,12 @@
-file:
-  # use_llama_parse: Use LlamaParse if `true`. Needs a `LLAMA_CLOUD_API_KEY` from https://cloud.llamaindex.ai set as environment variable
-  use_llama_parse: false
+#file:
+#  # use_llama_parse: Use LlamaParse if `true`. Needs a `LLAMA_CLOUD_API_KEY` from https://cloud.llamaindex.ai set as environment variable
+#  use_llama_parse: false
+
+web:
+  driver_arguments: [ ]
+  urls: [
+    { base_url: "https://www.kingshospital.lk",
+        prefix: "https://www.kingshospital.lk",
+        max_depth: 10
+    }
+    ]
