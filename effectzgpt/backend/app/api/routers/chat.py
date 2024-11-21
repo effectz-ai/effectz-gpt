@@ -117,6 +117,11 @@ async def chat_request(
     last_message_content = data.get_last_message_content()
     messages = data.get_history_messages()
 
+    doc_ids = data.get_chat_document_ids()
+    filters = generate_filters(doc_ids)
+    logger.info("Creating chat engine with filters", filters.dict())
+    chat_engine = get_chat_engine(filters=filters)
+
     response = await chat_engine.achat(last_message_content, messages)
     return Result(
         result=Message(role=MessageRole.ASSISTANT, content=response.response),
