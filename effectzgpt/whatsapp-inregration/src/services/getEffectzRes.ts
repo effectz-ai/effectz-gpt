@@ -18,7 +18,7 @@ export const getEffectzResponse = async (message:string):Promise<string> => {
 
         return response.data.result.content
     } catch (error) {
-        console.error('Error Communicating with EffectzGPT');
+        console.error('Error Communicating with EffectzGPT', error);
         return 'Sorry, Something went wrong'
     }
 }

@@ -6,28 +6,32 @@ import os
 import sys
 import logging
 import chromadb
-from pymongo import MongoClient
-from pymongo.server_api import ServerApi
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
+if os.getenv("USE_ICL", "True").lower() == "true":
 # Create a new client and connect to the MongoDB server
-mongo_uri = os.getenv("MONGO_URI", "mongodb://127.0.0.1:27017/")
-mongo_client = MongoClient(mongo_uri, server_api=ServerApi('1'))
+    mongo_uri = os.getenv("MONGO_URI", "mongodb://127.0.0.1:27017/")
 
-# Send a ping to confirm a successful connection
-try:
-    mongo_client.admin.command('ping')
-    logger.info("Successfully connected to MongoDB!\n")
-except Exception as e:
-    logger.info(f"Error connecting to MongoDB: {e}\n")
-    sys.exit(1)
+    # Send a ping to confirm a successful connection
+    try:
+        from pymongo import MongoClient
+        from pymongo.server_api import ServerApi
 
-# Setup mongodb collection
-mongo_db = mongo_client[os.getenv("MONGO_DB", "EffectzGPT")]
-mongo_collection = mongo_db[os.getenv("MONGO_COLLECTION", "QandA")]
-logger.info(f"Collection: {mongo_collection}\n") 
+        mongo_client = MongoClient(mongo_uri, server_api=ServerApi('1'))
+        mongo_client.admin.command('ping')
+        logger.info("Successfully connected to MongoDB!\n")
+
+        # Setup mongodb collection
+        mongo_db = mongo_client[os.getenv("MONGO_DB", "EffectzGPT")]
+        mongo_collection = mongo_db[os.getenv("MONGO_COLLECTION", "QandA")]
+        logger.info(f"Collection: {mongo_collection}\n")
+    except Exception as e:
+            logger.info(f"Error connecting to MongoDB: {e}\n")
+            sys.exit(1)
+
+
 
 # Setup Chroma
 collection_name = os.getenv("CHROMA_COLLECTION_QUESTIONS", "questions")
