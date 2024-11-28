@@ -10,12 +10,34 @@ EffectzGPT helps you quickly create data applications powered by Large Language 
 - [💾 EffectzGPT Walkthrough](#effectzgpt-walkthrough)
 - [✨ Feature Lists](#feature-lists)
 - [🔑 API Keys](#api-keys)
+- [🚀 Deploying With Docker Compose](#deploying-with-docker-compose)
 - [💖 Trusted By Our Clients](#trusted-by-our-clients)
 - [🚩 Used In Cutting Edge Research](#used-in-cutting-edge-research)
 
 
 ## EffectzGPT Walkthrough
 
+### • Frontend
+### Install The Dependencies
+
+```
+npm install
+```
+
+### Run The Development Server
+
+```
+npm run dev
+```
+
+### To Run In Production
+
+```
+npm run build
+nohup npm run start > output.log 2>&1 &
+```
+
+### • Backend
 ### Setup The Environment
 
 ```
@@ -88,13 +110,90 @@ python main.py
 
 Below is a comprehensive list of the API keys and variables you may require:
 
-| Environment Variable   | Value                                                      | Description                                                                       |
-| ---------------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| MODEL_PROVIDER         | Your model provider name                                   | Set model provider                                                                |
-| MODEL                  | Your model name                                            | Set model                                                                         |
-| EMBEDDING_MODEL        | Your embedding model name                                  | Set embedding model                                                               |
-| OPENAI_API_KEY         | Your OpenAI API key                                        | Set OpenAI API key                                                                |
-| COHERE_API_KEY         | Your Cohere API key                                        | Set Cohere API key                                                                |
+| Environment Variable   | Example Values                                             | Description                                    |
+| ---------------------- | ---------------------------------------------------------- | ---------------------------------------------- |
+| NEXT_PUBLIC_CHAT_API   | http://localhost:5000/api/chat                             | Set backend API for chat endpoint              |
+| APP_PORT               | 5000                                                       | Set port to start the backend app              |
+| TOP_K                  | 10                                                         | Set number of similar embeddings to return     |
+| VECTOR_STORE_PROVIDER  | chroma                                                     | Set vector store provider                      |
+| MODEL_PROVIDER         | openai                                                     | Set LLM provider                               |  
+| MODEL                  | gpt-3.5-turbo                                              | Set LLM                                        |    
+| EMBEDDING_MODEL        | text-embedding-3-large                                     | Set embedding model                            |    
+| OPENAI_API_KEY         | Your OpenAI API key                                        | Set OpenAI API key                             |    
+| SYSTEM_PROMPT          | Your system prompt                                         | Set system prompt                              |    
+| COHERE_API_KEY         | Your Cohere API key                                        | Set Cohere API key                             |  
+
+
+## Deploying With Docker Compose
+
+You can easily deploy EffectzGPT to your own infrastructure with Docker Compose.
+
+### Prerequisites
+
+Make sure you have the following installed on your system:
+
+- Docker
+- Docker Compose
+
+### Steps
+
+- Clone the repository.
+
+```
+git clone https://github.com/effectz-ai/effectz-gpt.git
+cd effectz-gpt
+```
+
+- Start all the services defined in the docker-compose.yml file.
+```
+docker-compose up
+```
+
+- Or start a specific service (detached mode).
+```
+docker-compose up -d <service_name>
+```
+
+### Notes
+
+- If you make changes to the code or Dockerfile, you may need to rebuild the images.
+
+```
+docker-compose up --build
+```
+
+### Environment Variables
+
+The docker-compose.yml file uses environment variables. To set environment variables, you can follow one of the following methods.
+
+- Using a .env file (create a .env file and define the environment variables).
+```
+APP_PORT=3000
+```
+
+- Exporting environment variables directly.
+```
+export APP_PORT=3000
+docker-compose up
+```
+
+- Passing variables inline.
+```
+APP_PORT=3000 docker-compose up
+```
+
+| Environment Variable   | Example Values                                             | Description                                    |
+| ---------------------- | ---------------------------------------------------------- | ---------------------------------------------- |
+| NEXT_PUBLIC_CHAT_API   | http://localhost:5000/api/chat                             | Set backend API for chat endpoint              |
+| APP_PORT               | 5000                                                       | Set port to start the backend app              |
+| TOP_K                  | 10                                                         | Set number of similar embeddings to return     |
+| VECTOR_STORE_PROVIDER  | chroma                                                     | Set vector store provider                      |
+| MODEL_PROVIDER         | openai                                                     | Set LLM provider                               |  
+| MODEL                  | gpt-3.5-turbo                                              | Set LLM                                        |    
+| EMBEDDING_MODEL        | text-embedding-3-large                                     | Set embedding model                            |    
+| OPENAI_API_KEY         | Your OpenAI API key                                        | Set OpenAI API key                             |    
+| SYSTEM_PROMPT          | Your system prompt                                         | Set system prompt                              |    
+| COHERE_API_KEY         | Your Cohere API key                                        | Set Cohere API key                             |    
 
 
 ## Trusted By Our Clients
