@@ -54,7 +54,7 @@ export default function ChatSection() {
             setInput={setInput}
           />
         </div>
-        <AutismPreChat append={append}/>
+        {/*<AutismPreChat append={append}/>*/}
       </div>
   );
 }
