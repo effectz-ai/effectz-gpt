@@ -16,7 +16,9 @@
 # Node
 **/.results
 **/node_modules
+./node_modules
 ./static
+./pacakge-lock.json
 
 # Ignore development create_llama code
 ./storage/
