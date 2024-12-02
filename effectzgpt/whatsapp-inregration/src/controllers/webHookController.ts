@@ -24,8 +24,9 @@ export const handleWebhookEvent = async (req: Request, res: Response) => {
     console.log("Incoming webhook message:", JSON.stringify(req.body, null, 2));
 
     const msgDetails = extractMessageDetails(req);
+    const conversationId : string = msgDetails?.from!
     if (msgDetails) {
-        const effectzResponse = await getEffectzResponse(msgDetails?.messageText!)
+        const effectzResponse = await getEffectzResponse(msgDetails?.messageText!, conversationId)
         try {
             const url = `https://graph.facebook.com/${process.env.CLOUD_API_VERSION!}/${process.env.WHATSAPP_PHONE_NUMBER_ID!}/messages`;
             console.info(url)
