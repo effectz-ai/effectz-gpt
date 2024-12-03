@@ -2,10 +2,10 @@ import axios from 'axios'
 
 const effectzEndpoint = process.env.EFFECTZGPT_ENDPOINT!
 
-export const getEffectzResponse = async (message:string):Promise<string> => {
+export const getEffectzResponse = async (message:string,conversationId: string):Promise<string> => {
     try {
         const response = await axios.post(
-            effectzEndpoint,
+            `${effectzEndpoint}/?agent_id=${conversationId}`,
             {
                 messages:[
                     {
