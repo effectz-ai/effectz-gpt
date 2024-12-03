@@ -2,10 +2,12 @@ import logging
 from uuid import uuid4
 
 from fastapi import APIRouter, Request, BackgroundTasks, HTTPException, status
+from llama_index.core.agent import AgentRunner
 from llama_index.core.chat_engine.types import AgentChatResponse
 from llama_index.core.llms import MessageRole
 
 from app.agent.agent import AgentFactory
+from app.agent.reActWorkflowAgnet import ReActAgent
 from app.api.routers.chat import generate_filters, process_response_nodes
 from app.api.routers.events import EventCallbackHandler
 from app.api.routers.models import ChatData, Result, Message
@@ -67,17 +69,25 @@ async def agent(
             f"Creating chat engine with filters: {str(filters)}",
         )
 
-        chat_agent = AgentFactory.get_agent(
+        chat_agent : AgentRunner|ReActAgent = AgentFactory.get_agent(
             agent_id= agent_id if agent_id else str(uuid4()),
             filters=filters,
             params=None,
             event_handlers=None,
+            is_react_agent = data.is_react_agent,
         )
-        response : AgentChatResponse = await chat_agent.achat(last_message_content)
-        return Result(
-            result=Message(role=MessageRole.ASSISTANT, content=response.response),
-            nodes=[],
-        )
+        if data.is_react_agent :
+            work_flow_handler = await chat_agent.run(input=last_message_content)
+            return Result(
+                result=Message(role=MessageRole.ASSISTANT, content=work_flow_handler["response"]),
+                nodes=[],
+            )
+        else:
+            response : AgentChatResponse = await chat_agent.achat(last_message_content)
+            return Result(
+                result=Message(role=MessageRole.ASSISTANT, content=response.response),
+                nodes=[],
+            )
     except Exception as e:
         logger.exception("Error in agent chat", exc_info=True)
         raise HTTPException(
