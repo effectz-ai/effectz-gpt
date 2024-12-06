@@ -188,7 +188,7 @@ docker-compose up --build
 
 ### Environment Variables
 
-The docker-compose.yml file uses environment variables. To set environment variables, you can follow one of the following methods.
+The docker-compose.yml file uses [environment variables](#environment-variables). To set environment variables, you can follow one of the following methods.
 
 - Using a .env file (create a .env file and define the environment variables).
 ```
@@ -204,20 +204,7 @@ docker-compose up
 - Passing variables inline.
 ```
 VAR_NAME1=value1 docker-compose up
-```
-
-| Environment Variable   | Example Values                                             | Description                                    |
-| ---------------------- | ---------------------------------------------------------- | ---------------------------------------------- |
-| NEXT_PUBLIC_CHAT_API   | http://localhost:5000/api/chat                             | Set backend API for chat endpoint              |
-| APP_PORT               | 5000                                                       | Set port to start the backend app              |
-| TOP_K                  | 10                                                         | Set number of similar embeddings to return     |
-| VECTOR_STORE_PROVIDER  | chroma                                                     | Set vector store provider                      |
-| MODEL_PROVIDER         | openai                                                     | Set LLM provider                               |  
-| MODEL                  | gpt-3.5-turbo                                              | Set LLM                                        |    
-| EMBEDDING_MODEL        | text-embedding-3-large                                     | Set embedding model                            |    
-| OPENAI_API_KEY         | Your OpenAI API key                                        | Set OpenAI API key                             |    
-| SYSTEM_PROMPT          | Your system prompt                                         | Set system prompt                              |    
-| COHERE_API_KEY         | Your Cohere API key                                        | Set Cohere API key                             |    
+```  
 
 
 ## Trusted By Our Clients
