@@ -7,8 +7,8 @@ EffectzGPT helps you quickly develop **Enterprise Workflow Automation Applicatio
 \
 [**Watch the Youtube demo of EffectzGPT ChatBot**](https://www.youtube.com/watch?v=C6k6pJ4MbOs)
 
+- [✨ Feature List](#feature-list)
 - [💾 Getting Started](#getting-started)
-- [✨ Feature Lists](#feature-lists)
 - [🚀 Deploying With Docker Compose](#deploying-with-docker-compose)
 - [💖 Trusted By Our Clients](#trusted-by-our-clients)
 - [🚩 Used In Cutting Edge Research](#used-in-cutting-edge-research)
@@ -19,6 +19,63 @@ EffectzGPT helps you quickly develop **Enterprise Workflow Automation Applicatio
 \
 \
 ![Chat UI](https://github.com/effectz-ai/effectz-gpt/blob/main/img/chat.png)
+
+## Feature List
+
+| 🤖 Model Support                  | Implemented | Description                                             |
+| --------------------------------- | ----------- | ------------------------------------------------------- |
+| OpenAI (e.g. GPT4)                | ✅          | Embedding and Generation Models by OpenAI               |
+| Ollama (e.g. Llama3)              | ✅          | Local Embedding and Generation Models powered by Ollama |
+| Anthrophic (e.g. Claude Sonnet)   | ✅          | Embedding and Generation Models by Anthrophic           |
+
+| 🤖 Embedding Support | Implemented | Description                              |
+| -------------------- | ----------- | ---------------------------------------- |
+| OpenAI               | ✅          | Embedding Models by OpenAI               |
+| Ollama               | ✅          | Local Embedding Models powered by Ollama |
+
+| 📁 Data Support                                          | Implemented | Description                                    |
+| -------------------------------------------------------- | ----------- | ---------------------------------------------- |
+| Document Ingestion                                       | ✅          | Ingest documents into EffectzGPT               |
+| URL Scraping                                             | ✅          | Ingest data from urls into EffectzGPT          |
+
+| ✨ RAG Features         | Implemented | Description                                                    | Reference                                                                                                 |
+| ----------------------- | ----------- | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Reranking               | ✅          | Rerank results based on context for improved results           |                                                                                                           |
+| Sentence window retrieval             | ✅                               | Sentence window retrieval   | [Production Ready Advanced RAG Optimization with Llama-Index and Qdrant Vector Database](https://medium.com/rahasak/production-ready-advanced-rag-optimization-with-llama-index-and-qdrant-vector-database-23ad6427b20a)                                                                                                          |
+| RAPTOR                  | ✅          | Raptor ingestion                                               | [RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval](https://arxiv.org/abs/2401.18059) |
+| Supervised ICL          | ✅          | Supervised In-Context Learning                                 | [Many-Shot In-Context Learning](https://arxiv.org/abs/2404.11018)                                         |
+| Unsupervised ICL        | ✅          | Unsupervised In-Context Learning                               | [Many-Shot In-Context Learning](https://arxiv.org/abs/2404.11018)                                         |
+| Query Optimization      | ✅          | Optimization by PROmpting (OPRO)                               | [Large Language Models as Optimizers](https://arxiv.org/abs/2309.03409)                                    |
+| Support for Hybrid RAG              | planned ⏱️  | Integrating Knowledge Graphs and Vector RAG                    | [HybridRAG: Integrating Knowledge Graphs and Vector Retrieval Augmented Generation for Efficient Information Extraction](https://arxiv.org/abs/2408.04948) |
+| LlamaIndex Workflows Support   | ✅  | Event-driven abstraction used to chain together several events |                                                                                                   |
+| Self-Route              | ✅          | Hybrid approach (RAG / LC LLM)                                 | [Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach](https://arxiv.org/abs/2407.16833) |
+| Secure ICL              | planned ⏱️  | Secure ICL implementation for security sensitive applications  | [Privacy-Preserving In-Context Learning with Differentially Private Few-Shot Generation](https://arxiv.org/abs/2309.11765) |
+| Dense-X-Retrieval       | planned ⏱️  | Retrieval based on propoistions extracted from each node       | [Dense X Retrieval: What Retrieval Granularity Should We Use?](https://arxiv.org/abs/2312.06648) |
+| Corrective RAG          | planned ⏱️  | Incorporating a self-correction mechanism that evaluates and refines retrieved knowledge       | [Corrective Retrieval Augmented Generation](https://arxiv.org/abs/2401.15884) |
+
+| 🗡️ Chunking Techniques | Implemented | Description                       |
+| ---------------------- | ----------- | --------------------------------- |
+| Sentence               | ✅          | Chunk by Sentence                |
+
+| 🆒 Cool Bonus         | Implemented | Description                                             |
+| --------------------- | ----------- | ------------------------------------------------------- |
+| Docker Support        | ✅          | EffectzGPT is deployable via Docker                     |
+| Inbuilt ChatBot       | ✅          | A Next.js based ChatBot is available                    |
+| Inbuilt Admin Panel   | ✅          | A Next.js based Admin Panel is available                |
+| Whatsapp Intergration | ✅          | Whatsapp business API is supported                      |
+| Messenger Intergration| ✅          | Facebook messenger API is supported                     |
+| Streaming API         | ✅          | For Applications like chatbots                          |
+| Non-Streaming API     | ✅          | For Non-streaming RAG applications                      |
+
+| 🤝 RAG Libraries | Implemented | Description                        |
+| ---------------- | ----------- | ---------------------------------- |
+| LlamaIndex       | ✅          | Implement LlamaIndex RAG pipelines |
+
+| 🗄️ Vector DB Support | Implemented | Description                                          |
+| -------------------- | ----------- | ---------------------------------------------------- |
+| Chroma               | ✅          | AI-native open-source vector database                |
+| Qdrant               | ✅          | Open-source vector database and vector search engine |
+| Weaviate             | planned ⏱️  | Open-source vectore database                         |
 
 ## Getting Started
 
@@ -67,64 +124,6 @@ The docker container exposes the following endpoints.
 - Admin Panel: http://localhost:3000/admin
 - Chat UI: http://localhost:3000
 - Docs UI: http://localhost:3000/docs
-
-
-## Feature Lists
-
-| 🤖 Model Support                  | Implemented | Description                                             |
-| --------------------------------- | ----------- | ------------------------------------------------------- |
-| OpenAI (e.g. GPT4)                | ✅          | Embedding and Generation Models by OpenAI               |
-| Ollama (e.g. Llama3)              | ✅          | Local Embedding and Generation Models powered by Ollama |
-| Anthrophic (e.g. Claude Sonnet)   | ✅          | Embedding and Generation Models by Anthrophic           |
-
-| 🤖 Embedding Support | Implemented | Description                              |
-| -------------------- | ----------- | ---------------------------------------- |
-| OpenAI               | ✅          | Embedding Models by OpenAI               |
-| Ollama               | ✅          | Local Embedding Models powered by Ollama |
-
-| 📁 Data Support                                          | Implemented | Description                                    |
-| -------------------------------------------------------- | ----------- | ---------------------------------------------- |
-| Document Ingestion                                       | ✅          | Ingest documents into EffectzGPT               |
-| URL Scraping                                             | ✅          | Ingest data from urls into EffectzGPT          |
-
-| ✨ RAG Features         | Implemented | Description                                                    | Reference                                                                                                 |
-| ----------------------- | ----------- | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| Reranking               | ✅          | Rerank results based on context for improved results           |                                                                                                           |
-| RAPTOR                  | ✅          | Raptor ingestion                                               | [RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval](https://arxiv.org/abs/2401.18059) |
-| Supervised ICL          | ✅          | Supervised In-Context Learning                                 | [Many-Shot In-Context Learning](https://arxiv.org/abs/2404.11018)                                         |
-| Unsupervised ICL        | ✅          | Unsupervised In-Context Learning                               | [Many-Shot In-Context Learning](https://arxiv.org/abs/2404.11018)                                         |
-| Query Optimization      | ✅          | Optimization by PROmpting (OPRO)                               | [Large Language Models as Optimizers](https://arxiv.org/abs/2309.03409)                                    |
-| Support for Hybrid RAG              | planned ⏱️  | Integrating Knowledge Graphs and Vector RAG                    | [HybridRAG: Integrating Knowledge Graphs and Vector Retrieval Augmented Generation for Efficient Information Extraction](https://arxiv.org/abs/2408.04948) |
-| LlamaIndex Workflows Support   | ✅  | Event-driven abstraction used to chain together several events |                                                                                                   |
-| Self-Route              | ✅          | Hybrid approach (RAG / LC LLM)                                 | [Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach](https://arxiv.org/abs/2407.16833) |
-| Secure ICL              | planned ⏱️  | Secure ICL implementation for security sensitive applications  | [Privacy-Preserving In-Context Learning with Differentially Private Few-Shot Generation](https://arxiv.org/abs/2309.11765) |
-| Dense-X-Retrieval       | planned ⏱️  | Retrieval based on propoistions extracted from each node       | [Dense X Retrieval: What Retrieval Granularity Should We Use?](https://arxiv.org/abs/2312.06648) |
-| Corrective RAG          | planned ⏱️  | Incorporating a self-correction mechanism that evaluates and refines retrieved knowledge       | [Corrective Retrieval Augmented Generation](https://arxiv.org/abs/2401.15884) |
-
-| 🗡️ Chunking Techniques | Implemented | Description                       |
-| ---------------------- | ----------- | --------------------------------- |
-| Sentence               | ✅          | Chunk by Sentence                |
-
-| 🆒 Cool Bonus         | Implemented | Description                                             |
-| --------------------- | ----------- | ------------------------------------------------------- |
-| Docker Support        | ✅          | EffectzGPT is deployable via Docker                     |
-| Inbuilt ChatBot       | ✅          | A Next.js based ChatBot is available                    |
-| Inbuilt Admin Panel   | ✅          | A Next.js based Admin Panel is available                |
-| Whatsapp Intergration | ✅          | Whatsapp business API is supported                      |
-| Messenger Intergration| ✅          | Facebook messenger API is supported                     |
-| Streaming API         | ✅          | For Applications like chatbots                          |
-| Non-Streaming API     | ✅          | For Non-streaming RAG applications                      |
-
-| 🤝 RAG Libraries | Implemented | Description                        |
-| ---------------- | ----------- | ---------------------------------- |
-| LlamaIndex       | ✅          | Implement LlamaIndex RAG pipelines |
-
-| 🗄️ Vector DB Support | Implemented | Description                                          |
-| -------------------- | ----------- | ---------------------------------------------------- |
-| Chroma               | ✅          | AI-native open-source vector database                |
-| Qdrant               | ✅          | Open-source vector database and vector search engine |
-| Weaviate             | planned ⏱️  | Open-source vectore database                         |
-
 
 ## Deploying With Docker Compose
 
