@@ -28,60 +28,37 @@ To run EffectzGPT, you have to build a Docker image from the Dockerfile and star
 
 Make sure you have the following installed on your system:
 
+- node
+- python 3.11
 - Docker
+- Docker Compose
 
-### Steps
 
-- Clone the repository.
-
-```
-git clone https://github.com/effectz-ai/effectz-gpt.git
-cd effectz-gpt
-```
-
-- Build the Docker image.
-
-```
-docker build -t your-image-name .
-```
-
-- Start the Docker container.
-
-```
-docker run -p 3000:3000 your-image-name
-```
 
 ### Environment Variables
 
-To set environment variables, you can follow one of the following methods.
 
-- Passing environment variables directly when running the container.
-```
-docker run -p 3000:3000 \
-  -e VAR_NAME1=value1 \
-  -e VAR_NAME2=value2 \
-  your-image-name
-```
+| Environment Variable  | Example Values                 | Description                                                                    | Scope   | IsRequired |
+|-----------------------|--------------------------------|--------------------------------------------------------------------------------|---------|------------|
+| NEXT_PUBLIC_CHAT_API  | http://localhost:5000/api/chat | Set backend API for chat endpoint                                              | UI      | Y          |
+| APP_PORT              | 5000                           | Set port to start the backend app                                              | BACKEND | Y          |
+| TOP_K                 | 10                             | Set number of similar embeddings to return                                     | BACKEND | Y          |
+| VECTOR_STORE_PROVIDER | chroma                         | Set vector store provider                                                      | BACKEND | Y          |
+| MODEL_PROVIDER        | openai                         | Set LLM provider                                                               | BACKEND | Y          |
+| MODEL                 | gpt-3.5-turbo                  | Set LLM                                                                        | BACKEND | Y          | 
+| EMBEDDING_MODEL       | text-embedding-3-large         | Set embedding model                                                            | BACKEND | Y          |
+| OPENAI_API_KEY        | Your OpenAI API key            | Set OpenAI API key                                                             | BACKEND | Y          |
+| SYSTEM_PROMPT         | Your system prompt             | Set system prompt                                                              | BACKEND | Y          |
+| COHERE_API_KEY        | Your Cohere API key            | Set Cohere API key                                                             | BACKEND | Y          |
+| STREAM_TIMEOUT        | 60000                          | Time out in ms for streaming a                                                 | BACKEND | N          |
+| CHROMA_COLLECTION     | ./default                      | chroma collection name                                                         | BACKEND | N          |
+| CHROMA_PATH           | ./chromadb                     | path to chroma file storage                                                    | BACKEND | N          |
+| CHROMA_HOST           | localhost                      | chroma DB url ( if this value is defined CHROMA_PATH will be ignore )          | BACKEND | N          |
+| CHROMA_PORT           | 8000                           | Chroma DB access port  ( if this value is defined CHROMA_PATH will be ignore ) | BACKEND | N          |
+| EMBEDDING_DIM         | 1024                           | embedding size                                                                 | BACKEND | N          |
+| LLAMA_CLOUD_API_KEY   | Your LLAMA cloud  API key      | LLAMA cloud key                                                                | BACKEND | N          |
+| COHERE_API_KEY        | Your Cohere cloud  API key     | Cohere key                                                                     | BACKEND | N          |
 
-- Using an .env file.
-```
-docker run -p 3000:3000 \
-  --env-file .env \
-  your-image-name
-```
-
-| Environment Variable   | Example Values                                             | Description                                    |
-| ---------------------- | ---------------------------------------------------------- | ---------------------------------------------- |
-| NEXT_PUBLIC_CHAT_API   | http://localhost:5000/api/chat                             | Set backend API for chat endpoint              |
-| APP_PORT               | 5000                                                       | Set port to start the backend app              |
-| TOP_K                  | 10                                                         | Set number of similar embeddings to return     |
-| VECTOR_STORE_PROVIDER  | chroma                                                     | Set vector store provider                      |
-| MODEL_PROVIDER         | openai                                                     | Set LLM provider                               |  
-| MODEL                  | gpt-3.5-turbo                                              | Set LLM                                        |    
-| EMBEDDING_MODEL        | text-embedding-3-large                                     | Set embedding model                            |    
-| OPENAI_API_KEY         | Your OpenAI API key                                        | Set OpenAI API key                             |    
-| SYSTEM_PROMPT          | Your system prompt                                         | Set system prompt                              |    
-| COHERE_API_KEY         | Your Cohere API key                                        | Set Cohere API key                             |    
 
 ### Endpoints
 
@@ -89,6 +66,7 @@ The docker container exposes the following endpoints.
 
 - Admin Panel: http://localhost:3000/admin
 - Chat UI: http://localhost:3000
+- Docs UI: http://localhost:3000/docs
 
 
 ## Feature Lists
@@ -165,12 +143,20 @@ Make sure you have the following installed on your system:
 
 ```
 git clone https://github.com/effectz-ai/effectz-gpt.git
-cd effectz-gpt
+
+# navigate to backend folder and build docker image
+cd effectz-gpt/backend
+docker build -t effectzai/effectzgpt_b .
+
+# navigate to frontend folder and build docker image
+cd effectz-gpt/frontend
+docker build -t effectzai/effectzgpt_f .
+
 ```
 
-- Start all the services defined in the docker-compose.yml file.
+- Start frontend and backend services defined in the docker-compose.yml file.
 ```
-docker-compose up
+docker-compose up -d effectzgpt_ui
 ```
 
 - Or start a specific service (detached mode).
@@ -186,7 +172,6 @@ docker-compose up -d <service_name>
 docker-compose up --build
 ```
 
-### Environment Variables
 
 The docker-compose.yml file uses environment variables. To set environment variables, you can follow one of the following methods.
 
@@ -198,27 +183,9 @@ VAR_NAME1=value1
 - Exporting environment variables directly.
 ```
 export VAR_NAME1=value1
-docker-compose up
 ```
 
-- Passing variables inline.
-```
-VAR_NAME1=value1 docker-compose up
-```
-
-| Environment Variable   | Example Values                                             | Description                                    |
-| ---------------------- | ---------------------------------------------------------- | ---------------------------------------------- |
-| NEXT_PUBLIC_CHAT_API   | http://localhost:5000/api/chat                             | Set backend API for chat endpoint              |
-| APP_PORT               | 5000                                                       | Set port to start the backend app              |
-| TOP_K                  | 10                                                         | Set number of similar embeddings to return     |
-| VECTOR_STORE_PROVIDER  | chroma                                                     | Set vector store provider                      |
-| MODEL_PROVIDER         | openai                                                     | Set LLM provider                               |  
-| MODEL                  | gpt-3.5-turbo                                              | Set LLM                                        |    
-| EMBEDDING_MODEL        | text-embedding-3-large                                     | Set embedding model                            |    
-| OPENAI_API_KEY         | Your OpenAI API key                                        | Set OpenAI API key                             |    
-| SYSTEM_PROMPT          | Your system prompt                                         | Set system prompt                              |    
-| COHERE_API_KEY         | Your Cohere API key                                        | Set Cohere API key                             |    
-
+Required and optional environment variable can be found above in [Environment Variables](#environment-variables)
 
 ## Trusted By Our Clients
 
