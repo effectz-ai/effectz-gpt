@@ -7,55 +7,88 @@ EffectzGPT helps you quickly develop **Enterprise Workflow Automation Applicatio
 \
 [**Watch the Youtube demo of EffectzGPT ChatBot**](https://www.youtube.com/watch?v=C6k6pJ4MbOs)
 
-- [💾 EffectzGPT Walkthrough](#effectzgpt-walkthrough)
+- [💾 Getting Started](#getting-started)
 - [✨ Feature Lists](#feature-lists)
-- [🔑 API Keys](#api-keys)
 - [🚀 Deploying With Docker Compose](#deploying-with-docker-compose)
 - [💖 Trusted By Our Clients](#trusted-by-our-clients)
 - [🚩 Used In Cutting Edge Research](#used-in-cutting-edge-research)
+\
+\
+\
+![Admin Panel](https://github.com/effectz-ai/effectz-gpt/blob/main/img/admin.png)
+\
+\
+![Chat UI](https://github.com/effectz-ai/effectz-gpt/blob/main/img/chat.png)
 
+## Getting Started
 
-## EffectzGPT Walkthrough
+To run EffectzGPT, you have to build a Docker image from the Dockerfile and start a docker container with that image.
 
-### • Frontend
-### Install The Dependencies
+### Prerequisites
 
-```
-npm install
-```
+Make sure you have the following installed on your system:
 
-### Run The Development Server
+- Docker
 
-```
-npm run dev
-```
+### Steps
 
-### To Run In Production
-
-```
-npm run build
-nohup npm run start > output.log 2>&1 &
-```
-
-### • Backend
-### Setup The Environment
+- Clone the repository.
 
 ```
-poetry install
-poetry shell
+git clone https://github.com/effectz-ai/effectz-gpt.git
+cd effectz-gpt
 ```
 
-### Import Your Data
+- Build the Docker image.
 
 ```
-poetry run generate
+docker build -t your-image-name .
 ```
 
-### Query Your Data
+- Start the Docker container.
 
 ```
-python main.py
+docker run -p 3000:3000 your-image-name
 ```
+
+### Environment Variables
+
+To set environment variables, you can follow one of the following methods.
+
+- Passing environment variables directly when running the container.
+```
+docker run -p 3000:3000 \
+  -e VAR_NAME1=value1 \
+  -e VAR_NAME2=value2 \
+  your-image-name
+```
+
+- Using an .env file.
+```
+docker run -p 3000:3000 \
+  --env-file .env \
+  your-image-name
+```
+
+| Environment Variable   | Example Values                                             | Description                                    |
+| ---------------------- | ---------------------------------------------------------- | ---------------------------------------------- |
+| NEXT_PUBLIC_CHAT_API   | http://localhost:5000/api/chat                             | Set backend API for chat endpoint              |
+| APP_PORT               | 5000                                                       | Set port to start the backend app              |
+| TOP_K                  | 10                                                         | Set number of similar embeddings to return     |
+| VECTOR_STORE_PROVIDER  | chroma                                                     | Set vector store provider                      |
+| MODEL_PROVIDER         | openai                                                     | Set LLM provider                               |  
+| MODEL                  | gpt-3.5-turbo                                              | Set LLM                                        |    
+| EMBEDDING_MODEL        | text-embedding-3-large                                     | Set embedding model                            |    
+| OPENAI_API_KEY         | Your OpenAI API key                                        | Set OpenAI API key                             |    
+| SYSTEM_PROMPT          | Your system prompt                                         | Set system prompt                              |    
+| COHERE_API_KEY         | Your Cohere API key                                        | Set Cohere API key                             |    
+
+### Endpoints
+
+The docker container exposes the following endpoints.
+
+- Admin Panel: http://localhost:3000/admin
+- Chat UI: http://localhost:3000
 
 
 ## Feature Lists
@@ -115,24 +148,6 @@ python main.py
 | Weaviate             | planned ⏱️  | Open-source vectore database                         |
 
 
-## API Keys
-
-Below is a comprehensive list of the API keys and variables you may require:
-
-| Environment Variable   | Example Values                                             | Description                                    |
-| ---------------------- | ---------------------------------------------------------- | ---------------------------------------------- |
-| NEXT_PUBLIC_CHAT_API   | http://localhost:5000/api/chat                             | Set backend API for chat endpoint              |
-| APP_PORT               | 5000                                                       | Set port to start the backend app              |
-| TOP_K                  | 10                                                         | Set number of similar embeddings to return     |
-| VECTOR_STORE_PROVIDER  | chroma                                                     | Set vector store provider                      |
-| MODEL_PROVIDER         | openai                                                     | Set LLM provider                               |  
-| MODEL                  | gpt-3.5-turbo                                              | Set LLM                                        |    
-| EMBEDDING_MODEL        | text-embedding-3-large                                     | Set embedding model                            |    
-| OPENAI_API_KEY         | Your OpenAI API key                                        | Set OpenAI API key                             |    
-| SYSTEM_PROMPT          | Your system prompt                                         | Set system prompt                              |    
-| COHERE_API_KEY         | Your Cohere API key                                        | Set Cohere API key                             |  
-
-
 ## Deploying With Docker Compose
 
 You can easily deploy EffectzGPT to your own infrastructure with Docker Compose.
@@ -177,18 +192,18 @@ The docker-compose.yml file uses environment variables. To set environment varia
 
 - Using a .env file (create a .env file and define the environment variables).
 ```
-APP_PORT=3000
+VAR_NAME1=value1
 ```
 
 - Exporting environment variables directly.
 ```
-export APP_PORT=3000
+export VAR_NAME1=value1
 docker-compose up
 ```
 
 - Passing variables inline.
 ```
-APP_PORT=3000 docker-compose up
+VAR_NAME1=value1 docker-compose up
 ```
 
 | Environment Variable   | Example Values                                             | Description                                    |
