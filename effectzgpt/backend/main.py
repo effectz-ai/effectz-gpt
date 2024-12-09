@@ -3,6 +3,7 @@ from sys import prefix
 from dotenv import load_dotenv
 
 load_dotenv()
+load_dotenv(".env.local", override=True)
 
 import logging
 import os
@@ -22,6 +23,7 @@ from app.api.routers.data_ingestion import data_ingestion_router
 from app.api.routers.image_generation import image_generation_router
 from app.api.routers.url_scraper import url_scraping_router
 from app.api.routers.web_scraper import web_scraping_router
+from app.api.routers.question_ingestion import question_ingestion_router
 from app.settings import init_settings
 from app.observability import init_observability
 from fastapi.staticfiles import StaticFiles
@@ -71,6 +73,7 @@ app.include_router(data_ingestion_router, prefix="/api")
 app.include_router(image_generation_router, prefix="/api")
 app.include_router(url_scraping_router, prefix="/api")
 app.include_router(web_scraping_router, prefix="/api")
+app.include_router(question_ingestion_router, prefix="/api")
 app.include_router(config_router,prefix="/api/management/config")
 app.include_router(tools_router, prefix="/api/management/tools", tags=["Agent"])
 app.include_router(files_router, prefix="/api/management/files", tags=["Knowledge"])

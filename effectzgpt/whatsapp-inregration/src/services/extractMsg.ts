@@ -37,25 +37,27 @@ interface WebhookPayload {
       }>;
     }>;
   }
-  
-  export function extractMessageDetails(request:Request):{ from: string; messageText: string } | null {
+
+  export function extractMessageDetails(request:Request):{ from: string; messageText: string ,messageId : string} | null {
     try {
         const payload: WebhookPayload = request.body;
     
         // Check if the 'id' exists first
-        if (payload.entry[0]?.id !== whatsappAccountId) {
+        if (payload?.entry?.[0]?.id !== whatsappAccountId) {
           console.error('ID is missing in the payload');
           return null;
         }
     
         // Proceed with extracting 'from' and 'messageText'
-        const messageEntry = payload.entry[0].changes[0].value;
-        const from = messageEntry.messages[0]?.from;
-        const messageText = messageEntry.messages[0]?.text?.body;
-    
+        const messageEntry = payload.entry?.[0]?.changes[0]?.value?.messages?.[0];
+        const from = messageEntry?.from;
+        const messageText = messageEntry?.text?.body;
+        const messageType = messageEntry?.type;
+        const messageId = messageEntry?.id;
+
         // Ensure that both 'from' and 'messageText' exist before returning
-        if (from && messageText) {
-          return { from, messageText };
+        if (messageType === "text" && from &&  messageText) {
+            return {from, messageText, messageId};
         } else {
           console.error('Missing "from" or "messageText" in the payload');
           return null;

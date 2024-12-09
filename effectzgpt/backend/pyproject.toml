@@ -7,7 +7,7 @@ authors = [ "Marcus Schiesser <mail@marcusschiesser.de>" ]
 readme = "README.md"
 
 [tool.poetry.scripts]
-generate = "app.engine.generate:generate_datasource"
+generate = "app.engine.generate:generate_datasource_init"
 
 [tool.poetry.dependencies]
 python = "^3.11,<3.12"
@@ -20,6 +20,7 @@ cohere = "5.6.2"
 python-multipart = "0.0.9"
 pydantic-settings = "^2.2.1"
 llama-index-readers-web = "0.1.23"
+pymongo = "^4.8.0"
 chromadb = "0.5.1"
 
 [tool.poetry.dependencies.uvicorn]
@@ -40,6 +41,9 @@ version = "0.2.6"
 
 [tool.poetry.dependencies."llama-index-postprocessor-cohere-rerank"]
 version = "0.1.7"
+
+[tool.poetry.dependencies."llama-index-packs-raptor"]
+version = "0.1.3"
 
 [build-system]
 requires = [ "poetry-core" ]
