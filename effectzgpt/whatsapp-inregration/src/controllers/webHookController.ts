@@ -3,6 +3,8 @@ import { Request, Response } from 'express';
 import {extractMessageDetails} from "../services/extractMsg";
 import {getEffectzResponse} from "../services/getEffectzRes";
 import axios from "axios";
+import {sendMessage} from "../../lib/sendMessege";
+import {processMessage} from "../../lib/processMessage";
 
 const webHookVerifyToken  = process.env.WEBHOOK_VERIFY_TOKEN!
 
@@ -25,25 +27,13 @@ export const handleWebhookEvent = async (req: Request, res: Response) => {
 
     const msgDetails = extractMessageDetails(req);
     if (msgDetails) {
-        const effectzResponse = await getEffectzResponse(msgDetails?.messageText!)
+        // const effectzResponse = await getEffectzResponse(msgDetails?.messageText!)
         try {
-            const url = `https://graph.facebook.com/${process.env.CLOUD_API_VERSION!}/${process.env.WHATSAPP_PHONE_NUMBER_ID!}/messages`;
+            const url = `https://graph.facebook.com/v${process.env.CLOUD_API_VERSION!}/${process.env.WHATSAPP_PHONE_NUMBER_ID!}/messages`;
             console.info(url)
 
-            await axios.post(
-                url,
-                {
-                    messaging_product: 'whatsapp',
-                    to: msgDetails?.from, // Reply to the same phone number that sent the message
-                    text: {body: effectzResponse},
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${process.env.WHATSAPP_ACCESS_TOKEN!}`,
-                        "Content-Type": 'application/json'
-                    },
-                }
-            )
+
+            await processMessage(msgDetails.messageText,msgDetails.from,msgDetails.name)
 
             //Mark message as read
             await axios.post(
