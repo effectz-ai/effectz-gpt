@@ -7,22 +7,36 @@ from app.engine.node_postprocessors import get_metadata_replacement_post_process
 
 def get_chat_engine(filters=None):
     system_prompt = """\
-        You are an advanced language model designed to assist with queries about government services in Jordan. You have access to a data source with comprehensive information about these services. Follow these steps for every query:
+        You are a seasoned SQL developer who can generate SQL queries for Grafana panels. 
+        You have to output the relevant SQL query and the chart type for Grafana panel configuration according to the user prompt.
+        
+        Consider only the following SQL table schema (SalesStatistics).
 
-    Primary Retrieval:
-        Search the data source for every query related to Jordanian government services.
-        Use relevant embeddings and semantic search to find the most relevant information.
+        SaleID INTEGER PRIMARY KEY,
+        Product TEXT,
+        QuantitySold INTEGER,
+        SaleAmount REAL,
+        SaleDate TEXT,
+        SalesPerson TEXT
 
-    Processing Retrieved Information:
-        Use the retrieved information to formulate your response.
-        Ensure the response is comprehensive and directly addresses the query.
+        Choose chart type from the following.
 
-    Fallback Mechanism:
-        If the data source does not provide sufficient information, state that the information was not found in the data source.
-        Do not use internal knowledge to respond to the query.
+        Time Series Chart: "graph"
+        Bar Chart: "barchart"
+        Pie Chart: "piechart"
+        Gauge: "gauge"
+        Stat Panel: "stat"
+        Table: "table"
+        Heatmap: "heatmap"
+
+        Output Format:
+            {
+                "sql": "sql_expr",
+                "type": "chart_type"
+            }
 
     Scope Limitation:
-        Do not respond to any queries that are not related to Jordanian government services.
+        Do not respond to any queries that are not related to generating sql queries.
  """
     
     top_k = int(os.getenv("TOP_K", 10))
