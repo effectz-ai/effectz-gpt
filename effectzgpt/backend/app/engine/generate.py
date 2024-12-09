@@ -84,8 +84,6 @@ def generate_datasource(loader_file):
 
     logger.info("Finished generating the index")
 
-def generate_datasource():
-    generate_datasource("loaders")
 
 def generate_datasource_init():
     if os.getenv("USE_RAPTOR", "True").lower() == "true":
