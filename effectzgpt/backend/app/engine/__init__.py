@@ -7,8 +7,14 @@ from app.engine.node_postprocessors import get_metadata_replacement_post_process
 
 def get_chat_engine(filters=None):
     system_prompt = """\
-        You are a seasoned SQL developer who can generate SQL queries for Grafana panels. 
-        You have to output the relevant SQL query and the chart type for Grafana panel configuration according to the user prompt.
+        You are an expert who can write SQL queries to generate Grafana panels. 
+        You have to output the relevant Grafana panel configuration according to the user prompt.
+            - For a time series, make sure to handle the x-axis variable by using STRFTIME("%s", x-axis variable) and aliasing it as time in the SQL query. 
+            - For a pie chart, set values as true in reduceOptions in options.
+            - Use "frser-sqlite-datasource" as the datasource and generated SQL query as the rawQueryText. Add both of them to the targets key. 
+            - Use a relevant title.
+            - Set 12 for h and w for the gridPos key.
+            - If their is a color requested for the panel by the user, add it to color in defaults in fieldConfig. Then the color mode should be 'fixed'.
         
         Consider only the following SQL table schema (SalesStatistics).
 
@@ -24,19 +30,14 @@ def get_chat_engine(filters=None):
         Time Series Chart: "graph"
         Bar Chart: "barchart"
         Pie Chart: "piechart"
-        Gauge: "gauge"
         Stat Panel: "stat"
         Table: "table"
-        Heatmap: "heatmap"
 
         Output Format:
-            {
-                "sql": "sql_expr",
-                "type": "chart_type"
-            }
+            Only output a dictionary containing the Grafana panel configuration. 
 
     Scope Limitation:
-        Do not respond to any queries that are not related to generating sql queries.
+        Do not respond to any queries that are not related to generating Grafana panel configurations.
  """
     
     top_k = int(os.getenv("TOP_K", 10))

@@ -1,4 +1,5 @@
 import json
+import re
 
 from aiostream import stream
 from fastapi import Request
@@ -8,6 +9,7 @@ from llama_index.core.chat_engine.types import StreamingAgentChatResponse
 from app.api.routers.events import EventCallbackHandler
 from app.api.routers.models import ChatData, Message, SourceNodes
 from app.api.services.suggestion import NextQuestionSuggestion
+from app.engine.grafana import generate_panel
 
 
 class VercelStreamResponse(StreamingResponse):
@@ -56,20 +58,32 @@ class VercelStreamResponse(StreamingResponse):
                 final_response += token
                 yield VercelStreamResponse.convert_text(token)
 
+            # Generate Grafana panel
+            panel_config_pattern = r'(\{.*\})'
+
+            panel_config_matches = re.search(panel_config_pattern, final_response, re.DOTALL)
+
+            if panel_config_matches:
+                try:
+                    panel_config = json.loads(panel_config_matches.group(1))
+                    generate_panel(panel_config)
+                except json.JSONDecodeError as e:
+                    print(f"Error: {e}")
+
             # Generate questions that user might interested to
-            conversation = chat_data.messages + [
-                Message(role="assistant", content=final_response)
-            ]
-            questions = await NextQuestionSuggestion.suggest_next_questions(
-                conversation
-            )
-            if len(questions) > 0:
-                yield VercelStreamResponse.convert_data(
-                    {
-                        "type": "suggested_questions",
-                        "data": questions,
-                    }
-                )
+            # conversation = chat_data.messages + [
+            #     Message(role="assistant", content=final_response)
+            # ]
+            # questions = await NextQuestionSuggestion.suggest_next_questions(
+            #     conversation
+            # )
+            # if len(questions) > 0:
+            #     yield VercelStreamResponse.convert_data(
+            #         {
+            #             "type": "suggested_questions",
+            #             "data": questions,
+            #         }
+            #     )
 
             # the text_generator is the leading stream, once it's finished, also finish the event stream
             event_handler.is_done = True
