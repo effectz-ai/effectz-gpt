@@ -1,5 +1,7 @@
 from dotenv import load_dotenv
 
+from app.api.routers.agent import agent_router
+
 load_dotenv()
 load_dotenv(".env.local", override=True)
 
@@ -60,6 +62,7 @@ mount_static_files("data", "/api/files/data")
 mount_static_files("output", "/api/files/output")
 
 app.include_router(chat_router, prefix="/api/chat")
+app.include_router(agent_router, prefix="/api/agent")
 app.include_router(file_upload_router, prefix="/api/chat/upload")
 app.include_router(data_ingestion_router, prefix="/api")
 app.include_router(image_generation_router, prefix="/api")

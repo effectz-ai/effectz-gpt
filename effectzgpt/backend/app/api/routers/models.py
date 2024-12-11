@@ -4,7 +4,7 @@ from typing import Any, Dict, List, Literal, Optional, Set
 
 from llama_index.core.llms import ChatMessage, MessageRole
 from llama_index.core.schema import NodeWithScore
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from pydantic.alias_generators import to_camel
 
 logger = logging.getLogger("uvicorn")
@@ -75,6 +75,7 @@ class Message(BaseModel):
 
 class ChatData(BaseModel):
     messages: List[Message]
+    is_react_agent : bool = False
 
     class Config:
         json_schema_extra = {
@@ -88,7 +89,7 @@ class ChatData(BaseModel):
             }
         }
 
-    @validator("messages")
+    @field_validator("messages")
     def messages_must_not_be_empty(cls, v):
         if len(v) == 0:
             raise ValueError("Messages must not be empty")
