@@ -8,3 +8,5 @@ output
 
 # local env files
 .env.local
+
+/.idea
