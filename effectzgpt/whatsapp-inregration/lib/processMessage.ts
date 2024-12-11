@@ -8,23 +8,21 @@ function search(pattern:string,text:string):boolean {
 
 export async function processMessage(message:string, to:string, name:string){
     const userPrompt = extractString(message);
-    if(userPrompt == "yes"){
-        await sendMessage(message,to,"CONTACT",name);
-    }else if (userPrompt == "no"){
-        await sendMessage(message,to,"TERMINATE",name);
+    if (userPrompt == "no"){
+        await sendMessage(userPrompt,to,"TERMINATE",name);
     }else{
         if(search("service",userPrompt)){
-           await sendMessage(message,to,"SERVICES",name);
+           await sendMessage(userPrompt,to,"SERVICES",name);
         }else if(search("help|contact|reach|email|problem|issue|more|information",userPrompt)){
-            await sendMessage(message,to,"CONTACT",name)
+            await sendMessage(userPrompt,to,"CONTACT",name)
         }else if(search("hello|hi|greetings",userPrompt)){
             if(search("this",userPrompt)){
-                await sendMessage(message,to,"CHATBOT",name)
+                await sendMessage(userPrompt,to,"CHATBOT",name)
             }else{
-                await sendMessage(message,to,"HELLO",name)
+                await sendMessage(userPrompt,to,"HELLO",name)
             }
         }else{
-            await sendMessage(message,to,"CHATBOT",name)
+            await sendMessage(userPrompt,to,"CHATBOT",name)
         }
     }
 }

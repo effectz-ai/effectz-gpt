@@ -43,7 +43,7 @@ interface WebhookPayload {
         const payload: WebhookPayload = request.body;
     
         // Check if the 'id' exists first
-        if (payload?.entry[0]?.id !== whatsappAccountId) {
+        if (payload?.entry[0].id !== whatsappAccountId) {
           console.error('ID is missing in the payload');
           return null;
         }
