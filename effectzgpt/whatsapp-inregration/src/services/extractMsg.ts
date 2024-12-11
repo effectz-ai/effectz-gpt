@@ -38,12 +38,12 @@ interface WebhookPayload {
     }>;
   }
 
-  export function extractMessageDetails(request:Request):{ from: string; messageText: string ,messageId : string} | null {
+  export function extractMessageDetails(request:Request):{ from: string; messageText: string ,messageId : string, name:string} | null {
     try {
         const payload: WebhookPayload = request.body;
     
         // Check if the 'id' exists first
-        if (payload?.entry?.[0]?.id !== whatsappAccountId) {
+        if (payload?.entry[0].id !== whatsappAccountId) {
           console.error('ID is missing in the payload');
           return null;
         }
@@ -54,10 +54,11 @@ interface WebhookPayload {
         const messageText = messageEntry?.text?.body;
         const messageType = messageEntry?.type;
         const messageId = messageEntry?.id;
+        const name = payload.entry[0].changes[0].value.contacts[0].profile.name;
 
         // Ensure that both 'from' and 'messageText' exist before returning
         if (messageType === "text" && from &&  messageText) {
-            return {from, messageText, messageId};
+            return {from, messageText, messageId, name};
         } else {
           console.error('Missing "from" or "messageText" in the payload');
           return null;
