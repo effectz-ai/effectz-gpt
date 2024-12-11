@@ -38,6 +38,14 @@ EffectzGPT helps you quickly develop **Enterprise Workflow Automation Applicatio
 | Document Ingestion                                       | ✅          | Ingest documents into EffectzGPT               |
 | URL Scraping                                             | ✅          | Ingest data from urls into EffectzGPT          |
 
+
+| 👨‍💻 Agent Features          | Implemented           | Description                                                          |
+|----------------------------|-----------------------|----------------------------------------------------------------------|
+| Agent with memory          | ✅                    | Agent with user specific memeory                                     |
+| Agent workflow             | ✅                    | Agent with multistep workflow with access to tools                   |
+| Agent memory management    | planned ⏱️            | Auto move memory between program memory and disk based on importance |
+
+
 | ✨ RAG Features         | Implemented | Description                                                    | Reference                                                                                                 |
 | ----------------------- | ----------- | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | Reranking               | ✅          | Rerank results based on context for improved results           |                                                                                                           |
