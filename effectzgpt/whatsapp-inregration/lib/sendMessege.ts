@@ -13,7 +13,7 @@ export async function sendMessage(message:string,to:string,messageOption:string,
         type:'template',
         template:{
             namespace:`${process.env.NAMESPACE}`,
-            name: 'welcome',
+            name: 'hello',
             language:{
                 code: "en_US"
             },
