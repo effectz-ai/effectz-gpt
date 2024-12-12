@@ -1,3 +1,7 @@
+from dotenv import load_dotenv
+
+load_dotenv()
+
 import os
 import logging
 import requests
@@ -7,6 +11,7 @@ logger = logging.getLogger()
 
 url = os.getenv("GRAFANA_DASHBOARD_URL")
 api_key = os.getenv("GRAFANA_API_KEY")
+dashbaord_id = int(os.getenv("GRAFANA_DASHBOARD_ID"))
 
 if url is None:
     raise ValueError(
@@ -18,6 +23,11 @@ if api_key is None:
         "Please set the Grafana API key"
     )
 
+if dashbaord_id is None:
+    raise ValueError(
+        "Please set the Grafana Dashboard ID"
+    )
+
 headers = {
     'Authorization': f'Bearer {api_key}',
     'Content-Type': 'application/json'
@@ -26,15 +36,15 @@ headers = {
 def generate_panel(panel_config: dict):
     payload = {
         "dashboard": {
-            "id": 1,
+            "id": dashbaord_id,
             "title": "Test Dashboard",
-            "panels": [panel_config]
+            "panels": panel_config
         },
         "folderId": 0,
         "overwrite": True
     }
 
-    response = requests.post(url, headers=headers, json=payload)
+    response = requests.post(f"{url}api/dashboards/db", headers=headers, json=payload)
 
     print(response.text)
 

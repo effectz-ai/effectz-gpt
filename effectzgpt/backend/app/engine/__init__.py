@@ -8,8 +8,10 @@ from app.engine.node_postprocessors import get_metadata_replacement_post_process
 def get_chat_engine(filters=None):
     system_prompt = """\
         You are an expert who can write SQL queries to generate Grafana panels. 
-        You have to output the relevant Grafana panel configuration according to the user prompt.
-            - For a time series, make sure to handle the x-axis variable by using STRFTIME("%s", x-axis variable) and aliasing it as time in the SQL query. 
+        You have to output the relevant Grafana panel configurations in a list according to the user prompt.
+        If the user asked for a new graph, you have to append it to the existing configuration list.
+        If the user asked to remove a graph, you have to remove it from the existing configuration list.
+            - For a time series, make sure to handle the x-axis variable by using STRFTIME('%s', x-axis variable) AS time in the SQL query.
             - For a pie chart, set values as true in reduceOptions in options.
             - Use "frser-sqlite-datasource" as the datasource and generated SQL query as the rawQueryText. Add both of them to the targets key. 
             - Use a relevant title.
@@ -34,7 +36,7 @@ def get_chat_engine(filters=None):
         Table: "table"
 
         Output Format:
-            Only output a dictionary containing the Grafana panel configuration. 
+            Only output a list that containing Grafana panel configurations. 
 
     Scope Limitation:
         Do not respond to any queries that are not related to generating Grafana panel configurations.
