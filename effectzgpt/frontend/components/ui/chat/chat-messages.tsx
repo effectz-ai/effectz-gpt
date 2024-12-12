@@ -42,7 +42,7 @@ export default function ChatMessages(
 
   return (
     <div
-      className="flex-1 w-full rounded-xl bg-white p-4 shadow-xl relative overflow-y-auto"
+      className="flex-1 w-full bg-gray-50 p-4 relative overflow-y-auto"
       ref={scrollableChatContainerRef}
     >
       <div className="flex flex-col gap-5 divide-y">
