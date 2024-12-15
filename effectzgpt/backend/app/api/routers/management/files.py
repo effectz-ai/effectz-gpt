@@ -8,7 +8,7 @@ files_router = r = APIRouter()
 
 
 @r.get("")
-def fetch_files() -> list[File]:
+def fetch_files() :
     """
     Get the current files.
     """
@@ -33,17 +33,21 @@ async def add_file(file: UploadFile):
     return res
 
 
-@r.delete("/{file_name}")
-def remove_file(file_name: str):
+@r.delete("/{parent_folder}/{file_name}")
+def remove_file(parent_folder:str, file_name: str):
     """
     Remove a file.
     """
     try:
-        FileHandler.remove_file(file_name)
+        FileHandler.remove_file(parent_folder,file_name)
     except FileNotFoundError:
         # Ignore the error if the file is not found
         # This is to ensure that the file is removed even if it is not found
         # and we don't have to show an unnecessary error message to the user
+        print(f"File {file_name} not found.")
+        pass
+    except Exception as e:
+        print(e)
         pass
     return JSONResponse(
         status_code=200,
