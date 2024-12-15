@@ -105,7 +105,7 @@ Make sure you have the following installed on your system:
 
 | Environment Variable  | Example Values                 | Description                                                                    | Scope   | IsRequired |
 |-----------------------|--------------------------------|--------------------------------------------------------------------------------|---------|------------|
-| NEXT_PUBLIC_CHAT_API  | http://localhost:5000/api/chat | Set backend API for chat endpoint                                              | UI      | Y          |
+| NEXT_PUBLIC_CHAT_API_BASE_URL  | http://localhost:5000 | Set backend API end point                                                      | UI      | Y          |
 | APP_PORT              | 5000                           | Set port to start the backend app                                              | BACKEND | Y          |
 | TOP_K                 | 10                             | Set number of similar embeddings to return                                     | BACKEND | Y          |
 | VECTOR_STORE_PROVIDER | chroma                         | Set vector store provider                                                      | BACKEND | Y          |
