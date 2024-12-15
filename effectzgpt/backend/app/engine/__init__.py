@@ -12,7 +12,9 @@ from app.engine.node_postprocessors import get_metadata_replacement_post_process
 def get_chat_engine(filters=None):
     system_prompt = os.getenv("SYSTEM_PROMPT",DEFAULT_SYSTEM_PROMPT)
 
-    top_k = os.getenv("TOP_K", DEFAULT_TOP_K)
+    top_k = int(os.getenv("TOP_K", DEFAULT_TOP_K))
+
+    node_postprocessors = []
 
     if os.getenv("USE_RERANKER", "True").lower() == "true":
         node_postprocessors.append(get_reranker())
