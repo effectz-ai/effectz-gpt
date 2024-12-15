@@ -4,13 +4,9 @@ import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import { ThemeContext } from "@/context";
 import { QueryClient, QueryClientProvider } from "react-query";
+import React from "react";
 
 const inter = Inter({ subsets: ["latin"] });
-
-// export const metadata: Metadata = {
-//   title: "EffectzGPT",
-//   description: "Your Trusted AI Partner",
-// };
 
 const queryClient = new QueryClient();
 export default function RootLayout({

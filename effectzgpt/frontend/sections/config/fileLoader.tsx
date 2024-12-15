@@ -1,4 +1,4 @@
-import { File, fetchFiles, removeFile, uploadFile } from "@/client/files";
+import { File, fetchFiles, removeFile, uploadFile, FolderStructure } from "@/client/files";
 import {
   FileLoaderSchema,
   fetchFileLoader,
@@ -27,7 +27,7 @@ import {
 import { toast, useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoaderCircle } from "lucide-react";
+import { Loader } from 'lucide-react';
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
@@ -36,7 +36,7 @@ import { RerankerConfig } from "./reranker";
 const SUPPORTED_FILE_EXTENSIONS = ["txt", "pdf", "csv"];
 
 export const KnowledgeFileSection = () => {
-  const [files, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = useState<FolderStructure>({folders:[],files:[]});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
@@ -46,19 +46,27 @@ export const KnowledgeFileSection = () => {
       setIsSubmitting(true);
     }
     setFiles((prevFiles) => {
-      return prevFiles.map((f) => {
-        if (toRemoveFiles.find((rf) => rf.name === f.name)) {
-          return { ...f, status: "toRemove" };
-        }
-        return f;
-      });
+      return {
+        ...prevFiles,
+        files: prevFiles!.files.map((f) => {
+          if (
+            toRemoveFiles.find(
+              (rf) => rf.name === f.name && rf.parent === f.parent,
+            )
+          ) {
+            return { ...f, status: "toRemove" };
+          }
+          return f;
+        }),
+      };
     });
     await Promise.all(
       toRemoveFiles.map(async (file) => {
         try {
-          await removeFile(file.name);
+          await removeFile(file.name, file.parent);
           return { ...file, status: "removed" };
         } catch (error) {
+          console.error("Failed to remove the file:", file.name, error);
           toast({
             title: "Failed to remove the file: " + file.name + "!",
             variant: "destructive",
@@ -69,9 +77,15 @@ export const KnowledgeFileSection = () => {
     );
     // Remove the files from the state no matter the result
     setFiles((prevFiles) => {
-      return prevFiles.filter(
-        (f) => !toRemoveFiles.find((rf) => rf.name === f.name),
-      );
+      return {
+        ...prevFiles,
+        files: prevFiles.files.filter(
+          (f) =>
+            !toRemoveFiles.find(
+              (rf) => rf.name === f.name && rf.parent === f.parent,
+            ),
+        ),
+      };
     });
     if (setSubmit) {
       setIsSubmitting(false);
@@ -82,15 +96,19 @@ export const KnowledgeFileSection = () => {
     const toUploadFiles: File[] = addingFiles.map((file) => ({
       name: file.name,
       status: "toUpload",
+      type: file.type,
+      parent: "data", //TODO : let user select parent folder
       blob: file,
     }));
-    setFiles((prevFiles) => [...prevFiles, ...toUploadFiles]);
+    setFiles((prevFiles) => {
+      return { ...prevFiles, files: [...prevFiles.files, ...toUploadFiles] };
+    });
     return toUploadFiles;
   }
 
   async function handleUploadFile(toUploadFiles?: File[]) {
     if (!toUploadFiles) {
-      toUploadFiles = files.filter((file) => file.status === "toUpload");
+      toUploadFiles = files.files.filter((file) => file.status === "toUpload");
     }
     console.log("Uploading files:", toUploadFiles);
 
@@ -101,12 +119,12 @@ export const KnowledgeFileSection = () => {
       try {
         await uploadFile(formData);
         setFiles((prevFiles) => {
-          return prevFiles.map((f) => {
+          return {...prevFiles, files: prevFiles.files.map((f) => {
             if (f.name === file.name) {
               return { ...f, status: "uploaded" };
             }
             return f;
-          });
+          })}
         });
       } catch (err: unknown) {
         console.error(
@@ -119,12 +137,12 @@ export const KnowledgeFileSection = () => {
           variant: "destructive",
         });
         setFiles((prevFiles) => {
-          return prevFiles.map((f) => {
+          return {...prevFiles, files: prevFiles.files.map((f) => {
             if (f.name === file.name) {
               return { ...f, status: "failed" };
             }
             return f;
-          });
+          })}
         });
         await handleRemoveFiles([file], false);
       }
@@ -133,7 +151,7 @@ export const KnowledgeFileSection = () => {
 
   async function processUpload(blobFiles: globalThis.File[]) {
     // Ignore duplicate files
-    const duplicateFiles = files.filter((file) =>
+    const duplicateFiles = files.files.filter((file) =>
       blobFiles.find((f) => f.name === file.name),
     );
     if (duplicateFiles.length > 0) {
@@ -180,7 +198,7 @@ export const KnowledgeFileSection = () => {
       <div className="space-y-4">
         <UploadFile processUpload={processUpload} isSubmitting={isSubmitting} />
         <ListFiles
-          files={files}
+          folderStructure={files}
           handleRemoveFiles={handleRemoveFiles}
           isSubmitting={isSubmitting}
         />
@@ -279,50 +297,87 @@ const FileLoaderConfig = () => {
 };
 
 const ListFiles = ({
-  files,
+  folderStructure,
   handleRemoveFiles,
   isSubmitting,
 }: {
-  files: File[];
+  folderStructure: FolderStructure;
   handleRemoveFiles: (files: File[], setSubmit?: boolean) => Promise<void>;
   isSubmitting: boolean;
 }) => {
+  const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set<string>());
+
+  const toggleFolder = (folderName:string) => {
+    console.log(expandedFolders);
+
+    console.log(folderName)
+    setExpandedFolders((prev) => {
+      return prev.symmetricDifference(new Set([folderName]))
+    });
+    console.log(expandedFolders);
+  };
   return (
     // Show uploaded files in grid layout
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {files.map((file, index) => (
-        <TooltipProvider key={index}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div
-                key={index}
-                className={`rounded-lg pl-2 pr-4 border border-gray-300 ${file.status !== "uploaded" ? "bg-gray-300" : "bg-gray-100"}`}
-              >
-                <div className="flex flex-row justify-between items-center h-10">
-                  <div className="text-sm overflow-hidden">
-                    {file.name.length > 20
-                      ? `${file.name.slice(0, 10)}...${file.name.slice(-10)}`
-                      : file.name}
-                  </div>
-                  <button
-                    className="text-gray-500 text-sm w-2"
-                    onClick={() => handleRemoveFiles([file])}
-                    disabled={isSubmitting}
-                  >
-                    {file.status === "uploaded" || file.status === "failed" ? (
-                      "✖"
-                    ) : (
-                      <LoaderCircle className="animate-spin w-4" />
-                    )}
-                  </button>
-                </div>
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{file.name}</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+    <div className="space-y-4">
+      {folderStructure.folders.map((folder, folderIndex) => (
+        <div
+          key={folderIndex}
+          className="rounded-lg border border-gray-300 bg-gray-100 p-2"
+        >
+          {/* Folder Header */}
+          <button
+            className="flex justify-between items-center cursor-pointer"
+            onClick={() => toggleFolder(folder)}
+          >
+            <h3 className="text-sm font-semibold overflow-hidden">
+              {folder}
+            </h3>
+            <div className="text-gray-500">
+              {expandedFolders.has(folder) ? "-" : "+"}
+            </div>
+          </button>
+
+          {/* Files in Folder */}
+          {expandedFolders.has(folder)  && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-2">
+              {folderStructure.files.filter((f)=> f.parent === folder).map((file, fileIndex) => (
+                <TooltipProvider key={fileIndex}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div
+                        className={`rounded-lg pl-2 pr-4 border border-gray-300 ${
+                          file.status !== "uploaded" ? "bg-gray-300" : "bg-gray-100"
+                        }`}
+                      >
+                        <div className="flex flex-row justify-between items-center h-10">
+                          <div className="text-sm overflow-hidden">
+                            {file.name.length > 20
+                              ? `${file.name.slice(0, 10)}...${file.name.slice(-10)}`
+                              : file.name}
+                          </div>
+                          <button
+                            className="text-gray-500 text-sm w-2"
+                            onClick={() => handleRemoveFiles([file])}
+                            disabled={isSubmitting}
+                          >
+                            {file.status === "uploaded" || file.status === "failed" ? (
+                              "✖"
+                            ) : (
+                              <Loader className="animate-spin w-4" />
+                            )}
+                          </button>
+                        </div>
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{file.name}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              ))}
+            </div>
+          )}
+        </div>
       ))}
     </div>
   );
