@@ -23,7 +23,7 @@ def get_llamaparse_parser():
     from app.engine.loaders import load_configs
     from app.engine.loaders.file import FileLoaderConfig, llama_parse_parser
 
-    config = load_configs()
+    config = load_configs("loaders")
     file_loader_config = FileLoaderConfig(**config["file"])
     if file_loader_config.use_llama_parse:
         return llama_parse_parser()
@@ -84,7 +84,7 @@ class PrivateFileService:
 
         # Only process nodes, no store the index
         pipeline = IngestionPipeline()
-        nodes = pipeline.run(documents=documents)
+        _ = pipeline.run(documents=documents)
 
         # Add the nodes to the index and persist it
         current_index = get_index()

@@ -1,3 +1,5 @@
+from sys import prefix
+
 from dotenv import load_dotenv
 
 from app.api.routers.agent import agent_router
@@ -12,6 +14,12 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from app.api.routers.chat import chat_router
+from app.api.routers.management.files import files_router
+from app.api.routers.management.llamacloud import llamacloud_router
+from app.api.routers.management.loader import loader_router
+from app.api.routers.management.reranker import reranker_router
+from app.api.routers.management.tools import tools_router
+from app.api.routers.model_config import config_router
 from app.api.routers.upload import file_upload_router
 from app.api.routers.data_ingestion import data_ingestion_router
 from app.api.routers.image_generation import image_generation_router
@@ -29,7 +37,7 @@ init_settings()
 init_observability()
 
 environment = os.getenv("ENVIRONMENT", "dev")  # Default to 'development' if not set
-logger = logging.getLogger("uvicorn") 
+logger = logging.getLogger("uvicorn")
 
 if environment == "dev":
     logger.warning("Running in development mode - allowing CORS for all origins")
@@ -69,6 +77,17 @@ app.include_router(image_generation_router, prefix="/api")
 app.include_router(url_scraping_router, prefix="/api")
 app.include_router(web_scraping_router, prefix="/api")
 app.include_router(question_ingestion_router, prefix="/api")
+app.include_router(config_router,prefix="/api/management/config")
+app.include_router(tools_router, prefix="/api/management/tools", tags=["Agent"])
+app.include_router(files_router, prefix="/api/management/files", tags=["Knowledge"])
+app.include_router(
+    llamacloud_router, prefix="/api/management/llamacloud", tags=["Llamacloud"]
+)
+app.include_router(loader_router, prefix="/api/management/loader", tags=["Knowledge"])
+app.include_router(
+    reranker_router, prefix="/api/management/reranker", tags=["Reranker"]
+)
+
 
 if __name__ == "__main__":
     app_host = os.getenv("APP_HOST", "0.0.0.0")
