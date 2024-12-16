@@ -59,7 +59,7 @@ class FileHandler:
             f.write(await file.read())
         # Index the data
         index_all() #TODO : add only the newly added file to the indexing ( define a new funtion )
-        return File(name=file_name, status=FileStatus.UPLOADED)
+        return File(name=file_name, status=FileStatus.UPLOADED, type=file_name.split(".")[-1], parent="data")
 
     @classmethod
     def remove_file(cls, parent_folder:str, file_name: str) -> None:
