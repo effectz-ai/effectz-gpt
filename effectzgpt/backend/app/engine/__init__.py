@@ -1,48 +1,18 @@
 import os
+
+from app.engine.constants import DEFAULT_SYSTEM_PROMPT, DEFAULT_TOP_K
+from app.engine.index import get_index
 from fastapi import HTTPException
 from llama_index.core.chat_engine import ContextChatEngine
 from app.engine.index import get_index
 from app.engine.raptor import get_raptor_retriever
-from app.engine.node_postprocessors import get_metadata_replacement_post_processor, get_reranker  
+from app.engine.node_postprocessors import get_metadata_replacement_post_processor, get_reranker
+
 
 def get_chat_engine(filters=None):
-    system_prompt = """\
-        You are an expert who can write SQL queries to generate Grafana panels. 
-        You have to output the relevant Grafana panel configurations in a list according to the user prompt.
-        If the user asked for a new graph, you have to append it to the existing configuration list.
-        If the user asked to remove a graph, you have to remove it from the existing configuration list.
-            - For a time series, make sure to handle the x-axis variable by using STRFTIME('%s', x-axis variable) AS time in the SQL query.
-            - For a pie chart, set values as true in reduceOptions in options.
-            - Use "frser-sqlite-datasource" as the datasource and generated SQL query as the rawQueryText. Add both of them to the targets key. 
-            - Use a relevant title.
-            - Set 12 for h and w for the gridPos key.
-            - If their is a color requested for the panel by the user, add it to color in defaults in fieldConfig. Then the color mode should be 'fixed'.
-        
-        Consider only the following SQL table schema (SalesStatistics).
+    system_prompt = os.getenv("SYSTEM_PROMPT",DEFAULT_SYSTEM_PROMPT)
 
-        SaleID INTEGER PRIMARY KEY,
-        Product TEXT,
-        QuantitySold INTEGER,
-        SaleAmount REAL,
-        SaleDate TEXT,
-        SalesPerson TEXT
-
-        Choose chart type from the following.
-
-        Time Series Chart: "graph"
-        Bar Chart: "barchart"
-        Pie Chart: "piechart"
-        Stat Panel: "stat"
-        Table: "table"
-
-        Output Format:
-            Only output a list that containing Grafana panel configurations. 
-
-    Scope Limitation:
-        Do not respond to any queries that are not related to generating Grafana panel configurations.
- """
-    
-    top_k = int(os.getenv("TOP_K", 10))
+    top_k = int(os.getenv("TOP_K", DEFAULT_TOP_K))
 
     node_postprocessors = []
 
@@ -61,9 +31,9 @@ def get_chat_engine(filters=None):
                     "RAPTOR retriever cannot be found"
                 )
             )
-        
+
         return ContextChatEngine.from_defaults(
-            retriever=retriever, 
+            retriever=retriever,
             system_prompt=system_prompt,
             node_postprocessors=node_postprocessors
         )
@@ -77,7 +47,7 @@ def get_chat_engine(filters=None):
                     "StorageContext is empty - call 'poetry run generate' to generate the storage first"
                 ),
             )
-            
+
         return index.as_chat_engine(
             similarity_top_k=top_k,
             system_prompt=system_prompt,

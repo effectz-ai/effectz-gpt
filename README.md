@@ -7,58 +7,20 @@ EffectzGPT helps you quickly develop **Enterprise Workflow Automation Applicatio
 \
 [**Watch the Youtube demo of EffectzGPT ChatBot**](https://www.youtube.com/watch?v=C6k6pJ4MbOs)
 
-- [💾 EffectzGPT Walkthrough](#effectzgpt-walkthrough)
-- [✨ Feature Lists](#feature-lists)
-- [🔑 API Keys](#api-keys)
+- [✨ Feature List](#feature-list)
+- [💾 Getting Started](#getting-started)
 - [🚀 Deploying With Docker Compose](#deploying-with-docker-compose)
 - [💖 Trusted By Our Clients](#trusted-by-our-clients)
 - [🚩 Used In Cutting Edge Research](#used-in-cutting-edge-research)
+\
+\
+\
+![Admin Panel](https://github.com/effectz-ai/effectz-gpt/blob/main/img/admin.png)
+\
+\
+![Chat UI](https://github.com/effectz-ai/effectz-gpt/blob/main/img/chat.png)
 
-
-## EffectzGPT Walkthrough
-
-### • Frontend
-### Install The Dependencies
-
-```
-npm install
-```
-
-### Run The Development Server
-
-```
-npm run dev
-```
-
-### To Run In Production
-
-```
-npm run build
-nohup npm run start > output.log 2>&1 &
-```
-
-### • Backend
-### Setup The Environment
-
-```
-poetry install
-poetry shell
-```
-
-### Import Your Data
-
-```
-poetry run generate
-```
-
-### Query Your Data
-
-```
-python main.py
-```
-
-
-## Feature Lists
+## Feature List
 
 | 🤖 Model Support                  | Implemented | Description                                             |
 | --------------------------------- | ----------- | ------------------------------------------------------- |
@@ -76,15 +38,24 @@ python main.py
 | Document Ingestion                                       | ✅          | Ingest documents into EffectzGPT               |
 | URL Scraping                                             | ✅          | Ingest data from urls into EffectzGPT          |
 
+
+| 👨‍💻 Agent Features          | Implemented           | Description                                                          |
+|----------------------------|-----------------------|----------------------------------------------------------------------|
+| Agent with memory          | ✅                    | Agent with user specific memeory                                     |
+| Agent workflow             | ✅                    | Agent with multistep workflow with access to tools                   |
+| Agent memory management    | planned ⏱️            | Auto move memory between program memory and disk based on importance |
+
+
 | ✨ RAG Features         | Implemented | Description                                                    | Reference                                                                                                 |
 | ----------------------- | ----------- | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | Reranking               | ✅          | Rerank results based on context for improved results           |                                                                                                           |
+| Sentence window retrieval             | ✅                               | Sentence window retrieval   | [Production Ready Advanced RAG Optimization with Llama-Index and Qdrant Vector Database](https://medium.com/rahasak/production-ready-advanced-rag-optimization-with-llama-index-and-qdrant-vector-database-23ad6427b20a)                                                                                                          |
 | RAPTOR                  | ✅          | Raptor ingestion                                               | [RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval](https://arxiv.org/abs/2401.18059) |
 | Supervised ICL          | ✅          | Supervised In-Context Learning                                 | [Many-Shot In-Context Learning](https://arxiv.org/abs/2404.11018)                                         |
 | Unsupervised ICL        | ✅          | Unsupervised In-Context Learning                               | [Many-Shot In-Context Learning](https://arxiv.org/abs/2404.11018)                                         |
 | Query Optimization      | ✅          | Optimization by PROmpting (OPRO)                               | [Large Language Models as Optimizers](https://arxiv.org/abs/2309.03409)                                    |
 | Support for Hybrid RAG              | planned ⏱️  | Integrating Knowledge Graphs and Vector RAG                    | [HybridRAG: Integrating Knowledge Graphs and Vector Retrieval Augmented Generation for Efficient Information Extraction](https://arxiv.org/abs/2408.04948) |
-| LlamaIndex Workflows Support   | planned ⏱️  | Event-driven abstraction used to chain together several events |                                                                                                   |
+| LlamaIndex Workflows Support   | ✅  | Event-driven abstraction used to chain together several events |                                                                                                   |
 | Self-Route              | ✅          | Hybrid approach (RAG / LC LLM)                                 | [Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach](https://arxiv.org/abs/2407.16833) |
 | Secure ICL              | planned ⏱️  | Secure ICL implementation for security sensitive applications  | [Privacy-Preserving In-Context Learning with Differentially Private Few-Shot Generation](https://arxiv.org/abs/2309.11765) |
 | Dense-X-Retrieval       | planned ⏱️  | Retrieval based on propoistions extracted from each node       | [Dense X Retrieval: What Retrieval Granularity Should We Use?](https://arxiv.org/abs/2312.06648) |
@@ -114,24 +85,53 @@ python main.py
 | Qdrant               | ✅          | Open-source vector database and vector search engine |
 | Weaviate             | planned ⏱️  | Open-source vectore database                         |
 
+## Getting Started
 
-## API Keys
+To run EffectzGPT, you have to build a Docker image from the Dockerfile and start a docker container with that image.
 
-Below is a comprehensive list of the API keys and variables you may require:
+### Prerequisites
 
-| Environment Variable   | Example Values                                             | Description                                    |
-| ---------------------- | ---------------------------------------------------------- | ---------------------------------------------- |
-| NEXT_PUBLIC_CHAT_API   | http://localhost:5000/api/chat                             | Set backend API for chat endpoint              |
-| APP_PORT               | 5000                                                       | Set port to start the backend app              |
-| TOP_K                  | 10                                                         | Set number of similar embeddings to return     |
-| VECTOR_STORE_PROVIDER  | chroma                                                     | Set vector store provider                      |
-| MODEL_PROVIDER         | openai                                                     | Set LLM provider                               |  
-| MODEL                  | gpt-3.5-turbo                                              | Set LLM                                        |    
-| EMBEDDING_MODEL        | text-embedding-3-large                                     | Set embedding model                            |    
-| OPENAI_API_KEY         | Your OpenAI API key                                        | Set OpenAI API key                             |    
-| SYSTEM_PROMPT          | Your system prompt                                         | Set system prompt                              |    
-| COHERE_API_KEY         | Your Cohere API key                                        | Set Cohere API key                             |  
+Make sure you have the following installed on your system:
 
+- node
+- python 3.11
+- Docker
+- Docker Compose
+
+
+
+### Environment Variables
+
+
+| Environment Variable  | Example Values                 | Description                                                                    | Scope   | IsRequired |
+|-----------------------|--------------------------------|--------------------------------------------------------------------------------|---------|------------|
+| NEXT_PUBLIC_CHAT_API_BASE_URL  | http://localhost:5000 | Set backend API end point                                                      | UI      | Y          |
+| APP_PORT              | 5000                           | Set port to start the backend app                                              | BACKEND | Y          |
+| TOP_K                 | 10                             | Set number of similar embeddings to return                                     | BACKEND | Y          |
+| VECTOR_STORE_PROVIDER | chroma                         | Set vector store provider                                                      | BACKEND | Y          |
+| MODEL_PROVIDER        | openai                         | Set LLM provider                                                               | BACKEND | Y          |
+| MODEL                 | gpt-3.5-turbo                  | Set LLM                                                                        | BACKEND | Y          | 
+| EMBEDDING_MODEL       | text-embedding-3-large         | Set embedding model                                                            | BACKEND | Y          |
+| OPENAI_API_KEY        | Your OpenAI API key            | Set OpenAI API key                                                             | BACKEND | Y          |
+| SYSTEM_PROMPT         | Your system prompt             | Set system prompt                                                              | BACKEND | Y          |
+| COHERE_API_KEY        | Your Cohere API key            | Set Cohere API key                                                             | BACKEND | Y          |
+| STREAM_TIMEOUT        | 60000                          | Time out in ms for streaming a                                                 | BACKEND | N          |
+| CHROMA_COLLECTION     | ./default                      | chroma collection name                                                         | BACKEND | N          |
+| CHROMA_PATH           | ./chromadb                     | path to chroma file storage                                                    | BACKEND | N          |
+| CHROMA_HOST           | localhost                      | chroma DB url ( if this value is defined CHROMA_PATH will be ignore )          | BACKEND | N          |
+| CHROMA_PORT           | 8000                           | Chroma DB access port  ( if this value is defined CHROMA_PATH will be ignore ) | BACKEND | N          |
+| EMBEDDING_DIM         | 1024                           | embedding size                                                                 | BACKEND | N          |
+| LLAMA_CLOUD_API_KEY   | Your LLAMA cloud  API key      | LLAMA cloud key                                                                | BACKEND | N          |
+| COHERE_API_KEY        | Your Cohere cloud  API key     | Cohere key                                                                     | BACKEND | N          |
+
+
+### Endpoints
+
+The docker container exposes the following endpoints.
+
+- Admin Panel: http://localhost:3000/admin
+- Chat UI: http://localhost:3000
+- Docs UI: http://localhost:3000/docs
 
 ## Deploying With Docker Compose
 
@@ -150,12 +150,20 @@ Make sure you have the following installed on your system:
 
 ```
 git clone https://github.com/effectz-ai/effectz-gpt.git
-cd effectz-gpt
+
+# navigate to backend folder and build docker image
+cd effectz-gpt/backend
+docker build -t effectzai/effectzgpt_b .
+
+# navigate to frontend folder and build docker image
+cd effectz-gpt/frontend
+docker build -t effectzai/effectzgpt_f .
+
 ```
 
-- Start all the services defined in the docker-compose.yml file.
+- Start frontend and backend services defined in the docker-compose.yml file.
 ```
-docker-compose up
+docker-compose up -d effectzgpt_ui
 ```
 
 - Or start a specific service (detached mode).
@@ -171,39 +179,20 @@ docker-compose up -d <service_name>
 docker-compose up --build
 ```
 
-### Environment Variables
 
 The docker-compose.yml file uses environment variables. To set environment variables, you can follow one of the following methods.
 
 - Using a .env file (create a .env file and define the environment variables).
 ```
-APP_PORT=3000
+VAR_NAME1=value1
 ```
 
 - Exporting environment variables directly.
 ```
-export APP_PORT=3000
-docker-compose up
+export VAR_NAME1=value1
 ```
 
-- Passing variables inline.
-```
-APP_PORT=3000 docker-compose up
-```
-
-| Environment Variable   | Example Values                                             | Description                                    |
-| ---------------------- | ---------------------------------------------------------- | ---------------------------------------------- |
-| NEXT_PUBLIC_CHAT_API   | http://localhost:5000/api/chat                             | Set backend API for chat endpoint              |
-| APP_PORT               | 5000                                                       | Set port to start the backend app              |
-| TOP_K                  | 10                                                         | Set number of similar embeddings to return     |
-| VECTOR_STORE_PROVIDER  | chroma                                                     | Set vector store provider                      |
-| MODEL_PROVIDER         | openai                                                     | Set LLM provider                               |  
-| MODEL                  | gpt-3.5-turbo                                              | Set LLM                                        |    
-| EMBEDDING_MODEL        | text-embedding-3-large                                     | Set embedding model                            |    
-| OPENAI_API_KEY         | Your OpenAI API key                                        | Set OpenAI API key                             |    
-| SYSTEM_PROMPT          | Your system prompt                                         | Set system prompt                              |    
-| COHERE_API_KEY         | Your Cohere API key                                        | Set Cohere API key                             |    
-
+Required and optional environment variable can be found above in [Environment Variables](#environment-variables)
 
 ## Trusted By Our Clients
 

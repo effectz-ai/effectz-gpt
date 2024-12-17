@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { getBaseURL } from "@/client/utils";
 
 export interface ChatConfig {
   backend?: string;
@@ -8,7 +9,7 @@ export interface ChatConfig {
 }
 
 export function useClientConfig(): ChatConfig {
-  const chatAPI = process.env.NEXT_PUBLIC_CHAT_API;
+  const chatAPI = `${getBaseURL()}/api/chat`;
   const [config, setConfig] = useState<ChatConfig>();
 
   const backendOrigin = useMemo(() => {
