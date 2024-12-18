@@ -2,15 +2,13 @@
 import { JSONValue } from "ai";
 import { Button } from "../button";
 import { DocumentPreview } from "../document-preview";
-import FileUploader from "../file-uploader";
 import { Input } from "../input";
 import UploadImagePreview from "../upload-image-preview";
 import { ChatHandler } from "./chat.interface";
 import { useFile } from "./hooks/use-file";
 import SpeechUploader from "@/components/ui/speech-uploader";
 import {useEffect, useState} from "react";
-
-const ALLOWED_EXTENSIONS = ["png", "jpg", "jpeg", "csv", "pdf", "txt", "docx"];
+import { SendHorizonal } from 'lucide-react';
 
 export default function ChatInput(
   props: Pick<
@@ -32,7 +30,6 @@ export default function ChatInput(
   const {
     imageUrl,
     setImageUrl,
-    uploadFile,
     files,
     removeDoc,
     reset,
@@ -72,23 +69,10 @@ export default function ChatInput(
     props.handleSubmit(e);
   };
 
-  const handleUploadFile = async (file: File) => {
-    if (imageUrl || files.length > 0) {
-      alert("You can only upload one file at a time.");
-      return;
-    }
-    try {
-      await uploadFile(file, props.requestParams);
-      props.onFileUpload?.(file);
-    } catch (error: any) {
-      props.onFileError?.(error.message);
-    }
-  };
-
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-xl bg-white p-4 shadow-xl space-y-4 shrink-0"
+      className="rounded-xl bg-white p-4 space-y-4 shrink-0"
     >
       {imageUrl && (
         <UploadImagePreview url={imageUrl} onRemove={() => setImageUrl(null)} />
@@ -113,20 +97,12 @@ export default function ChatInput(
             value={props.input}
             onChange={props.handleInputChange}
         />
-        <FileUploader
-            onFileUpload={handleUploadFile}
-            onFileError={props.onFileError}
-            config={{
-              allowedExtensions: ALLOWED_EXTENSIONS,
-              disabled: props.isLoading,
-            }}
-        />
         <SpeechUploader
             onTranscript={(text) => setTranscript(text)}
             onError={(errMsg) => console.error(errMsg)}
         />
         <Button type="submit" disabled={props.isLoading || !props.input.trim()}>
-          Send message
+          <SendHorizonal className="h-4 w-4" />
         </Button>
       </div>
     </form>

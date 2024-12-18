@@ -7,7 +7,7 @@ import {AuthProvider} from "@/context";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "EffectzGPT",
+  title: "GrafanaGPT",
   description: "Developed by Effectz.AI",
 };
 

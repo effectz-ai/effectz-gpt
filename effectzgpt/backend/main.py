@@ -26,6 +26,7 @@ from app.api.routers.image_generation import image_generation_router
 from app.api.routers.url_scraper import url_scraping_router
 from app.api.routers.web_scraper import web_scraping_router
 from app.api.routers.question_ingestion import question_ingestion_router
+from app.api.routers.grafana_config import grafana_config_router
 from app.settings import init_settings
 from app.observability import init_observability
 from fastapi.staticfiles import StaticFiles
@@ -87,7 +88,7 @@ app.include_router(loader_router, prefix="/api/management/loader", tags=["Knowle
 app.include_router(
     reranker_router, prefix="/api/management/reranker", tags=["Reranker"]
 )
-
+app.include_router(grafana_config_router, prefix="/api/grafana")
 
 if __name__ == "__main__":
     app_host = os.getenv("APP_HOST", "0.0.0.0")

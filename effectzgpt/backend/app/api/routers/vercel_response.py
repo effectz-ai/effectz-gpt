@@ -1,4 +1,5 @@
 import json
+import re
 
 from aiostream import stream
 from fastapi import Request
@@ -8,6 +9,7 @@ from llama_index.core.chat_engine.types import StreamingAgentChatResponse
 from app.api.routers.events import EventCallbackHandler
 from app.api.routers.models import ChatData, Message, SourceNodes
 from app.api.services.suggestion import NextQuestionSuggestion
+from app.engine.grafana import generate_panel
 
 
 class VercelStreamResponse(StreamingResponse):
@@ -54,24 +56,21 @@ class VercelStreamResponse(StreamingResponse):
             final_response = ""
             async for token in response.async_response_gen():
                 final_response += token
-                yield VercelStreamResponse.convert_text(token)
 
-            # Generate questions that user might interested to
-            conversation = chat_data.messages + [
-                Message(role="assistant", content=final_response)
-            ]
-            questions = await NextQuestionSuggestion.suggest_next_questions(
-                conversation
-            )
-            if len(questions) > 0:
-                yield VercelStreamResponse.convert_data(
-                    {
-                        "type": "suggested_questions",
-                        "data": questions,
-                    }
-                )
+            yield VercelStreamResponse.convert_text("Done.")
 
-            # the text_generator is the leading stream, once it's finished, also finish the event stream
+            # Generate Grafana panel
+            panel_config_pattern = r'(\[.*\])'
+
+            panel_config_matches = re.search(panel_config_pattern, final_response, re.DOTALL)
+
+            if panel_config_matches:
+                try:
+                    panel_config = json.loads(panel_config_matches.group(1))
+                    generate_panel(panel_config)
+                except json.JSONDecodeError as e:
+                    print(f"Error: {e}")
+
             event_handler.is_done = True
 
             # Yield the source nodes
@@ -87,23 +86,14 @@ class VercelStreamResponse(StreamingResponse):
                 }
             )
 
-        # Yield the events from the event handler
-        async def _event_generator():
-            async for event in event_handler.async_event_gen():
-                event_response = event.to_response()
-                if event_response is not None:
-                    yield VercelStreamResponse.convert_data(event_response)
-
-        combine = stream.merge(_chat_response_generator(), _event_generator())
         is_stream_started = False
-        async with combine.stream() as streamer:
-            async for output in streamer:
-                if not is_stream_started:
-                    is_stream_started = True
-                    # Stream a blank message to start the stream
-                    yield VercelStreamResponse.convert_text("")
+        async for output in _chat_response_generator():
+            if not is_stream_started:
+                is_stream_started = True
+                # Stream a blank message to start the stream
+                yield VercelStreamResponse.convert_text("")
 
-                yield output
+            yield output
 
-                if await request.is_disconnected():
-                    break
+            if await request.is_disconnected():
+                break
