@@ -38,7 +38,7 @@ export function ChatSources({ data }: { data: SourceData }) {
       .forEach((node) => {
         const nodeInfo = {
           id: node.id,
-          url: node.url?? `${getBaseURL()}/api/files/${(node.metadata.file_path as string).replace(/^\/app\//, "")}`,
+          url: node.url?? node.metadata.file_path ? `${getBaseURL()}/api/files/${(node.metadata.file_path as string).replace(/^\/app\//, "")}` :  node.url ,
             // TODO : properly handle local files
         };
         const key = nodeInfo.url ?? nodeInfo.id; // use id as key for UNKNOWN type
