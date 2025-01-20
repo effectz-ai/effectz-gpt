@@ -10,7 +10,7 @@ import chromadb
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
-if os.getenv("USE_ICL", "True").lower() == "true":
+if os.getenv("USE_ICL", "False").lower() == "true":
 # Create a new client and connect to the MongoDB server
     mongo_uri = os.getenv("MONGO_URI", "mongodb://127.0.0.1:27017/")
 
