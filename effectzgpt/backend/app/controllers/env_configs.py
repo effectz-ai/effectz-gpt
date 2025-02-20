@@ -20,11 +20,12 @@ class EnvConfigManager:
         Update the environment configuration with the provided config.
 
         Args:
-            env_config (BaseEnvConfig): The new environment configuration.
-            rollback_on_failure (bool): Whether to rollback the changes if the update fails.
+            current_config ( BaseEnvConfig ): The current configuration object.
+            new_config (BaseEnvConfig): The new environment configuration.
+            rollback_on_failure (bool): Whether to roll back the changes if the update fails.
         """
         # Backup the current config
-        backup_config = current_config.copy()
+        backup_config = current_config.model_copy()
 
         # Try to update the config
         try:

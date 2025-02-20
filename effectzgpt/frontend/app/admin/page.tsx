@@ -13,9 +13,7 @@ import { ChatConfig } from "@/sections/config/chat";
 import { ModelConfig } from "@/sections/config/model";
 import { ToolConfig } from "@/sections/config/tool";
 import { DemoChat } from "@/sections/demoChat";
-import { Footer } from "@/sections/footer";
 import { Knowledge } from "@/sections/knowledge";
-import { StatusBar } from "@/sections/statusBar";
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from "react";
 
@@ -59,9 +57,6 @@ export default function Home() {
     <>
       <main className="h-screen w-screen">
         <div className="flex flex-col max-h-full h-full">
-          <div className="w-full shrink-0">
-            {/*<StatusBar configured={configured ?? false} />*/}
-          </div>
           <div className="w-full flex-1 overflow-auto flex">
             <div
               className={cn("w-1/2 overflow-y-auto p-4", {
@@ -91,9 +86,6 @@ export default function Home() {
                 <DemoChat />
               </div>
             )}
-          </div>
-          <div className="w-full shrink-0">
-            {/*<Footer />*/}
           </div>
         </div>
       </main>

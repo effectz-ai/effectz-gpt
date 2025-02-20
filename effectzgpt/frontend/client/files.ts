@@ -5,10 +5,17 @@ export type FileStatus = "toUpload" | "uploaded" | "failed" | "toRemove";
 export type File = {
   name: string;
   status: FileStatus;
+  type: string;
+  parent: string;
   blob?: Blob;
 };
 
-export async function fetchFiles(): Promise<File[]> {
+export type FolderStructure = {
+  folders: string[];
+  files: File[];
+};
+
+export async function fetchFiles(): Promise<FolderStructure> {
   const res = await fetch(`${getBaseURL()}/api/management/files`);
   if (!res.ok) {
     throw new Error("Failed to fetch files");
@@ -27,10 +34,11 @@ export async function uploadFile(formData: any) {
   }
 }
 
-export async function removeFile(fileName: string) {
+export async function removeFile(fileName: string,parent:string) {
   const encodedFileName = encodeURIComponent(fileName);
+  const encodedParent = encodeURIComponent(parent);
   const res = await fetch(
-    `${getBaseURL()}/api/management/files/${encodedFileName}`,
+    `${getBaseURL()}/api/management/files/${encodedParent}/${encodedFileName}`,
     {
       method: "DELETE",
     },

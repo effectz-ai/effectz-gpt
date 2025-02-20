@@ -30,7 +30,7 @@ class BaseEnvConfig(BaseSettings):
         """
         Update the current values to the runtime environment variables.
         """
-        for field_name, field_info in self.__fields__.items():
+        for field_name, field_info in self.model_fields.items():
             env_name = field_info.json_schema_extra.get("env")
             value = getattr(self, field_name)
             if value is not None:
@@ -43,7 +43,7 @@ class BaseEnvConfig(BaseSettings):
         Write the current values to a dot env file.
         """
         dotenv_file = dotenv.find_dotenv(filename=ENV_FILE_PATH)
-        for field_name, field_info in self.__fields__.items():
+        for field_name, field_info in self.model_fields.items():
             env_name = field_info.json_schema_extra.get("env")
             value = getattr(self, field_name)
             if value is not None:
@@ -59,4 +59,4 @@ class BaseEnvConfig(BaseSettings):
         """
         Convert the current values to a dictionary for API response.
         """
-        return self.dict()
+        return self.model_dump()

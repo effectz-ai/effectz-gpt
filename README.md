@@ -38,6 +38,14 @@ EffectzGPT helps you quickly develop **Enterprise Workflow Automation Applicatio
 | Document Ingestion                                       | ✅          | Ingest documents into EffectzGPT               |
 | URL Scraping                                             | ✅          | Ingest data from urls into EffectzGPT          |
 
+
+| 👨‍💻 Agent Features          | Implemented           | Description                                                          |
+|----------------------------|-----------------------|----------------------------------------------------------------------|
+| Agent with memory          | ✅                    | Agent with user specific memeory                                     |
+| Agent workflow             | ✅                    | Agent with multistep workflow with access to tools                   |
+| Agent memory management    | planned ⏱️            | Auto move memory between program memory and disk based on importance |
+
+
 | ✨ RAG Features         | Implemented | Description                                                    | Reference                                                                                                 |
 | ----------------------- | ----------- | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | Reranking               | ✅          | Rerank results based on context for improved results           |                                                                                                           |
@@ -97,7 +105,7 @@ Make sure you have the following installed on your system:
 
 | Environment Variable  | Example Values                 | Description                                                                    | Scope   | IsRequired |
 |-----------------------|--------------------------------|--------------------------------------------------------------------------------|---------|------------|
-| NEXT_PUBLIC_CHAT_API  | http://localhost:5000/api/chat | Set backend API for chat endpoint                                              | UI      | Y          |
+| NEXT_PUBLIC_CHAT_API_BASE_URL  | http://localhost:5000 | Set backend API end point                                                      | UI      | Y          |
 | APP_PORT              | 5000                           | Set port to start the backend app                                              | BACKEND | Y          |
 | TOP_K                 | 10                             | Set number of similar embeddings to return                                     | BACKEND | Y          |
 | VECTOR_STORE_PROVIDER | chroma                         | Set vector store provider                                                      | BACKEND | Y          |
