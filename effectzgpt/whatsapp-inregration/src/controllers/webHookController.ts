@@ -3,6 +3,8 @@ import { Request, Response } from 'express';
 import {extractMessageDetails} from "../services/extractMsg";
 import {getEffectzResponse} from "../services/getEffectzRes";
 import axios from "axios";
+import {Text } from 'whatsapp-api-js/messages';
+import Whatsapp from '../services/whatsapp';
 
 const webHookVerifyToken  = process.env.WEBHOOK_VERIFY_TOKEN!
 
@@ -30,44 +32,48 @@ export const handleWebhookEvent = async (req: Request, res: Response) => {
         try {
             const url = `https://graph.facebook.com/${process.env.CLOUD_API_VERSION!}/${process.env.WHATSAPP_PHONE_NUMBER_ID!}/messages`;
             console.info(url)
+            const phoneId = process.env.WHATSAPP_PHONE_NUMBER_ID!
 
-            await axios.post(
-                url,
-                {
-                    messaging_product: 'whatsapp',
-                    to: msgDetails?.from, // Reply to the same phone number that sent the message
-                    text: {body: effectzResponse},
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${process.env.WHATSAPP_ACCESS_TOKEN!}`,
-                        "Content-Type": 'application/json'
-                    },
-                }
-            )
+            const message = new Text(effectzResponse)
+            const response = await Whatsapp.sendMessage(phoneId, msgDetails.from, message)
+            // await axios.post(
+            //     url,
+            //     {
+            //         messaging_product: 'whatsapp',
+            //         to: msgDetails?.from, // Reply to the same phone number that sent the message
+            //         text: {body: effectzResponse},
+            //     },
+            //     {
+            //         headers: {
+            //             Authorization: `Bearer ${process.env.WHATSAPP_ACCESS_TOKEN!}`,
+            //             "Content-Type": 'application/json'
+            //         },
+            //     }
+            // )
 
+            await Whatsapp.markAsRead(phoneId, msgDetails.messageId)
             //Mark message as read
-            await axios.post(
-                url,
-                {
-                    messaging_product: "whatsapp",
-                    status: "read",
-                    message_id: msgDetails.messageId,
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${process.env.WHATSAPP_ACCESS_TOKEN!}`,
-                        "Content-Type": 'application/json'
-                    },
-                }
-            );
+            // await axios.post(
+            //     url,
+            //     {
+            //         messaging_product: "whatsapp",
+            //         status: "read",
+            //         message_id: msgDetails.messageId,
+            //     },
+            //     {
+            //         headers: {
+            //             Authorization: `Bearer ${process.env.WHATSAPP_ACCESS_TOKEN!}`,
+            //             "Content-Type": 'application/json'
+            //         },
+            //     }
+            // );
             res.sendStatus(200)
         } catch (e) {
             console.error(e)
             res.sendStatus(500)
         }
     } else {
-        res.sendStatus(200)
+        res.sendStatus(404)
     }
 }
 
