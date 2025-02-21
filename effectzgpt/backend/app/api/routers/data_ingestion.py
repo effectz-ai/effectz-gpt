@@ -30,7 +30,7 @@ def ingest_documents(files: List[UploadFile] = File(...)):
             with open(file_path, 'wb') as buffer:
                 buffer.write(file.file.read())
 
-        if os.getenv("USE_RAPTOR", "True").lower() == "true":
+        if os.getenv("USE_RAPTOR", "False").lower() == "true":
             raptor_ingestion(UPLOAD_FOLDER)
         else:
             generate_datasource("loaders")
