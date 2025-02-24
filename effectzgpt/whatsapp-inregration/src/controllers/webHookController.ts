@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import {extractMessageDetails} from "../services/extractMsg";
 import {getEffectzResponse} from "../services/getEffectzRes";
 import axios from "axios";
-import {Text } from 'whatsapp-api-js/messages/index';
+import {Text } from 'whatsapp-api-js/messages';
 import Whatsapp from '../services/whatsapp';
 
 const webHookVerifyToken  = process.env.WEBHOOK_VERIFY_TOKEN!
