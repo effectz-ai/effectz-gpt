@@ -23,5 +23,5 @@ app.get('/', (req, res) => {
 app.use('/webhook', webHookRouter)
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Effectz Whatsapp is listening at http://localhost:${port}`)
 })
