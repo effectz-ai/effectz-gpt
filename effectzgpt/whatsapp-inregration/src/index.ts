@@ -1,19 +1,15 @@
 import express from 'express'
 import morgan from 'morgan'
-import cors from 'cors'
 
 import 'dotenv/config'
 import webHookRouter from './routes/webhookRoutes'
+import bodyParser from 'body-parser'
 
-const corsOptions = {
-    origin: '*',
-    methods: ["GET", "POST"],
-    credentials: true
-}
+
 const app = express()
 const port = process.env.PORT || 3000
 
-app.use(cors(corsOptions))
+app.use(bodyParser.json())
 app.use(morgan('dev'))
 
 
