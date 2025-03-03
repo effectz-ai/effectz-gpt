@@ -1,7 +1,14 @@
+import { templateHeaderParam } from "../types/types";
+
 interface Option {
     number: string;
     description: string;
     key: string;
+    template?: {
+      name: string;
+      language?: string;
+      headerParam?: templateHeaderParam;
+    };
   }
   
   interface Menu {
@@ -20,8 +27,14 @@ interface Option {
         options: [
           { number: '0', description: 'Go back to last menu', key: 'back' },
           { number: '1', description: 'Go back to main menu', key: 'main' },
-          { number: '2', description: 'Channeling Service', key: 'channeling' },
-          { number: '3', description: 'Chat with Agent', key: 'agent' }
+          { number: '2', description: 'Channeling Service', key: 'chanelling_main', template:{
+            name: 'chanelling_main',
+            language: 'en_US',
+          }},
+          { number: '3', description: 'Chat with Agent', key: 'chat_agent', template:{
+            name: 'chat_agent',
+            language: 'en_US',
+          } }
         ]
       };
   
@@ -31,8 +44,15 @@ interface Option {
           options: [
             { number: '0', description: 'Go back to last menu', key: 'back' },
             { number: '1', description: 'Go back to main menu', key: 'main' },
-            { number: '2', description: 'Doc 990', key: 'schedule' },
-            { number: '3', description: 'E chanelling', key: 'info' }
+            { number: '2', description: 'Call to Chanel', key: 'schedule',template:{
+              name: 'chanelling_phone',
+              language: 'en',
+              
+            } },
+            { number: '3', description: 'E chanelling', key: 'chanelling_online', template:{
+              name: 'chanelling_online',
+              language: 'en_US',
+            } }
           ]
         },
         agent: {
@@ -58,7 +78,15 @@ interface Option {
     }
   
 
-    public handleInput(phoneId: string, input: string): { text: string; menu?: Menu } {
+    public handleInput(phoneId: string, input: string): { 
+      text: string; 
+      menu?: Menu;
+      template?: {
+        name: string;
+        language?: string;
+        headerParam?: templateHeaderParam;
+      }
+    } {
       const trimmedInput = input.trim();
   
       if (trimmedInput === '0') {
@@ -69,6 +97,13 @@ interface Option {
         return {
           text: `Returning to ${menu.title}:\n${this.formatMenu(menu)}`,
           menu
+        };
+      } else if (trimmedInput === '1') {
+        // Go to main menu regardless of current position
+        this.userStates.set(phoneId, []);
+        return {
+          text: `Returning to Main Menu:\n${this.formatMenu(this.mainMenu)}`,
+          menu: this.mainMenu
         };
       }
   
@@ -89,9 +124,17 @@ interface Option {
           };
         } else {
           // Final action (no submenu)
-          return {
-            text: `You selected "${selectedOption.description}". Processing your request...`
-          };
+          if (selectedOption.template){
+            return {
+              text: `You selected "${selectedOption.description}". Processing your request...`,
+              template: selectedOption.template
+            };
+          } else {
+            return {
+              text: `You selected "${selectedOption.description}". Processing your request...`
+            };
+          }
+          
         }
       } else {
         // Invalid input

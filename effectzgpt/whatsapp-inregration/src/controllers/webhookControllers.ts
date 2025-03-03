@@ -2,7 +2,9 @@ import { Request, Response } from 'express';
 import { extractMsgDetails } from '../lib/webhookHelperst';
 import { WhatsappService } from '../services/whatsapp';
 import 'dotenv/config';
+import { MenuService } from '../services/menu';
 
+const menuService = new MenuService();
 
 export async function verifyWebhook(req:Request, res:Response){
   const mode = req.query['hub.mode'];
@@ -37,15 +39,29 @@ export async function handleWebhook(req:Request, res:Response){
     // Extract message details from the payload
     console.log(`Received a message from ${from}: ${messageText}`);
     // Send a response to the user
-    const WhatsappRes = await WhatsApp.sendTemplate(from, 'hello', 'en_US',{
+    const menuResponse = menuService.handleInput(from,messageText);
+
+    await WhatsApp.markAsRead(messageId);
+
+    let whatsappRes
+    if (menuResponse){
+      whatsappRes = await WhatsApp.sendTemplate(
+        from,
+        menuResponse.template?.name!,
+        menuResponse.template?.language,
+        menuResponse.template?.headerParam,
+      )
+      console.log(menuResponse)
+    } else {
+      whatsappRes = await WhatsApp.sendTemplate(from, 'hello', 'en_US',{
         type : 'image',
         image:{
             link: 'https://www.kingshospital.lk/public/frontend/images/logo.png'
         }
-    } );
-    await WhatsApp.markAsRead(messageId);
+    } )
+    }
     
-    if (WhatsappRes.status === 200) {
+    if (whatsappRes.status === 200) {
       res.sendStatus(200);
     } else {
         res.sendStatus(404);
