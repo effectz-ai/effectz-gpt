@@ -1,6 +1,6 @@
 import axios from 'axios';
 import 'dotenv/config';
-import { templateBodyParam, templateHeaderParam } from '../types/types';
+import { templateBodyParam, templateHeaderParams } from '../types/types';
 
 interface WhatsappServiceConfig {
     apiVersion: string;
@@ -46,7 +46,7 @@ export class WhatsappService {
                     to: to,
                     type: "text",
                     text: {
-                        body: `Hello! I am a bot. I received your message: ${text}`
+                        body: text
                     }
                 },
                 {
@@ -87,7 +87,7 @@ export class WhatsappService {
         }
     }
 
-    async sendTemplate(to:string, templateName:string, languageCode:string = 'en_US', headerParam?:templateHeaderParam, templateBodyParams?:Array<templateBodyParam>){
+    async sendTemplate(to:string, templateName:string, languageCode:string = 'en_US', headerParam?:templateHeaderParams, templateBodyParams?:Array<templateBodyParam>){
         if (!this.botPhoneId) {
             throw new Error('Phone number ID is not defined');
         }
@@ -109,13 +109,7 @@ export class WhatsappService {
                             code: languageCode
                         },
                         components: [
-                            {
-                                type: 'header',
-                                parameters: [
-                                    headerParam
-                                ]
-                            }
-                            
+                            headerParam,
                         ]
                     }
                 },

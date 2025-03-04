@@ -31,11 +31,15 @@ export interface WebhookPayload {
 }
 
 export type templateHeaderParam = {
-    type: "image" | "video" | "text";
+  type: "image" | "video" | "text";
     image?:{
         link: string;
     }
-    text?: string;
+    text?: string; 
+}
+export type templateHeaderParams = {
+    type: 'header',
+    parameters: Array<templateHeaderParam>
 }
 
 export type templateBodyParam = {

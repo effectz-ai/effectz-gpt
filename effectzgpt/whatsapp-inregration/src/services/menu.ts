@@ -1,4 +1,4 @@
-import { templateHeaderParam } from "../types/types";
+import { templateHeaderParam, templateHeaderParams } from "../types/types";
 
 interface Option {
     number: string;
@@ -7,7 +7,7 @@ interface Option {
     template?: {
       name: string;
       language?: string;
-      headerParam?: templateHeaderParam;
+      headerParam?: templateHeaderParams;
     };
   }
   
@@ -25,40 +25,24 @@ interface Option {
       this.mainMenu = {
         title: 'Main Menu',
         options: [
-          { number: '0', description: 'Go back to last menu', key: 'back' },
           { number: '1', description: 'Go back to main menu', key: 'main' },
-          { number: '2', description: 'Channeling Service', key: 'chanelling_main', template:{
-            name: 'chanelling_main',
-            language: 'en_US',
-          }},
-          { number: '3', description: 'Chat with Agent', key: 'chat_agent', template:{
-            name: 'chat_agent',
-            language: 'en_US',
-          } }
+          { number: '2', description: 'Channeling Service', key: 'chanelling_main'},
+          { number: '3', description: 'Chat with Agent', key: 'chat_agent' }
         ]
       };
   
       this.subMenus = {
-        channeling: {
+        chanelling_main: {
           title: 'Channeling Service Options',
           options: [
-            { number: '0', description: 'Go back to last menu', key: 'back' },
             { number: '1', description: 'Go back to main menu', key: 'main' },
-            { number: '2', description: 'Call to Chanel', key: 'schedule',template:{
-              name: 'chanelling_phone',
-              language: 'en',
-              
-            } },
-            { number: '3', description: 'E chanelling', key: 'chanelling_online', template:{
-              name: 'chanelling_online',
-              language: 'en_US',
-            } }
+            { number: '2', description: 'Call to Chanel', key: 'schedule'},
+            { number: '3', description: 'E chanelling', key: 'chanelling_online'}
           ]
         },
-        agent: {
+        chat_agent: {
           title: 'Chat Agent Options',
           options: [
-            { number: '0', description: 'Go back to last menu', key: 'back' },
             { number: '1', description: 'Go back to main menu', key: 'main' },
             { number: '2', description: 'Talk to Agent', key: 'transfer' }
           ]
@@ -84,7 +68,7 @@ interface Option {
       template?: {
         name: string;
         language?: string;
-        headerParam?: templateHeaderParam;
+        headerParam?: templateHeaderParams;
       }
     } {
       const trimmedInput = input.trim();
@@ -145,7 +129,7 @@ interface Option {
       }
     }
   
-    private formatMenu(menu: Menu): string {
+    public formatMenu(menu: Menu): string {
       let response = `${menu.title}:\n`;
       menu.options.forEach(opt => {
         response += `${opt.number}. ${opt.description}\n`;

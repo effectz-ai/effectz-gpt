@@ -5,6 +5,7 @@ import 'dotenv/config';
 import { MenuService } from '../services/menu';
 
 const menuService = new MenuService();
+const GREETINGS = ['hi', 'hello', 'hey', 'start', 'menu', 'help'];
 
 export async function verifyWebhook(req:Request, res:Response){
   const mode = req.query['hub.mode'];
@@ -38,27 +39,34 @@ export async function handleWebhook(req:Request, res:Response){
   try {
     // Extract message details from the payload
     console.log(`Received a message from ${from}: ${messageText}`);
-    // Send a response to the user
-    const menuResponse = menuService.handleInput(from,messageText);
 
     await WhatsApp.markAsRead(messageId);
+    if(GREETINGS.includes(messageText.toLowerCase())){
+      const response = await WhatsApp.sendTemplate(from, 'hello', 'en_US',{
+        type:'header',
+        parameters:[{
+          type:'image',
+          image:{link: 'https://www.kingshospital.lk/public/frontend/images/logo.png'}
+        }]
+      })
+      console.log("Greeting message sent")
+      res.sendStatus(200);
+      return;
+    }
 
+    const menuResponse = menuService.handleInput(from, messageText);
     let whatsappRes
-    if (menuResponse){
+    if (menuResponse.template){
       whatsappRes = await WhatsApp.sendTemplate(
         from,
         menuResponse.template?.name!,
         menuResponse.template?.language,
         menuResponse.template?.headerParam,
       )
-      console.log(menuResponse)
+      console.log("Menu message sent", menuResponse.template?.name)
     } else {
-      whatsappRes = await WhatsApp.sendTemplate(from, 'hello', 'en_US',{
-        type : 'image',
-        image:{
-            link: 'https://www.kingshospital.lk/public/frontend/images/logo.png'
-        }
-    } )
+      whatsappRes = await WhatsApp.sendText(from, menuResponse.text);
+      console.log("Text message sent")
     }
     
     if (whatsappRes.status === 200) {
