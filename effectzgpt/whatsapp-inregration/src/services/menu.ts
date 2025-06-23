@@ -20,36 +20,78 @@ interface Option {
     private mainMenu: Menu;
     private subMenus: { [key: string]: Menu };
     private userStates: Map<string, string[]>;
-  
+    private chatStates: Map<string, { inChat: boolean; conversationId?: string }>;
+
     constructor() {
       this.mainMenu = {
         title: 'Main Menu',
         options: [
-          { number: '1', description: 'Go back to main menu', key: 'main' },
-          { number: '2', description: 'Channeling Service', key: 'chanelling_main'},
-          { number: '3', description: 'Chat with Agent', key: 'chat_agent' }
+          { number: '1', description: 'Channelling Appointments', key: 'channelling_main'},
+          { number: '2', description: 'Surgery prices and Admission Details', key: 'surgery_admission'},
+          { number: '3', description: 'CT, MRI Scan & Radiology Services', key: 'radiology_services'},
+          { number: '4', description: 'Laboratory Services', key: 'laboratory_services'},
+          { number: '5', description: 'Ambulance Services', key: 'ambulance_services'},
+          { number: '6', description: 'Chat with our AI', key: 'chat_agent' }
         ]
       };
   
       this.subMenus = {
-        chanelling_main: {
-          title: 'Channeling Service Options',
+        channelling_main: {
+          title: 'Channelling Appointments',
           options: [
             { number: '1', description: 'Go back to main menu', key: 'main' },
-            { number: '2', description: 'Call to Chanel', key: 'schedule'},
-            { number: '3', description: 'E chanelling', key: 'chanelling_online'}
+            { number: '2', description: 'Book Appointment', key: 'book_appointment'},
+            { number: '3', description: 'Check Appointment Status', key: 'check_appointment'},
+            { number: '4', description: 'Cancel Appointment', key: 'cancel_appointment'}
+          ]
+        },
+        surgery_admission: {
+          title: 'Surgery & Admission Details',
+          options: [
+            { number: '1', description: 'Go back to main menu', key: 'main' },
+            { number: '2', description: 'Surgery Prices', key: 'surgery_prices'},
+            { number: '3', description: 'Admission Process Info', key: 'admission_info'},
+            { number: '4', description: 'Pre-surgery Requirements', key: 'presurgery_requirements'}
+          ]
+        },
+        radiology_services: {
+          title: 'CT, MRI Scan & Radiology Services',
+          options: [
+            { number: '1', description: 'Go back to main menu', key: 'main' },
+            { number: '2', description: 'CT Scan Services', key: 'ct_scan'},
+            { number: '3', description: 'MRI Scan Services', key: 'mri_scan'},
+            { number: '4', description: 'Other Radiology Services', key: 'other_radiology'}
+          ]
+        },
+        laboratory_services: {
+          title: 'Laboratory Services',
+          options: [
+            { number: '1', description: 'Go back to main menu', key: 'main' },
+            { number: '2', description: 'Blood Tests', key: 'blood_tests'},
+            { number: '3', description: 'Urine Tests', key: 'urine_tests'},
+            { number: '4', description: 'Special Tests', key: 'special_tests'}
+          ]
+        },
+        ambulance_services: {
+          title: 'Ambulance Services',
+          options: [
+            { number: '1', description: 'Go back to main menu', key: 'main' },
+            { number: '2', description: 'Emergency Ambulance', key: 'emergency_ambulance'},
+            { number: '3', description: 'Non-Emergency Transport', key: 'non_emergency_transport'},
+            { number: '4', description: 'Ambulance Rates', key: 'ambulance_rates'}
           ]
         },
         chat_agent: {
           title: 'Chat Agent Options',
           options: [
             { number: '1', description: 'Go back to main menu', key: 'main' },
-            { number: '2', description: 'Talk to Agent', key: 'transfer' }
+            { number: '2', description: 'Talk to AI Assistant', key: 'transfer' }
           ]
         }
       };
 
       this.userStates = new Map<string, string[]>();
+      this.chatStates = new Map<string, { inChat: boolean; conversationId?: string }>();
     }
   
     public getCurrentMenu(phoneId: string): Menu {
@@ -60,6 +102,23 @@ interface Option {
       const currentKey = states[states.length - 1];
       return this.subMenus[currentKey] ?? this.mainMenu;
     }
+
+    public isInChatMode(phoneId: string): boolean {
+      const chatState = this.chatStates.get(phoneId);
+      return chatState?.inChat || false;
+    }
+
+    public enterChatMode(phoneId: string, conversationId?: string): void {
+      this.chatStates.set(phoneId, { inChat: true, conversationId });
+    }
+
+    public exitChatMode(phoneId: string): void {
+      this.chatStates.set(phoneId, { inChat: false });
+    }
+
+    public getChatState(phoneId: string): { inChat: boolean; conversationId?: string } | undefined {
+      return this.chatStates.get(phoneId);
+    }
   
 
     public handleInput(phoneId: string, input: string): { 
@@ -69,7 +128,8 @@ interface Option {
         name: string;
         language?: string;
         headerParam?: templateHeaderParams;
-      }
+      };
+      action?: 'start_chat' | 'exit_chat';
     } {
       const trimmedInput = input.trim();
   
@@ -108,7 +168,14 @@ interface Option {
           };
         } else {
           // Final action (no submenu)
-          if (selectedOption.template){
+          if (selectedOption.key === 'transfer') {
+            // Start chat with AI agent
+            this.enterChatMode(phoneId);
+            return {
+              text: `🤖 You are now connected to our AI assistant!\n\n💬 Ask me anything about our services\n📝 I can help with information and support\n🚪 Type "exit" anytime to return to the main menu\n\nHow can I help you today?`,
+              action: 'start_chat'
+            };
+          } else if (selectedOption.template){
             return {
               text: `You selected "${selectedOption.description}". Processing your request...`,
               template: selectedOption.template
@@ -118,7 +185,6 @@ interface Option {
               text: `You selected "${selectedOption.description}". Processing your request...`
             };
           }
-          
         }
       } else {
         // Invalid input
@@ -129,6 +195,32 @@ interface Option {
       }
     }
   
+    public handleChatMessage(phoneId: string, message: string): { 
+      text?: string; 
+      menu?: Menu;
+      action?: 'exit_chat' | 'continue_chat';
+      aiMessage?: string;
+    } {
+      const lowerMessage = message.toLowerCase().trim();
+      
+      // Check if user wants to exit chat
+      if (lowerMessage === 'exit' || lowerMessage === 'quit' || lowerMessage === 'stop' || lowerMessage === 'menu') {
+        this.exitChatMode(phoneId);
+        this.userStates.set(phoneId, []); // Reset to main menu
+        return {
+          text: `Chat ended. Returning to Main Menu:\n${this.formatMenu(this.mainMenu)}`,
+          menu: this.mainMenu,
+          action: 'exit_chat'
+        };
+      }
+      
+      // Return the message for AI processing
+      return {
+        aiMessage: message,
+        action: 'continue_chat'
+      };
+    }
+
     public formatMenu(menu: Menu): string {
       let response = `${menu.title}:\n`;
       menu.options.forEach(opt => {
@@ -140,4 +232,3 @@ interface Option {
       return response;
     }
   }
-  
