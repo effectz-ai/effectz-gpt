@@ -27,7 +27,7 @@ jobs:
         cd effectzgpt/whatsapp-inregration
         npm ci
         # Only do a syntax check, don't build (to avoid env var issues in CI)
-        npx tsc --noEmit
+        npm run build
         
     - name: Deploy to Azure VM
       uses: appleboy/ssh-action@v1.0.3
