@@ -7,7 +7,7 @@ import bodyParser from 'body-parser'
 
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8080
 
 app.use(bodyParser.json())
 app.use(morgan('dev'))
@@ -16,6 +16,17 @@ app.use(morgan('dev'))
 app.get('/', (req, res) => {
     res.send('Hello from EffectzGPT Whatsapp Webhook')
 })
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        status: 'OK',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime(),
+        environment: process.env.NODE_ENV || 'development'
+    })
+})
+
 app.use('/webhook', webHookRouter)
 
 app.listen(port, () => {
