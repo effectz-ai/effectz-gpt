@@ -69,22 +69,27 @@ function validateEnvVars(): Config {
   const missingVars = requiredVars.filter(varName => !process.env[varName]);
   
   if (missingVars.length > 0) {
-    console.error('❌ Missing required environment variables:');
-    missingVars.forEach(varName => {
-      console.error(`   - ${varName}`);
-    });
-    console.error('\n💡 Please create a .env file based on .env.example and fill in the required values.');
-    process.exit(1);
+    // Only fail if we're not in a build environment
+    if (process.env.NODE_ENV !== 'build' && !process.env.CI) {
+      console.error('❌ Missing required environment variables:');
+      missingVars.forEach(varName => {
+        console.error(`   - ${varName}`);
+      });
+      console.error('\n💡 Please create a .env file based on .env.example and fill in the required values.');
+      process.exit(1);
+    } else {
+      console.log('⚠️  Building without environment variables (CI/build mode)');
+    }
+  } else {
+    console.log('✅ Environment variables validated successfully');
   }
-
-  console.log('✅ Environment variables validated successfully');
 
   return {
     PORT: parseInt(process.env.PORT || '8080', 10),
     NODE_ENV: process.env.NODE_ENV || 'development',
-    WEBHOOK_VERIFY_TOKEN: process.env.WEBHOOK_VERIFY_TOKEN!,
-    WHATSAPP_ACCESS_TOKEN: process.env.WHATSAPP_ACCESS_TOKEN!,
-    WHATSAPP_PHONE_NUMBER_ID: process.env.WHATSAPP_PHONE_NUMBER_ID!,
+    WEBHOOK_VERIFY_TOKEN: process.env.WEBHOOK_VERIFY_TOKEN || '',
+    WHATSAPP_ACCESS_TOKEN: process.env.WHATSAPP_ACCESS_TOKEN || '',
+    WHATSAPP_PHONE_NUMBER_ID: process.env.WHATSAPP_PHONE_NUMBER_ID || '',
     WHATSAPP_BUSINESS_ACCOUNT_ID: process.env.WHATSAPP_BUSINESS_ACCOUNT_ID,
     EFFECTZGPT_ENDPOINT: process.env.EFFECTZGPT_ENDPOINT,
     CLOUD_API_VERSION: process.env.CLOUD_API_VERSION || '22.0'
