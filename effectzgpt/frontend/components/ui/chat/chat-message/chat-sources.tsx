@@ -9,6 +9,8 @@ import {
 import { useCopyToClipboard } from "../hooks/use-copy-to-clipboard";
 import { SourceData } from "../index";
 import PdfDialog from "../widgets/PdfDialog";
+import {getBaseURL} from "@/client/utils";
+import MarkdownDialog from "@/components/ui/chat/widgets/MarkdownDialog";
 
 const SCORE_THRESHOLD = 0.3;
 
@@ -36,7 +38,8 @@ export function ChatSources({ data }: { data: SourceData }) {
       .forEach((node) => {
         const nodeInfo = {
           id: node.id,
-          url: node.url,
+          url: node.url?? node.metadata.file_path ? `${getBaseURL()}/api/files/${(node.metadata.file_path as string).replace(/^\/app\//, "")}` :  node.url ,
+            // TODO : properly handle local files
         };
         const key = nodeInfo.url ?? nodeInfo.id; // use id as key for UNKNOWN type
         if (!nodesByPath[key]) {
@@ -54,6 +57,7 @@ export function ChatSources({ data }: { data: SourceData }) {
       <span className="font-semibold">Sources:</span>
       <div className="inline-flex gap-1 items-center">
         {sources.map((nodeInfo: NodeInfo, index: number) => {
+          // pdf viewer
           if (nodeInfo.url?.endsWith(".pdf")) {
             return (
               <PdfDialog
@@ -63,6 +67,16 @@ export function ChatSources({ data }: { data: SourceData }) {
                 trigger={<SourceNumberButton index={index} />}
               />
             );
+          }
+          //markdown viewer
+          if (nodeInfo.url?.endsWith(".md")) {
+            return (
+                <MarkdownDialog
+                    key={nodeInfo.id}
+                    url={nodeInfo.url!}
+                    trigger={<SourceNumberButton index={index} />}
+                />
+            )
           }
           return (
             <div key={nodeInfo.id}>

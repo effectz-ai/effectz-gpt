@@ -40,7 +40,7 @@ def run_pipeline(docstore, vector_store, documents):
             ))
     transformations.append(Settings.embed_model)
 
-    if os.getenv("USE_SENTENCE_WINDOW_RETRIEVAL", "True").lower() == "true":
+    if os.getenv("USE_SENTENCE_WINDOW_RETRIEVAL", "False").lower() == "true":
         transformations.append(get_sentence_window_node_parser())
     
     pipeline = IngestionPipeline(
@@ -86,7 +86,7 @@ def generate_datasource(loader_file):
 
 
 def generate_datasource_init():
-    if os.getenv("USE_RAPTOR", "True").lower() == "true":
+    if os.getenv("USE_RAPTOR", "False").lower() == "true":
         raptor_ingestion("data/data_source")
     else:
         generate_datasource("loaders")

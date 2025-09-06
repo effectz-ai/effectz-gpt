@@ -13,6 +13,9 @@ services:
   effectzgpt_server:
     container_name: server
     image: effectzai/effectzgpt_b
+    build:
+      context: "./effectzgpt/backend"
+      dockerfile: Dockerfile
     ports:
       - 5002:5000
     volumes:
@@ -49,6 +52,9 @@ services:
   effectzgpt_ui:
     container_name: ui
     image: effectzai/effectzgpt_f
+    build:
+      context: "./effectzgpt/frontend"
+      dockerfile: Dockerfile
     ports:
       - 5001:3000
     environment:
@@ -64,6 +70,9 @@ services:
   effectzgpt:
     container_name: effectzgpt_a
     image: effectzai/effectzgpt
+    build:
+      context: "./effectzgpt"
+      dockerfile: Dockerfile
     ports:
       - 5000:3000
     volumes:
@@ -100,7 +109,11 @@ services:
       exec npm run start"
 
   effectz_whatsapp:
-    image: effectzai/effectzgpt_whatsapp 
+    container_name: effectzgpt_whatsapp
+    image: effectzai/effectzgpt_whatsapp
+    build:
+      context: "./effectzgpt/whatsapp-inregration"
+      dockerfile: Dockerfile
     ports:
       - "${WHATSAPP_PORT}:${WHATSAPP_PORT}"
     environment:
@@ -111,7 +124,11 @@ services:
       - WHATSAPP_PHONE_NUMBER_ID=${WHATSAPP_PHONE_NUMBER_ID}
   
   effectz_messenger:
-    image: effectzai/effectzgpt_messenger 
+    container_name: effectzgpt_messenger
+    image: effectzai/effectzgpt_messenger
+    build:
+      context: "./effectzgpt/messenger-integration"
+      dockerfile: Dockerfile
     ports:
       - "${MESSENGER_PORT}:${MESSENGER_PORT}"
     environment:

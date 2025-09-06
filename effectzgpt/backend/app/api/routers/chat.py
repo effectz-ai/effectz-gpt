@@ -52,7 +52,7 @@ async def chat(
         messages = data.get_history_messages()
 
         # Adding In-Context Learning
-        if os.getenv("USE_ICL", "True").lower() == "true":
+        if os.getenv("USE_ICL", "False").lower() == "true":
             no_of_similar_questions = int(os.getenv("NO_OF_SIMILAR_QUESIONS", 3))
             last_message_content = add_icl(last_message_content, no_of_similar_questions)
 

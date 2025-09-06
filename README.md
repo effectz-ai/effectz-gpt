@@ -196,7 +196,7 @@ Required and optional environment variable can be found above in [Environment Va
 
 ## Trusted By Our Clients
 
-[//]: # (![Logo of University of Florida]&#40;https://github.com/effectz-ai/effectz-gpt/blob/main/img/uf.png&#41; &nbsp;&nbsp;)
+![Logo of University of Florida](https://github.com/effectz-ai/effectz-gpt/blob/main/img/uf.png) &nbsp;&nbsp;
 ![Logo of Chitra](https://github.com/effectz-ai/effectz-gpt/blob/main/img/chitra.png) &nbsp;&nbsp;
 ![Logo of Cleolinks AB](https://github.com/effectz-ai/effectz-gpt/blob/main/img/cleolinks.png)
 

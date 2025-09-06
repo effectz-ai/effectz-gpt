@@ -16,13 +16,13 @@ def get_chat_engine(filters=None):
 
     node_postprocessors = []
 
-    if os.getenv("USE_RERANKER", "True").lower() == "true":
+    if os.getenv("USE_RERANKER", "False").lower() == "true":
         node_postprocessors.append(get_reranker())
 
-    if os.getenv("USE_SENTENCE_WINDOW_RETRIEVAL", "True").lower() == "true":
+    if os.getenv("USE_SENTENCE_WINDOW_RETRIEVAL", "False").lower() == "true":
         node_postprocessors.append(get_metadata_replacement_post_processor())
 
-    if os.getenv("USE_RAPTOR", "True").lower() == "true":
+    if os.getenv("USE_RAPTOR", "False").lower() == "true":
         retriever = get_raptor_retriever(top_k)
         if retriever is None:
             raise HTTPException(
