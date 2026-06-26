@@ -26,7 +26,7 @@ EffectzGPT helps you quickly develop **Enterprise Workflow Automation Applicatio
 | --------------------------------- | ----------- | ------------------------------------------------------- |
 | OpenAI (e.g. GPT4)                | ✅          | Embedding and Generation Models by OpenAI               |
 | Ollama (e.g. Llama3)              | ✅          | Local Embedding and Generation Models powered by Ollama |
-| Anthrophic (e.g. Claude Sonnet)   | ✅          | Embedding and Generation Models by Anthrophic           |
+| Anthropic (e.g. Claude Sonnet)    | ✅          | Embedding and Generation Models by Anthropic            |
 
 | 🤖 Embedding Support | Implemented | Description                              |
 | -------------------- | ----------- | ---------------------------------------- |
@@ -41,7 +41,7 @@ EffectzGPT helps you quickly develop **Enterprise Workflow Automation Applicatio
 
 | 👨‍💻 Agent Features          | Implemented           | Description                                                          |
 |----------------------------|-----------------------|----------------------------------------------------------------------|
-| Agent with memory          | ✅                    | Agent with user specific memeory                                     |
+| Agent with memory          | ✅                    | Agent with user specific memory                                     |
 | Agent workflow             | ✅                    | Agent with multistep workflow with access to tools                   |
 | Agent memory management    | planned ⏱️            | Auto move memory between program memory and disk based on importance |
 
