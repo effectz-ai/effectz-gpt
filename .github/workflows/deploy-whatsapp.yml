@@ -1,0 +1,71 @@
+name: Deploy WhatsApp Integration to Azure VM
+
+on:
+  push:
+    branches: [ whatsappRefactor_NS]
+    paths:
+      - 'effectzgpt/whatsapp-inregration/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: effectzgpt/whatsapp-inregration/package.json
+        
+    - name: Install dependencies and validate syntax
+      run: |
+        cd effectzgpt/whatsapp-inregration
+        npm ci
+        # Only do a syntax check, don't build (to avoid env var issues in CI)
+        npm run build
+        
+    - name: Deploy to Azure VM
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        port: 22
+        script: |
+          # Navigate to application directory
+          cd /home/${{ secrets.USERNAME }}/navindu/effectzgpt
+
+          # Pull latest changes
+          git pull origin main
+          
+          # Navigate to whatsapp integration directory
+          cd effectzgpt/whatsapp-inregration
+          
+          # Create/update .env file with secrets
+          cat > .env << EOF
+          NODE_ENV=production
+          PORT=8080
+          WEBHOOK_VERIFY_TOKEN=${{ secrets.WEBHOOK_VERIFY_TOKEN }}
+          WHATSAPP_ACCESS_TOKEN=${{ secrets.WHATSAPP_ACCESS_TOKEN }}
+          WHATSAPP_PHONE_NUMBER_ID=${{ secrets.WHATSAPP_PHONE_NUMBER_ID }}
+          WHATSAPP_BUSINESS_ACCOUNT_ID=${{ secrets.WHATSAPP_BUSINESS_ACCOUNT_ID }}
+          EFFECTZGPT_ENDPOINT=${{ secrets.EFFECTZGPT_ENDPOINT }}
+          CLOUD_API_VERSION=22.0
+          EOF
+          
+          # Install dependencies
+          npm ci
+          
+          # Build application
+          npm run build
+          
+          # Restart PM2 process (assuming you're using PM2)
+          pm2 restart whatsapp-integration || pm2 start npm --name "whatsapp-integration" -- run start
+          
+          # Show status
+          pm2 status

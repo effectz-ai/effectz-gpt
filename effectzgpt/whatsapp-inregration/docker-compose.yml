@@ -1,6 +1,6 @@
 services:
   effectz_whatsapp:
-    image: <image/name> 
+    image: effectzgpt/whatsapp 
     ports:
       - "${PORT}:${PORT}"
     environment:

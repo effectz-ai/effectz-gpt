@@ -1,9 +1,9 @@
-import { Router } from "express";
-import { handleWebhookEvent, verifyWebhook } from "../controllers/webHookController";
+import {Router} from 'express'
+import { handleWebhook, verifyWebhook } from '../controllers/webhookControllers';
 
-const router = Router();
+const webHookRouter = Router();
 
-router.get('/webhook',verifyWebhook);
-router.post('/webhook',handleWebhookEvent);
+webHookRouter.get('/', verifyWebhook);
+webHookRouter.post('/', handleWebhook)
 
-export default router
+export default webHookRouter;
